@@ -94,10 +94,6 @@ Projet non affilié à eero ni à Amazon. L'intégration repose sur l'API cloud 
 - [@343max](https://github.com/343max/eero-client) : l'authentification de l'API ;
 - [@jrlucier](https://github.com/jrlucier/eero_tracker) : l'idée de départ.
 
-## Pour les développeurs
-
-L'organisation du code, l'environnement de développement, les tests, le suivi des forks et le processus de release sont décrits dans [TECHNIQUE.md](https://github.com/Xaoimoon/ha-eero/blob/main/TECHNIQUE.md).
-
 ## Licence
 
 MIT — voir [LICENSE](https://github.com/Xaoimoon/ha-eero/blob/main/LICENSE).

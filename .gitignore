@@ -143,3 +143,5 @@ config/
 release_notes.md
 # Réponses brutes de l'API eero capturées en développement
 dev/
+# Notes techniques gardées en local
+TECHNIQUE.md
