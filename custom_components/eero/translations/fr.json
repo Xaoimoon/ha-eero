@@ -1,0 +1,314 @@
+{
+    "config": {
+        "abort": {
+            "already_configured": "Ce réseau est déjà configuré",
+            "reauth_successful": "La réauthentification a réussi",
+            "wrong_account": "Le compte vérifié n'est pas celui avec lequel cette entrée a été configurée"
+        },
+        "error": {
+            "invalid_code": "Code invalide",
+            "invalid_login": "Identifiant invalide",
+            "invalid_scan_interval_timeout": "Le délai d'attente doit être inférieur à l'intervalle de relevé pour éviter des problèmes."
+        },
+        "step": {
+            "user": {
+                "data": {
+                    "login": "Identifiant (e-mail ou numéro de téléphone pour SMS)"
+                },
+                "description": "Saisir l'adresse e-mail ou le numéro de téléphone (avec l'indicatif du pays) associé au compte eero.",
+                "title": "Connexion au compte eero"
+            },
+            "verify": {
+                "data": {
+                    "code": "Code de vérification"
+                },
+                "description": "Saisir le code de vérification envoyé à {login}.",
+                "title": "Vérification du compte eero"
+            },
+            "reauth_confirm": {
+                "data": {
+                    "login": "Identifiant (e-mail ou numéro de téléphone pour SMS)"
+                },
+                "description": "La session eero a expiré. Saisir l'adresse e-mail ou le numéro de téléphone (avec l'indicatif du pays) associé au compte pour se reconnecter.",
+                "title": "Réauthentification du compte eero"
+            },
+            "reauth_verify": {
+                "data": {
+                    "code": "Code de vérification"
+                },
+                "description": "Saisir le code de vérification envoyé à {login}.",
+                "title": "Vérification du compte eero"
+            },
+            "networks": {
+                "data": {
+                    "networks": "Réseaux"
+                },
+                "description": "Choisir le ou les réseaux eero à intégrer.",
+                "title": "Choix des réseaux eero"
+            },
+            "resources": {
+                "data": {
+                    "eeros": "Appareils eero",
+                    "profiles": "Profils",
+                    "wired_clients": "Appareils filaires",
+                    "wired_clients_filter": "Mode de filtrage des appareils filaires",
+                    "wireless_clients": "Appareils Wi-Fi",
+                    "wireless_clients_filter": "Mode de filtrage des appareils Wi-Fi",
+                    "backup_networks": "Réseaux de secours"
+                },
+                "description": "Réseau : {network}\n\nChaque ressource choisie crée un appareil et ses entités dans Home Assistant (pour les appareils connectés, le mode de filtrage permet d'inverser la sélection). Les entités inutiles peuvent ensuite être désactivées une à une.",
+                "title": "Choix des ressources du réseau"
+            },
+            "activity": {
+                "data": {
+                    "network": "Réseau",
+                    "eeros": "Appareils eero",
+                    "profiles": "Profils",
+                    "clients": "Appareils connectés"
+                },
+                "description": "Réseau : {network}\n\nChaque mesure demande un appel dédié à l'API eero : en choisir beaucoup peut provoquer des dépassements du délai d'attente.",
+                "title": "Choix des mesures d'activité"
+            },
+            "miscellaneous": {
+                "data": {
+                    "consider_home": "Délai avant de considérer un appareil absent (traceurs de présence uniquement)",
+                    "prefix_network_name": "Préfixer les entités hors réseau par le nom du réseau",
+                    "suffix_connection_type": "Suffixer les appareils connectés et leurs entités par le type de connexion (filaire ou Wi-Fi)"
+                },
+                "description": "Réseau : {network}",
+                "title": "Options diverses"
+            },
+            "advanced": {
+                "data": {
+                    "save_responses": "Enregistrer les réponses anonymisées du serveur dans .storage/eero_responses",
+                    "scan_interval": "Intervalle de relevé",
+                    "timeout": "Délai d'attente"
+                },
+                "title": "Options avancées"
+            }
+        }
+    },
+    "options": {
+        "error": {
+            "invalid_scan_interval_timeout": "Le délai d'attente doit être inférieur à l'intervalle de relevé pour éviter des problèmes."
+        },
+        "step": {
+            "networks": {
+                "data": {
+                    "networks": "Réseaux"
+                },
+                "description": "Choisir le ou les réseaux eero à intégrer.",
+                "title": "Choix des réseaux eero"
+            },
+            "resources": {
+                "data": {
+                    "eeros": "Appareils eero",
+                    "profiles": "Profils",
+                    "wired_clients": "Appareils filaires",
+                    "wired_clients_filter": "Mode de filtrage des appareils filaires",
+                    "wireless_clients": "Appareils Wi-Fi",
+                    "wireless_clients_filter": "Mode de filtrage des appareils Wi-Fi",
+                    "backup_networks": "Réseaux de secours"
+                },
+                "description": "Réseau : {network}\n\nChaque ressource choisie crée un appareil et ses entités dans Home Assistant (pour les appareils connectés, le mode de filtrage permet d'inverser la sélection). Les entités inutiles peuvent ensuite être désactivées une à une.\n\nDésélectionner une ressource supprime son appareil et toutes ses entités (ou les ajoute, selon le mode de filtrage).",
+                "title": "Choix des ressources du réseau"
+            },
+            "activity": {
+                "data": {
+                    "network": "Réseau",
+                    "eeros": "Appareils eero",
+                    "profiles": "Profils",
+                    "clients": "Appareils connectés"
+                },
+                "description": "Réseau : {network}\n\nChaque mesure demande un appel dédié à l'API eero : en choisir beaucoup peut provoquer des dépassements du délai d'attente.",
+                "title": "Choix des mesures d'activité"
+            },
+            "miscellaneous": {
+                "data": {
+                    "consider_home": "Délai avant de considérer un appareil absent (traceurs de présence uniquement)",
+                    "prefix_network_name": "Préfixer les entités hors réseau par le nom du réseau",
+                    "suffix_connection_type": "Suffixer les appareils connectés et leurs entités par le type de connexion (filaire ou Wi-Fi)"
+                },
+                "description": "Réseau : {network}",
+                "title": "Options diverses"
+            },
+            "advanced": {
+                "data": {
+                    "save_responses": "Enregistrer les réponses anonymisées du serveur dans .storage/eero_responses",
+                    "scan_interval": "Intervalle de relevé",
+                    "timeout": "Délai d'attente"
+                },
+                "title": "Options avancées"
+            }
+        }
+    },
+    "services": {
+        "set_blocked_apps": {
+            "name": "Définir les applications bloquées",
+            "description": "Définit les applications bloquées d'un profil.",
+            "fields": {
+                "blocked_apps": {
+                    "name": "Applications bloquées",
+                    "description": "(Obligatoire) Liste des applications à bloquer. Une liste vide débloque toutes les applications prises en charge."
+                },
+                "target_profile": {
+                    "name": "Profil(s) ciblé(s)",
+                    "description": "(Facultatif) Nom(s) ou identifiant(s) du ou des profils à modifier. Par défaut, tous les profils."
+                },
+                "target_network": {
+                    "name": "Réseau(x) ciblé(s)",
+                    "description": "(Facultatif) Nom(s) ou identifiant(s) du ou des réseaux qui contiennent les profils. Par défaut, tous les réseaux."
+                }
+            }
+        }
+    },
+    "selector": {
+        "all": {
+            "options": {
+                "adblock_day": "Publicités bloquées (jour)",
+                "adblock_week": "Publicités bloquées (semaine)",
+                "adblock_month": "Publicités bloquées (mois)",
+                "data_usage_day": "Consommation de données (jour)",
+                "data_usage_week": "Consommation de données (semaine)",
+                "data_usage_month": "Consommation de données (mois)",
+                "exclude": "Exclure la sélection",
+                "include": "Inclure la sélection",
+                "inspected_day": "Analyses (jour)",
+                "inspected_week": "Analyses (semaine)",
+                "inspected_month": "Analyses (mois)",
+                "blocked_day": "Menaces bloquées (jour)",
+                "blocked_week": "Menaces bloquées (semaine)",
+                "blocked_month": "Menaces bloquées (mois)"
+            }
+        }
+    },
+    "entity": {
+        "binary_sensor": {
+            "all": {
+                "state_attributes": {
+                    "bandwidth_receive": {
+                        "name": "Largeur de canal en réception"
+                    },
+                    "bandwidth_transmit": {
+                        "name": "Largeur de canal en émission"
+                    },
+                    "channel": {
+                        "name": "Canal"
+                    },
+                    "operating_band": {
+                        "name": "Bande de fréquence"
+                    }
+                }
+            }
+        },
+        "device_tracker": {
+            "all": {
+                "state_attributes": {
+                    "connection_type": {
+                        "state": {
+                            "wired": "Filaire",
+                            "wireless": "Wi-Fi"
+                        }
+                    }
+                }
+            }
+        },
+        "select": {
+            "all": {
+                "state": {
+                    "12am_1am": "0 h - 1 h",
+                    "1am_2am": "1 h - 2 h",
+                    "2am_3am": "2 h - 3 h",
+                    "3am_4am": "3 h - 4 h",
+                    "4am_5am": "4 h - 5 h",
+                    "5am_6am": "5 h - 6 h",
+                    "6am_7am": "6 h - 7 h",
+                    "7am_8am": "7 h - 8 h",
+                    "8am_9am": "8 h - 9 h",
+                    "9am_10am": "9 h - 10 h",
+                    "10am_11am": "10 h - 11 h",
+                    "11am_12pm": "11 h - 12 h",
+                    "12pm_1pm": "12 h - 13 h",
+                    "1pm_2pm": "13 h - 14 h",
+                    "2pm_3pm": "14 h - 15 h",
+                    "3pm_4pm": "15 h - 16 h",
+                    "4pm_5pm": "16 h - 17 h",
+                    "5pm_6pm": "17 h - 18 h",
+                    "6pm_7pm": "18 h - 19 h",
+                    "7pm_8pm": "19 h - 20 h",
+                    "8pm_9pm": "20 h - 21 h",
+                    "9pm_10pm": "21 h - 22 h",
+                    "10pm_11pm": "22 h - 23 h",
+                    "11pm_12am": "23 h - 0 h",
+                    "ambient": "Lumière ambiante",
+                    "disabled": "Désactivée",
+                    "schedule": "Planning"
+                }
+            }
+        },
+        "sensor": {
+            "all": {
+                "state": {
+                    "blue": "Bleu",
+                    "connected": "Connecté",
+                    "disabled": "Désactivé",
+                    "disconnected": "Déconnecté",
+                    "failure": "Échec",
+                    "green": "Vert",
+                    "network": "Réseau",
+                    "profiles": "Profils",
+                    "red": "Rouge",
+                    "success": "Réussite",
+                    "white": "Blanc",
+                    "yellow": "Jaune"
+                },
+                "state_attributes": {
+                    "computers_personal": {
+                        "name": "Ordinateurs et appareils personnels"
+                    },
+                    "failure_reason": {
+                        "state": {
+                            "network_not_found": "Réseau introuvable"
+                        }
+                    },
+                    "mac_address": {
+                        "name": "Adresse MAC"
+                    },
+                    "name": {
+                        "name": "Nom"
+                    },
+                    "subnet_mask": {
+                        "name": "Masque de sous-réseau"
+                    }
+                }
+            }
+        },
+        "switch": {
+            "all": {
+                "state_attributes": {
+                    "thread_network_key": {
+                        "name": "Clé du réseau Thread"
+                    },
+                    "thread_network_name": {
+                        "name": "Nom du réseau Thread"
+                    },
+                    "channel": {
+                        "name": "Canal"
+                    },
+                    "pan_id": {
+                        "name": "PAN ID"
+                    },
+                    "extended_pan_id": {
+                        "name": "PAN ID étendu"
+                    },
+                    "commissioning_credential": {
+                        "name": "Identifiant de mise en service"
+                    },
+                    "active_operational_dataset": {
+                        "name": "Jeu de données opérationnel actif"
+                    }
+                }
+            }
+        }
+    }
+}

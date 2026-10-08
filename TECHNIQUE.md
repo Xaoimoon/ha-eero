@@ -39,6 +39,7 @@ registre des entités).
   `sensor`, `switch`, `time`, `update`. Les entités ne sont créées qu'au chargement de
   l'entrée : un client apparu ensuite attend le prochain rechargement.
 - `services.yaml` : action `eero.set_blocked_apps` (eero Plus).
+- `strings.json` (référence, en anglais) et `translations/` (`en.json`, `fr.json`) : config flow, options, action, sélecteurs, états et attributs. `tests/test_translations.py` vérifie que chaque langue a les mêmes clés et les mêmes `{placeholders}` que `strings.json`. Les noms d'entités sont encore écrits en dur (`name=` dans les descriptions) : les traduire demande un `translation_key` par entité.
 
 ## Développement
 
