@@ -59,6 +59,7 @@ Home Assistant Core 2026.8 ou plus récent est requis.
 
 ## Bon à savoir
 
+- **Langue** : la configuration, les options, l'action et les états sont traduits en français. Les noms des entités restent pour l'instant en anglais.
 - **Compte Amazon** : la connexion par un compte Amazon n'est pas prise en charge. Créer un compte eero classique et l'ajouter comme administrateur du réseau ([marche à suivre](https://github.com/schmittx/home-assistant-eero/issues/77#issuecomment-1960875926)).
 - **Session expirée** : si eero invalide la session, Home Assistant propose de se réauthentifier avec un nouveau code de vérification, sans supprimer l'intégration.
 - **Appareils disparus** : un appareil qu'eero ne signale plus passe en « indisponible ». Il peut être supprimé depuis sa fiche dans Home Assistant et il est recréé s'il revient. Le réseau, les eero et les profils ne peuvent pas être supprimés de cette façon.
