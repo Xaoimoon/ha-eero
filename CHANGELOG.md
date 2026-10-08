@@ -1,5 +1,8 @@
 # Changelog
 
+Historique jusqu'à la 1.9.3 (fork lpleva). Les versions suivantes sont décrites dans les
+[notes de release](https://github.com/Xaoimoon/ha-eero/releases).
+
 ## 1.9.3
 
 - The config and options flows always offer the Advanced options step (polling interval, timeout, save responses; all with defaults). It used to appear only when the Home Assistant user had "advanced mode" on, through `show_advanced_options`, which HA deprecated and removes in 2027.6.
