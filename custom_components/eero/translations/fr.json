@@ -73,10 +73,14 @@
                 "data": {
                     "consider_home": "Délai avant de considérer un appareil absent (traceurs de présence uniquement)",
                     "prefix_network_name": "Préfixer les entités hors réseau par le nom du réseau",
-                    "suffix_connection_type": "Suffixer les appareils connectés et leurs entités par le type de connexion (filaire ou Wi-Fi)"
+                    "suffix_connection_type": "Suffixer les appareils connectés et leurs entités par le type de connexion (filaire ou Wi-Fi)",
+                    "remove_stale_clients": "Supprimer les appareils clients absents depuis (jours, 0 = jamais)"
                 },
                 "description": "Réseau : {network}",
-                "title": "Options diverses"
+                "title": "Options diverses",
+                "data_description": {
+                    "remove_stale_clients": "Un appareil filaire ou Wi-Fi qui ne s'est pas connecté depuis ce nombre de jours est supprimé avec ses entités, sauf si vous l'avez renommé, rangé dans une pièce, étiqueté ou personnalisé une de ses entités. Il revient s'il se reconnecte (au prochain rechargement). Utile pour les appareils qui changent d'adresse MAC à chaque connexion."
+                }
             },
             "advanced": {
                 "data": {
@@ -127,10 +131,14 @@
                 "data": {
                     "consider_home": "Délai avant de considérer un appareil absent (traceurs de présence uniquement)",
                     "prefix_network_name": "Préfixer les entités hors réseau par le nom du réseau",
-                    "suffix_connection_type": "Suffixer les appareils connectés et leurs entités par le type de connexion (filaire ou Wi-Fi)"
+                    "suffix_connection_type": "Suffixer les appareils connectés et leurs entités par le type de connexion (filaire ou Wi-Fi)",
+                    "remove_stale_clients": "Supprimer les appareils clients absents depuis (jours, 0 = jamais)"
                 },
                 "description": "Réseau : {network}",
-                "title": "Options diverses"
+                "title": "Options diverses",
+                "data_description": {
+                    "remove_stale_clients": "Un appareil filaire ou Wi-Fi qui ne s'est pas connecté depuis ce nombre de jours est supprimé avec ses entités, sauf si vous l'avez renommé, rangé dans une pièce, étiqueté ou personnalisé une de ses entités. Il revient s'il se reconnecte (au prochain rechargement). Utile pour les appareils qui changent d'adresse MAC à chaque connexion."
+                }
             },
             "advanced": {
                 "data": {
@@ -158,6 +166,24 @@
                 "target_network": {
                     "name": "Réseau(x) ciblé(s)",
                     "description": "(Facultatif) Nom(s) ou identifiant(s) du ou des réseaux qui contiennent les profils. Par défaut, tous les réseaux."
+                }
+            }
+        },
+        "remove_stale_devices": {
+            "name": "Supprimer les appareils clients absents",
+            "description": "Supprime les appareils clients qui ne se sont pas connectés depuis un nombre de jours donné. Les appareils renommés ou personnalisés, le réseau, les eero et les profils ne sont jamais supprimés. Renvoie la liste des appareils.",
+            "fields": {
+                "days": {
+                    "name": "Jours",
+                    "description": "Nombre minimal de jours sans connexion."
+                },
+                "dry_run": {
+                    "name": "Simulation",
+                    "description": "Lister seulement les appareils qui seraient supprimés (par défaut)."
+                },
+                "remove_unknown": {
+                    "name": "Inclure les appareils sans date",
+                    "description": "Supprimer aussi les appareils dont la dernière connexion est inconnue (disparus de l'API eero avant que l'intégration ne commence à compter)."
                 }
             }
         }

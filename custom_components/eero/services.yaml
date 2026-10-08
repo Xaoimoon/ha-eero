@@ -10,3 +10,24 @@ set_blocked_apps:
     target_network:
       required: False
       example: My Network or 1234567    
+
+remove_stale_devices:
+  fields:
+    days:
+      required: false
+      default: 7
+      selector:
+        number:
+          min: 1
+          max: 365
+          unit_of_measurement: d
+    dry_run:
+      required: false
+      default: true
+      selector:
+        boolean:
+    remove_unknown:
+      required: false
+      default: false
+      selector:
+        boolean:

@@ -63,6 +63,16 @@ Home Assistant Core 2026.8 ou plus récent est requis.
 - **Compte Amazon** : la connexion par un compte Amazon n'est pas prise en charge. Créer un compte eero classique et l'ajouter comme administrateur du réseau ([marche à suivre](https://github.com/schmittx/home-assistant-eero/issues/77#issuecomment-1960875926)).
 - **Session expirée** : si eero invalide la session, Home Assistant propose de se réauthentifier avec un nouveau code de vérification, sans supprimer l'intégration.
 - **Appareils disparus** : un appareil qu'eero ne signale plus passe en « indisponible ». Il peut être supprimé depuis sa fiche dans Home Assistant et il est recréé s'il revient. Le réseau, les eero et les profils ne peuvent pas être supprimés de cette façon.
+- **Ménage automatique** : l'option « Supprimer les appareils clients absents depuis » (options diverses, réglée par réseau, 0 = jamais) supprime les appareils filaires et Wi-Fi qui ne se sont pas connectés depuis ce nombre de jours, avec leurs entités. C'est utile quand un appareil change d'adresse MAC à chaque connexion (certaines voitures, téléphones en adresse aléatoire) et laisse un nouvel appareil derrière lui à chaque fois. Un appareil que vous avez renommé, rangé dans une pièce, étiqueté, ou dont une entité porte un nom, une icône ou une étiquette à vous, n'est jamais supprimé. La date retenue est la plus récente entre la dernière activité donnée par eero et la dernière connexion vue par l'intégration ; un appareil qu'eero ne signale plus est compté à partir de la première fois que l'intégration le rencontre sans date.
+- **Action `eero.remove_stale_devices`** : même ménage à la demande. Par défaut c'est une simulation (`dry_run: true`) qui renvoie la liste des appareils concernés, à lancer depuis **Outils de développement > Actions** avec « Renvoyer la réponse » :
+
+  ```yaml
+  action: eero.remove_stale_devices
+  data:
+    days: 7
+    dry_run: true          # false pour supprimer vraiment
+    remove_unknown: false  # true : inclure les appareils sans date connue
+  ```
 - **Nouveaux appareils** : seuls les appareils présents au chargement de l'intégration reçoivent des entités. Un appareil apparu depuis n'est ajouté qu'au prochain rechargement.
 
 ## Venir de l'intégration de schmittx
