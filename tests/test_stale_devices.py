@@ -123,3 +123,46 @@ def test_forget_drops_records():
     seen = {"a": NOW, "b": NOW}
     sd.forget(seen, {"a", "missing"})
     assert seen == {"b": NOW}
+
+
+def test_placeholder_keeps_device_in_automatic_mode():
+    # Met undated on the first run: stamped now, kept for max_age.
+    seen, stamped = {}, set()
+    sd.update_seen(seen, NOW - timedelta(hours=2), set(), {"car-old-mac"}, {}, stamped)
+    assert stamped == {"car-old-mac"}
+    assert not sd.select_stale_devices([client("car-old-mac")], NOW, WEEK, set(), {}, seen, stamped=stamped)
+
+
+def test_remove_unknown_sees_through_placeholders():
+    # The backlog case: devices the API no longer reports, stamped on the first run.
+    seen, stamped = {}, set()
+    sd.update_seen(seen, NOW - timedelta(hours=2), set(), {"car-old-mac", "laptop"}, {}, stamped)
+    sd.update_seen(seen, NOW - timedelta(hours=1), {"laptop"}, set(), {}, stamped)  # laptop really seen
+    stale = sd.select_stale_devices(
+        [client("car-old-mac"), client("laptop")], NOW, WEEK, set(), {}, seen,
+        remove_unknown=True, stamped=stamped,
+    )
+    assert ids(stale) == ["car-old-mac"]
+    assert stale[0].last_seen is None
+
+
+def test_remove_unknown_keeps_devices_the_api_dates_recently():
+    seen, stamped = {}, set()
+    stale = sd.select_stale_devices(
+        [client("phone")], NOW, WEEK, set(), {"phone": NOW - timedelta(days=1)}, seen,
+        remove_unknown=True, stamped=stamped,
+    )
+    assert not stale
+
+
+def test_connection_turns_a_placeholder_into_a_sighting():
+    seen, stamped = {}, set()
+    sd.update_seen(seen, NOW, set(), {"tv"}, {}, stamped)
+    sd.update_seen(seen, NOW, {"tv"}, set(), {}, stamped)
+    assert stamped == set()
+
+
+def test_forget_drops_placeholders_too():
+    seen, stamped = {"a": NOW}, {"a"}
+    sd.forget(seen, {"a"}, stamped)
+    assert seen == {} and stamped == set()

@@ -183,7 +183,7 @@
                 },
                 "remove_unknown": {
                     "name": "Inclure les appareils sans date",
-                    "description": "Supprimer aussi les appareils dont la dernière connexion est inconnue (disparus de l'API eero avant que l'intégration ne commence à compter)."
+                    "description": "Supprimer aussi, quel que soit le délai, les appareils qu'eero ne signale plus et que l'intégration n'a jamais vus connectés. À utiliser une fois pour vider un stock d'appareils morts, après une simulation."
                 }
             }
         }
