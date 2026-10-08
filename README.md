@@ -1,52 +1,102 @@
-## About this fork
+# eero pour Home Assistant
 
-This is an audited fork of [schmittx/home-assistant-eero](https://github.com/schmittx/home-assistant-eero), taken at upstream version 1.8.1; this fork is version 1.9.1. It exists because, in the Home Assistant install it serves, every integration that holds a login or can act on the home gets a line-by-line audit before it runs, and the fixes live here rather than upstream.
+[![HACS](https://img.shields.io/badge/HACS-Custom-orange.svg?style=for-the-badge)](https://hacs.xyz/docs/faq/custom_repositories)
+[![Release](https://img.shields.io/github/v/release/Xaoimoon/ha-eero?style=for-the-badge)](https://github.com/Xaoimoon/ha-eero/releases)
+[![Licence](https://img.shields.io/badge/license-MIT-green.svg?style=for-the-badge)](https://github.com/Xaoimoon/ha-eero/blob/main/LICENSE)
 
-**Why it was forked.** Upstream's device tracker broke on Home Assistant 2026.7 and the project went quiet with the fix sitting in an unmerged pull request, so the only way to run working code was to carry it ourselves.
+[![Maintenu](https://img.shields.io/badge/maintained-yes-green.svg?style=for-the-badge)](https://github.com/Xaoimoon/ha-eero/commits/main)
+[![Activité](https://img.shields.io/github/commit-activity/y/Xaoimoon/ha-eero?style=for-the-badge)](https://github.com/Xaoimoon/ha-eero/commits/main)
 
-**What is different.** It merges upstream pull requests #170, #169, #171 and #174 (the 2026.7 device-tracker fix, a Python 3.14 crash fix, a bug-fix bundle, and per-client band, channel and width). A full code audit then found 33 issues and every one is fixed here: the session token is never written to disk or logged, API errors no longer dump response bodies (which carried the wifi password and Thread key) into the log, an expired session raises a re-authentication prompt instead of crashing in a loop, failed polls make entities unavailable instead of freezing on stale data, HTTP calls have timeouts, several crash paths on missing fields are closed, the image platform and its two abandoned dependencies are gone, and a test suite (42 tests, no Home Assistant needed) was added. An independent review then found and fixed one more defect: a token refresh no longer reloads the whole integration. Fixes are not sent upstream; upstream is unchanged by this fork.
+Intégration Home Assistant (non officielle) pour les réseaux Wi-Fi maillés eero. Elle passe par le compte eero (API cloud, comme l'application mobile) pour afficher et piloter le réseau, les eero, les profils et les appareils connectés.
 
-**How it is kept current.** A weekly job merges upstream's new commits onto a branch, runs this fork's tests, reviews the diff, and only then pushes; a merge conflict or a failing test stops it. The fork is installed through HACS as a custom repository, so Home Assistant offers each new version as an update.
+C'est la suite maintenue de [schmittx/home-assistant-eero](https://github.com/schmittx/home-assistant-eero), sans nouvelle version depuis la 1.8.1 (septembre 2025), reprise à partir du fork audité [lpleva/home-assistant-eero](https://github.com/lpleva/home-assistant-eero) 1.9.3. Le domaine reste `eero` : une installation existante se met à jour sans rien reconfigurer (voir [Venir de l'intégration de schmittx](#venir-de-lintégration-de-schmittx)).
 
-**Where the detail is.** CHANGELOG.md record every change by audit finding.
+## Fonctionnalités
 
----
+- Plusieurs réseaux par compte.
+- Réglages du réseau : réseau invité, fonctions eero Plus et eero Labs.
+- Pause de l'accès à Internet par profil ou par appareil, filtres de contenu des profils, applications bloquées (eero Plus).
+- Présence des appareils et des profils, avec la bande, le canal et la largeur de canal des appareils Wi-Fi.
+- Capteurs de signal, de débit, de consommation de données et d'activité (eero Plus).
+- Boutons pour les actions qui redémarrent le réseau, mises à jour du firmware des eero.
+- Veilleuse des eero Beacon (mode, horaires, luminosité).
+- Réseaux de secours (eero Plus).
 
-[![hacs_badge](https://img.shields.io/badge/HACS-Custom-41BDF5.svg?style=for-the-badge)](https://github.com/hacs/integration)
-# Eero Home Assistant Integration
-Custom component to allow control of Eero networks in [Home Assistant](https://home-assistant.io).
+## Installation
 
-## Credit
-- [@343max's eero-client project](https://github.com/343max/eero-client) - Basic API auth and refresh methods
-- [@jrlucier's eero_tracker project](https://github.com/jrlucier/eero_tracker) - Initial Home Assistant idea
+### Via HACS (recommandé)
 
-## Install
-1. Ensure Home Assistant is updated to version 2025.2.0 or newer.
-2. Use HACS and add as a [custom repo](https://hacs.xyz/docs/faq/custom_repositories); or download and manually move to the `custom_components` folder.
-3. Once the integration is installed follow the standard process to setup via UI and search for `eero`.
-4. Follow the prompts.
+[![Ouvrir le dépôt dans HACS](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=Xaoimoon&repository=ha-eero&category=integration)
 
-## Options
-- Networks, resources, and activity metrics can be updated via integration options.
-- The inclusion method for clients can be toggled between whitelisting (include only selected clients) or blacklisting (exclude only selected clients).
-- If `Advanced Mode` is enabled for the current profile, additional options are available (interval, timeout, and response logging).
+Cliquer sur le bouton ci-dessus, ou ajouter le dépôt à la main :
 
-## Notes
-- This integration does not support login via Amazon account. A workaround is to create a new account without Amazon login and add that account as another network admin. Refer to this [post](https://github.com/schmittx/home-assistant-eero/issues/77#issuecomment-1960875926) for step-by-step instructions.
+1. Dans HACS, menu **⋮ > Dépôts personnalisés**, ajouter `https://github.com/Xaoimoon/ha-eero` avec le type **Intégration**.
+2. Rechercher "eero" dans HACS, puis **Télécharger**.
+3. Redémarrer Home Assistant.
 
-## Currently Working
-- Multiple networks supported
-- Control network properties (ex. guest network, Eero Plus features, Eero Labs features)
-- Pause access for profiles and/or clients
-- Control content filters for profiles
-- Device tracker entities for clients and profiles (wireless clients also report `ip`, `mac`, `host_name`, `band`, `channel`, and `channel_width_rx` attributes)
-- Sensors for various metrics
-- Button entities to control features that require network restarts
-- Select and time entities to control nightlight features for Eero Beacon devices
-- Sensors for activity data (requires Eero Plus subscription)
-- Set blocked apps for profiles (requires Eero Plus subscription)
-- Update entities for Eero device firmware management
-- Control backup networks (requires Eero Plus subscription)
+HACS vous proposera ensuite automatiquement les nouvelles versions.
 
-## Coming Soon
-- TBD, feature requests are welcome.
+### Manuelle
+
+1. Repérer le dossier de configuration de Home Assistant (celui qui contient `configuration.yaml`).
+2. Y créer un dossier `custom_components` s'il n'existe pas déjà.
+3. Copier le dossier `custom_components/eero` de ce dépôt dedans, pour obtenir `<config>/custom_components/eero/`.
+4. Redémarrer Home Assistant.
+
+## Configuration
+
+[![Ajouter l'intégration](https://my.home-assistant.io/badges/config_flow_start.svg)](https://my.home-assistant.io/redirect/config_flow_start/?domain=eero)
+
+Cliquer sur le bouton ci-dessus, ou :
+
+1. **Paramètres > Appareils et services > Ajouter une intégration**, chercher "eero".
+2. Saisir l'adresse e-mail ou le numéro de téléphone du compte eero, puis le code de vérification reçu.
+3. Choisir les réseaux, puis les ressources à suivre (eero, profils, appareils filaires et Wi-Fi, réseaux de secours) et les mesures d'activité.
+
+Ces choix se modifient ensuite dans les **options** de l'intégration, de même que l'intervalle de relevé (5 minutes par défaut, 1 minute au minimum) et le délai d'attente.
+
+Home Assistant Core 2026.8 ou plus récent est requis.
+
+## Bon à savoir
+
+- **Compte Amazon** : la connexion par un compte Amazon n'est pas prise en charge. Créer un compte eero classique et l'ajouter comme administrateur du réseau ([marche à suivre](https://github.com/schmittx/home-assistant-eero/issues/77#issuecomment-1960875926)).
+- **Session expirée** : si eero invalide la session, Home Assistant propose de se réauthentifier avec un nouveau code de vérification, sans supprimer l'intégration.
+- **Appareils disparus** : un appareil qu'eero ne signale plus passe en « indisponible ». Il peut être supprimé depuis sa fiche dans Home Assistant et il est recréé s'il revient. Le réseau, les eero et les profils ne peuvent pas être supprimés de cette façon.
+- **Nouveaux appareils** : seuls les appareils présents au chargement de l'intégration reçoivent des entités. Un appareil apparu depuis n'est ajouté qu'au prochain rechargement.
+
+## Venir de l'intégration de schmittx
+
+L'intégration garde le domaine `eero`, les identifiants uniques des entités et le format de l'entrée de configuration. Les appareils, les entités, et les noms et icônes personnalisés sont conservés.
+
+1. Dans HACS, ouvrir l'intégration eero actuelle, menu **⋮ > Supprimer**. Cela retire ses fichiers, pas l'entrée de configuration.
+2. Ajouter ce dépôt et le télécharger (voir [Installation](#via-hacs-recommandé)), **avant** de redémarrer.
+3. Redémarrer Home Assistant.
+
+Changements visibles par rapport à la 1.8.1 :
+
+- les deux entités image de QR code (réseau et réseau invité) disparaissent et peuvent être supprimées ;
+- les noms d'entités suivent la convention de Home Assistant (nom de l'appareil + nom de la mesure) : les noms affichés peuvent changer, mais pas les identifiants des entités déjà créées ;
+- l'interrupteur `secondary_wan_deny_access` devient `secondary_wan_allow_access`, de sens inverse ;
+- l'intervalle de relevé est désormais d'au moins 1 minute, et de 5 minutes par défaut ;
+- en cas d'erreur de l'API, les entités passent en « indisponible » au lieu de garder leur dernière valeur.
+
+Le détail est dans [CHANGELOG.md](https://github.com/Xaoimoon/ha-eero/blob/main/CHANGELOG.md).
+
+## Avertissement
+
+Projet non affilié à eero ni à Amazon. L'intégration repose sur l'API cloud non documentée de l'application eero, qui peut changer sans préavis.
+
+## Remerciements
+
+- [@schmittx](https://github.com/schmittx/home-assistant-eero) : l'intégration d'origine ;
+- [@lpleva](https://github.com/lpleva/home-assistant-eero) : l'audit et les corrections de la 1.9 ;
+- [@343max](https://github.com/343max/eero-client) : l'authentification de l'API ;
+- [@jrlucier](https://github.com/jrlucier/eero_tracker) : l'idée de départ.
+
+## Pour les développeurs
+
+L'organisation du code, l'environnement de développement, les tests, le suivi des forks et le processus de release sont décrits dans [TECHNIQUE.md](https://github.com/Xaoimoon/ha-eero/blob/main/TECHNIQUE.md).
+
+## Licence
+
+MIT — voir [LICENSE](https://github.com/Xaoimoon/ha-eero/blob/main/LICENSE).
