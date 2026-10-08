@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from functools import cached_property
+
 from .backup_network import EeroBackupNetwork
 from .client import EeroClient
 from .const import (
@@ -879,7 +881,7 @@ class EeroNetwork(EeroResource):
             },
         )
 
-    @property
+    @cached_property
     def backup_networks(self) -> list[EeroBackupNetwork | None]:
         """Backup networks."""
         return [
@@ -889,7 +891,7 @@ class EeroNetwork(EeroResource):
             )
         ]
 
-    @property
+    @cached_property
     def clients(self) -> list[EeroClient | None]:
         """Clients."""
         return [
@@ -897,7 +899,7 @@ class EeroNetwork(EeroResource):
             for client in self.data.get("devices", {}).get("data", [])
         ]
 
-    @property
+    @cached_property
     def eeros(self) -> list[EeroDevice | EeroDeviceBeacon | None]:
         """Eeros."""
         eeros = []
@@ -908,7 +910,7 @@ class EeroNetwork(EeroResource):
                 eeros.append(EeroDevice(self.api, self, eero))
         return eeros
 
-    @property
+    @cached_property
     def profiles(self) -> list[EeroProfile | None]:
         """Profiles."""
         return [
@@ -916,7 +918,7 @@ class EeroNetwork(EeroResource):
             for profile in self.data.get("profiles", {}).get("data", [])
         ]
 
-    @property
+    @cached_property
     def resources(
         self,
     ) -> list[
@@ -929,3 +931,18 @@ class EeroNetwork(EeroResource):
     ]:
         """Resources."""
         return self.backup_networks + self.eeros + self.profiles + self.clients
+
+    def resource_by_id(self, resource_id: str) -> EeroResource | None:
+        """Return the resource with this ID, or None if it is not reported.
+
+        The first match wins, in the order of `resources`, as the linear scan did.
+        """
+        return self._resources_by_id.get(resource_id)
+
+    @cached_property
+    def _resources_by_id(self) -> dict[str, EeroResource]:
+        by_id: dict[str, EeroResource] = {}
+        for resource in self.resources:
+            if resource is not None:
+                by_id.setdefault(resource.id, resource)
+        return by_id

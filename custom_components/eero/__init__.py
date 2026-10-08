@@ -669,10 +669,7 @@ class EeroEntity(CoordinatorEntity):
         """Return the network for this entity, or None if it is no longer reported."""
         if (data := self.coordinator.data) is None:
             return None
-        for network in data.networks:
-            if network.id == self.network_id:
-                return network
-        return None
+        return data.network_by_id(self.network_id)
 
     @property
     def resource(self) -> EeroResource | None:
@@ -681,10 +678,7 @@ class EeroEntity(CoordinatorEntity):
             return None
         if self.resource_id is None:
             return network
-        for resource in network.resources:
-            if resource.id == self.resource_id:
-                return resource
-        return None
+        return network.resource_by_id(self.resource_id)
 
     @property
     def available(self) -> bool:
