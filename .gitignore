@@ -133,3 +133,13 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# Environnement de développement (modèle ha-freebox / ha-sunology-stream)
+.vscode/
+.idea/
+# Configuration du Home Assistant de test (scripts/develop, conteneur ha-eero-dev) :
+# contient le jeton de session eero
+config/
+release_notes.md
+# Réponses brutes de l'API eero capturées en développement
+dev/

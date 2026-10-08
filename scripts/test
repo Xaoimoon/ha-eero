@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+set -e
+
+cd "$(dirname "$0")/.."
+
+# Les tests chargent le client API (custom_components/eero/api) seul : ils
+# n'ont besoin ni de Home Assistant ni d'accès réseau.
+python3 -m pip install --quiet pytest==8.4.2 requests
+python3 -m pytest tests/ -v
