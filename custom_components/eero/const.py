@@ -43,6 +43,9 @@ ACTIVITIES_DATA_USAGE_PREMIUM = [
 ]
 
 ATTR_BLOCKED_APPS = "blocked_apps"
+ATTR_DAYS = "days"
+ATTR_DRY_RUN = "dry_run"
+ATTR_REMOVE_UNKNOWN = "remove_unknown"
 ATTR_TARGET_NETWORK = "target_network"
 ATTR_TARGET_PROFILE = "target_profile"
 
@@ -71,6 +74,7 @@ CONF_WIRELESS_CLIENTS_FILTER = "wireless_clients_filter"
 DATA_API = "api"
 DATA_COORDINATOR = "coordinator"
 DATA_OPTIONS = "options"
+DATA_PURGER = "purger"
 DATA_UPDATE_LISTENER = "update_listener"
 
 DOMAIN = "eero"
@@ -88,10 +92,12 @@ RELEASE_URL = (
     "https://support.eero.com/hc/en-us/articles/209636523-eero-Software-Release-Notes"
 )
 
+SERVICE_REMOVE_STALE_DEVICES = "remove_stale_devices"
 SERVICE_SET_BLOCKED_APPS = "set_blocked_apps"
 
 CONF_MISCELLANEOUS = "miscellaneous"
 CONF_PREFIX_NETWORK_NAME = "prefix_network_name"
+CONF_REMOVE_STALE_CLIENTS = "remove_stale_clients"
 CONF_RESOURCES = "resources"
 CONF_SAVE_RESPONSES = "save_responses"
 CONF_SUFFIX_CONNECTION_TYPE = "suffix_connection_type"
@@ -103,6 +109,10 @@ MIN_CONSIDER_HOME: int = 0
 MAX_CONSIDER_HOME: int = 30
 STEP_CONSIDER_HOME: int = 1
 
+MIN_REMOVE_STALE_CLIENTS: int = 0
+MAX_REMOVE_STALE_CLIENTS: int = 365
+STEP_REMOVE_STALE_CLIENTS: int = 1
+
 MIN_SCAN_INTERVAL: int = 60
 MAX_SCAN_INTERVAL: int = 600
 STEP_SCAN_INTERVAL: int = 30
@@ -113,6 +123,7 @@ STEP_TIMEOUT: int = 5
 
 DEFAULT_CONSIDER_HOME: int = 0
 DEFAULT_PREFIX_NETWORK_NAME: bool = True
+DEFAULT_REMOVE_STALE_CLIENTS: int = 0
 DEFAULT_SAVE_DIRECTORY: str = f"{DOMAIN}_responses"
 DEFAULT_SAVE_RESPONSES: bool = False
 DEFAULT_SCAN_INTERVAL: int = 300

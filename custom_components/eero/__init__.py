@@ -12,7 +12,13 @@ import voluptuous as vol
 
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.const import CONF_NAME, CONF_SCAN_INTERVAL, Platform
-from homeassistant.core import HomeAssistant, callback
+from homeassistant.core import (
+    HomeAssistant,
+    ServiceCall,
+    ServiceResponse,
+    SupportsResponse,
+    callback,
+)
 from homeassistant.exceptions import ConfigEntryAuthFailed
 from homeassistant.helpers import (
     config_validation as cv,
@@ -39,9 +45,13 @@ from .api.network import EeroNetwork
 from .api.resource import EeroResource
 from .config_flow import EeroConfigFlow
 from .device_removal import can_remove_device
+from .purge import StaleDevicePurger
 from .const import (
     ACTIVITIES_PREMIUM,
     ATTR_BLOCKED_APPS,
+    ATTR_DAYS,
+    ATTR_DRY_RUN,
+    ATTR_REMOVE_UNKNOWN,
     ATTR_TARGET_NETWORK,
     ATTR_TARGET_PROFILE,
     CONF_ACTIVITY,
@@ -58,6 +68,7 @@ from .const import (
     CONF_NETWORKS,
     CONF_PREFIX_NETWORK_NAME,
     CONF_PROFILES,
+    CONF_REMOVE_STALE_CLIENTS,
     CONF_RESOURCES,
     CONF_SAVE_RESPONSES,
     CONF_SUFFIX_CONNECTION_TYPE,
@@ -70,6 +81,7 @@ from .const import (
     DATA_API,
     DATA_COORDINATOR,
     DATA_OPTIONS,
+    DATA_PURGER,
     DATA_UPDATE_LISTENER,
     DEFAULT_CONSIDER_HOME,
     DEFAULT_PREFIX_NETWORK_NAME,
@@ -82,12 +94,14 @@ from .const import (
     DEFAULT_WIRELESS_CLIENTS_FILTER,
     DOMAIN,
     MANUFACTURER,
+    MAX_REMOVE_STALE_CLIENTS,
     MIN_SCAN_INTERVAL,
     MODEL_BACKUP_NETWORK,
     MODEL_CLIENT_WIRED,
     MODEL_CLIENT_WIRELESS,
     MODEL_NETWORK,
     MODEL_PROFILE,
+    SERVICE_REMOVE_STALE_DEVICES,
     SERVICE_SET_BLOCKED_APPS,
 )
 
@@ -102,6 +116,16 @@ SET_BLOCKED_APPS_SCHEMA = vol.Schema(
         vol.Optional(ATTR_TARGET_NETWORK, default=[]): vol.All(
             cv.ensure_list, [vol.Any(cv.positive_int, cv.string)]
         ),
+    }
+)
+
+REMOVE_STALE_DEVICES_SCHEMA = vol.Schema(
+    {
+        vol.Optional(ATTR_DAYS, default=7): vol.All(
+            vol.Coerce(int), vol.Range(min=1, max=MAX_REMOVE_STALE_CLIENTS)
+        ),
+        vol.Optional(ATTR_DRY_RUN, default=True): cv.boolean,
+        vol.Optional(ATTR_REMOVE_UNKNOWN, default=False): cv.boolean,
     }
 )
 
@@ -505,6 +529,50 @@ async def async_setup_entry(hass: HomeAssistant, config_entry: ConfigEntry) -> b
         DATA_UPDATE_LISTENER: config_entry.add_update_listener(async_update_listener),
     }
 
+    purger = StaleDevicePurger(
+        hass,
+        config_entry,
+        coordinator,
+        {
+            network_id: int(misc.get(CONF_REMOVE_STALE_CLIENTS) or 0)
+            for network_id, misc in conf_miscellaneous.items()
+        },
+    )
+    config_entry.async_on_unload(await purger.async_setup())
+    hass.data[DOMAIN][config_entry.entry_id][DATA_PURGER] = purger
+
+    async def async_remove_stale_devices(service: ServiceCall) -> ServiceResponse:
+        """Remove (or with dry_run, list) client devices away for `days` days."""
+        devices = []
+        for entry_data in hass.data.get(DOMAIN, {}).values():
+            for stale in await entry_data[DATA_PURGER].async_purge(
+                service.data[ATTR_DAYS],
+                dry_run=service.data[ATTR_DRY_RUN],
+                remove_unknown=service.data[ATTR_REMOVE_UNKNOWN],
+            ):
+                devices.append(
+                    {
+                        "device_id": stale.device_id,
+                        "name": stale.name,
+                        "last_seen": stale.last_seen.isoformat()
+                        if stale.last_seen
+                        else None,
+                    }
+                )
+        return {
+            "dry_run": service.data[ATTR_DRY_RUN],
+            "count": len(devices),
+            "devices": devices,
+        }
+
+    hass.services.async_register(
+        DOMAIN,
+        SERVICE_REMOVE_STALE_DEVICES,
+        async_remove_stale_devices,
+        schema=REMOVE_STALE_DEVICES_SCHEMA,
+        supports_response=SupportsResponse.OPTIONAL,
+    )
+
     async def async_set_blocked_apps(service):
         blocked_apps = service.data[ATTR_BLOCKED_APPS]
         for profile in _validate_profile(
@@ -611,9 +679,15 @@ async def async_unload_entry(hass: HomeAssistant, config_entry: ConfigEntry) -> 
     if unload_ok:
         entry_data = hass.data[DOMAIN].pop(config_entry.entry_id)
         entry_data[DATA_UPDATE_LISTENER]()
+        await entry_data[DATA_PURGER].async_save()
         await hass.async_add_executor_job(entry_data[DATA_API].session.close)
 
     return unload_ok
+
+
+async def async_remove_entry(hass: HomeAssistant, config_entry: ConfigEntry) -> None:
+    """Delete the last-seen record of a removed entry."""
+    await StaleDevicePurger.async_remove_store_for(hass, config_entry)
 
 
 async def async_update_listener(hass: HomeAssistant, config_entry: ConfigEntry) -> None:

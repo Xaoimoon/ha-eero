@@ -39,6 +39,7 @@ from .const import (
     CONF_EEROS,
     CONF_LOGIN,
     CONF_MISCELLANEOUS,
+    CONF_REMOVE_STALE_CLIENTS,
     CONF_NETWORKS,
     CONF_PREFIX_NETWORK_NAME,
     CONF_PROFILES,
@@ -54,6 +55,7 @@ from .const import (
     DATA_API,
     DEFAULT_CONSIDER_HOME,
     DEFAULT_PREFIX_NETWORK_NAME,
+    DEFAULT_REMOVE_STALE_CLIENTS,
     DEFAULT_SAVE_RESPONSES,
     DEFAULT_SCAN_INTERVAL,
     DEFAULT_SUFFIX_CONNECTION_TYPE,
@@ -62,12 +64,15 @@ from .const import (
     DEFAULT_WIRELESS_CLIENTS_FILTER,
     DOMAIN,
     MAX_CONSIDER_HOME,
+    MAX_REMOVE_STALE_CLIENTS,
     MAX_SCAN_INTERVAL,
     MAX_TIMEOUT,
     MIN_CONSIDER_HOME,
+    MIN_REMOVE_STALE_CLIENTS,
     MIN_SCAN_INTERVAL,
     MIN_TIMEOUT,
     STEP_CONSIDER_HOME,
+    STEP_REMOVE_STALE_CLIENTS,
     STEP_SCAN_INTERVAL,
     STEP_TIMEOUT,
     VALUES_CLIENTS_FILTER,
@@ -441,6 +446,11 @@ class EeroConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
                         CONF_SUFFIX_CONNECTION_TYPE: user_input[
                             CONF_SUFFIX_CONNECTION_TYPE
                         ],
+                        CONF_REMOVE_STALE_CLIENTS: int(
+                            user_input.get(
+                                CONF_REMOVE_STALE_CLIENTS, DEFAULT_REMOVE_STALE_CLIENTS
+                            )
+                        ),
                     }
                     self.index += 1
 
@@ -478,6 +488,17 @@ class EeroConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
                                 CONF_SUFFIX_CONNECTION_TYPE,
                                 default=DEFAULT_SUFFIX_CONNECTION_TYPE,
                             ): BooleanSelector(),
+                            vol.Optional(
+                                CONF_REMOVE_STALE_CLIENTS,
+                                default=DEFAULT_REMOVE_STALE_CLIENTS,
+                            ): NumberSelector(
+                                NumberSelectorConfig(
+                                    min=MIN_REMOVE_STALE_CLIENTS,
+                                    max=MAX_REMOVE_STALE_CLIENTS,
+                                    step=STEP_REMOVE_STALE_CLIENTS,
+                                    unit_of_measurement=UnitOfTime.DAYS,
+                                )
+                            ),
                         }
                     ),
                     description_placeholders={"network": network.name_unique},
@@ -996,6 +1017,11 @@ class EeroOptionsFlowHandler(config_entries.OptionsFlow):
                         CONF_SUFFIX_CONNECTION_TYPE: user_input[
                             CONF_SUFFIX_CONNECTION_TYPE
                         ],
+                        CONF_REMOVE_STALE_CLIENTS: int(
+                            user_input.get(
+                                CONF_REMOVE_STALE_CLIENTS, DEFAULT_REMOVE_STALE_CLIENTS
+                            )
+                        ),
                     }
                     self.index += 1
 
@@ -1024,6 +1050,9 @@ class EeroOptionsFlowHandler(config_entries.OptionsFlow):
                 conf_suffix_connection_type = conf_miscellaneous.get(
                     CONF_SUFFIX_CONNECTION_TYPE, DEFAULT_SUFFIX_CONNECTION_TYPE
                 )
+                conf_remove_stale_clients = conf_miscellaneous.get(
+                    CONF_REMOVE_STALE_CLIENTS, DEFAULT_REMOVE_STALE_CLIENTS
+                )
 
                 return self.async_show_form(
                     step_id="miscellaneous",
@@ -1047,6 +1076,17 @@ class EeroOptionsFlowHandler(config_entries.OptionsFlow):
                                 CONF_SUFFIX_CONNECTION_TYPE,
                                 default=conf_suffix_connection_type,
                             ): BooleanSelector(),
+                            vol.Optional(
+                                CONF_REMOVE_STALE_CLIENTS,
+                                default=conf_remove_stale_clients,
+                            ): NumberSelector(
+                                NumberSelectorConfig(
+                                    min=MIN_REMOVE_STALE_CLIENTS,
+                                    max=MAX_REMOVE_STALE_CLIENTS,
+                                    step=STEP_REMOVE_STALE_CLIENTS,
+                                    unit_of_measurement=UnitOfTime.DAYS,
+                                )
+                            ),
                         }
                     ),
                     description_placeholders={"network": network.name_unique},

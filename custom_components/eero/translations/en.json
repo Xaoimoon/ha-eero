@@ -73,10 +73,14 @@
                 "data": {
                     "consider_home": "Consider home interval (applicable to device tracker entities only)",
                     "prefix_network_name": "Add network name as a prefix for all non-network entities",
-                    "suffix_connection_type": "Add connection type (wired or wireless) as a suffix for all client devices and entities"
+                    "suffix_connection_type": "Add connection type (wired or wireless) as a suffix for all client devices and entities",
+                    "remove_stale_clients": "Remove client devices away for (days, 0 = never)"
                 },
                 "description": "Network: {network}",
-                "title": "Miscellaneous options"
+                "title": "Miscellaneous options",
+                "data_description": {
+                    "remove_stale_clients": "A wired or wireless client that has not been connected for this many days is removed with its entities, unless you renamed it, gave it an area or a label, or customized one of its entities. It comes back if it reconnects (at the next reload). Useful for devices that change their MAC address on every connection."
+                }
             },
             "advanced": {
                 "data": {
@@ -127,10 +131,14 @@
                 "data": {
                     "consider_home": "Consider home interval (applicable to device tracker entities only)",
                     "prefix_network_name": "Add network name as a prefix for all non-network entities",
-                    "suffix_connection_type": "Add connection type (wired or wireless) as a suffix for all client devices and entities"
+                    "suffix_connection_type": "Add connection type (wired or wireless) as a suffix for all client devices and entities",
+                    "remove_stale_clients": "Remove client devices away for (days, 0 = never)"
                 },
                 "description": "Network: {network}",
-                "title": "Miscellaneous options"
+                "title": "Miscellaneous options",
+                "data_description": {
+                    "remove_stale_clients": "A wired or wireless client that has not been connected for this many days is removed with its entities, unless you renamed it, gave it an area or a label, or customized one of its entities. It comes back if it reconnects (at the next reload). Useful for devices that change their MAC address on every connection."
+                }
             },
             "advanced": {
                 "data": {
@@ -158,6 +166,24 @@
                 "target_network": {
                     "name": "Target network(s)",
                     "description": "(Optional) Name(s) or ID(s) of network(s) in which desired profile(s) are located. Defaults to all networks if not specified."
+                }
+            }
+        },
+        "remove_stale_devices": {
+            "name": "Remove stale client devices",
+            "description": "Removes client devices that have not been connected for a number of days. Renamed or customized devices, the network, the eeros and the profiles are never removed. Returns the list of devices.",
+            "fields": {
+                "days": {
+                    "name": "Days",
+                    "description": "Minimum number of days without a connection."
+                },
+                "dry_run": {
+                    "name": "Dry run",
+                    "description": "Only list the devices that would be removed (default)."
+                },
+                "remove_unknown": {
+                    "name": "Include undated devices",
+                    "description": "Also remove devices with no known last connection (gone from the eero API before the integration started counting)."
                 }
             }
         }
