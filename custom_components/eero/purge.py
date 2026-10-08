@@ -61,10 +61,12 @@ class StaleDevicePurger:
         self.max_age_days = {k: v for k, v in max_age_days.items() if v}
         self._store = self._make_store(hass, config_entry)
         self._seen: dict[str, datetime] = {}
+        # Records that are only the placeholder date of a client met undated.
+        self._stamped: set[str] = set()
         self._last_auto_run: datetime | None = None
 
     @staticmethod
-    def _make_store(hass: HomeAssistant, config_entry: ConfigEntry) -> Store[dict[str, str]]:
+    def _make_store(hass: HomeAssistant, config_entry: ConfigEntry) -> Store[dict]:
         return Store(hass, STORE_VERSION, f"{DOMAIN}.{config_entry.entry_id}.last_seen")
 
     @classmethod
@@ -77,9 +79,19 @@ class StaleDevicePurger:
     async def async_setup(self) -> Callable[[], None]:
         """Load the record and follow the coordinator; return the unsubscribe."""
         stored = await self._store.async_load() or {}
-        for client_id, value in stored.items():
-            if (parsed := dt_util.parse_datetime(value)) is not None:
+        legacy = "seen" not in stored
+        seen = stored if legacy else stored.get("seen", {})
+        for client_id, value in seen.items():
+            if isinstance(value, str) and (parsed := dt_util.parse_datetime(value)):
                 self._seen[client_id] = _aware(parsed)
+        if legacy:
+            # 2.2.0 wrote a flat {client_id: date} mapping that did not tell
+            # placeholders from sightings, and it only ran for hours: treat every
+            # date as a placeholder. Connected clients become real sightings
+            # again on the next poll; only remove_unknown looks at the difference.
+            self._stamped = set(self._seen)
+        else:
+            self._stamped = set(stored.get("stamped", [])) & set(self._seen)
         self._record_sightings()
         return self.coordinator.async_add_listener(self._handle_update)
 
@@ -178,11 +190,16 @@ class StaleDevicePurger:
             if device.is_client
             for client_id in device.client_ids
         }
-        if update_seen(self._seen, dt_util.utcnow(), connected, known, last_active):
+        if update_seen(
+            self._seen, dt_util.utcnow(), connected, known, last_active, self._stamped
+        ):
             self._store.async_delay_save(self._serialize, SAVE_DELAY)
 
-    def _serialize(self) -> dict[str, str]:
-        return {client_id: date.isoformat() for client_id, date in self._seen.items()}
+    def _serialize(self) -> dict:
+        return {
+            "seen": {client_id: date.isoformat() for client_id, date in self._seen.items()},
+            "stamped": sorted(self._stamped),
+        }
 
     async def async_purge(
         self,
@@ -215,6 +232,7 @@ class StaleDevicePurger:
                     last_active,
                     self._seen,
                     remove_unknown=remove_unknown,
+                    stamped=self._stamped,
                 )
             )
         if dry_run or not selected:
@@ -230,7 +248,7 @@ class StaleDevicePurger:
             device_registry.async_update_device(
                 stale.device_id, remove_config_entry_id=self.config_entry.entry_id
             )
-        forget(self._seen, removed_ids)
+        forget(self._seen, removed_ids, self._stamped)
         self._store.async_delay_save(self._serialize, SAVE_DELAY)
         _LOGGER.info(
             "Removed %s client device(s) away for too long: %s",

@@ -183,7 +183,7 @@
                 },
                 "remove_unknown": {
                     "name": "Include undated devices",
-                    "description": "Also remove devices with no known last connection (gone from the eero API before the integration started counting)."
+                    "description": "Also remove, whatever their age, devices eero no longer reports and that the integration has never seen connected. Use it once to clear a backlog of dead devices, with a dry run first."
                 }
             }
         }

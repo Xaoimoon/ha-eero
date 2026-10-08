@@ -73,6 +73,8 @@ Home Assistant Core 2026.8 ou plus récent est requis.
     dry_run: true          # false pour supprimer vraiment
     remove_unknown: false  # true : inclure les appareils sans date connue
   ```
+
+  `remove_unknown: true` sert au premier ménage : il inclut, quel que soit le délai, les appareils qu'eero ne signale plus et que l'intégration n'a jamais vus connectés (le stock accumulé avant l'activation de la fonction). Toujours le lancer d'abord en simulation.
 - **Nouveaux appareils** : seuls les appareils présents au chargement de l'intégration reçoivent des entités. Un appareil apparu depuis n'est ajouté qu'au prochain rechargement.
 
 ## Venir de l'intégration de schmittx
