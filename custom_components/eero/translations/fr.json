@@ -210,7 +210,25 @@
     },
     "entity": {
         "binary_sensor": {
-            "all": {
+            "block_apps_enabled": {
+                "name": "Blocage d'applications",
+                "state_attributes": {
+                    "bandwidth_receive": {
+                        "name": "Largeur de canal en réception"
+                    },
+                    "bandwidth_transmit": {
+                        "name": "Largeur de canal en émission"
+                    },
+                    "channel": {
+                        "name": "Canal"
+                    },
+                    "operating_band": {
+                        "name": "Bande de fréquence"
+                    }
+                }
+            },
+            "connected": {
+                "name": "Connecté",
                 "state_attributes": {
                     "bandwidth_receive": {
                         "name": "Largeur de canal en réception"
@@ -227,8 +245,19 @@
                 }
             }
         },
+        "button": {
+            "reboot": {
+                "name": "Redémarrer"
+            },
+            "run_internet_backup_test": {
+                "name": "Tester l'Internet de secours"
+            },
+            "run_speed_test": {
+                "name": "Lancer un test de débit"
+            }
+        },
         "device_tracker": {
-            "all": {
+            "device_tracker": {
                 "state_attributes": {
                     "connection_type": {
                         "state": {
@@ -239,8 +268,51 @@
                 }
             }
         },
+        "light": {
+            "status_light_enabled": {
+                "name": "Voyant d'état"
+            }
+        },
+        "number": {
+            "nightlight_brightness_percentage": {
+                "name": "Luminosité de la veilleuse"
+            }
+        },
         "select": {
-            "all": {
+            "nightlight_mode": {
+                "name": "Mode de la veilleuse",
+                "state": {
+                    "12am_1am": "0 h - 1 h",
+                    "1am_2am": "1 h - 2 h",
+                    "2am_3am": "2 h - 3 h",
+                    "3am_4am": "3 h - 4 h",
+                    "4am_5am": "4 h - 5 h",
+                    "5am_6am": "5 h - 6 h",
+                    "6am_7am": "6 h - 7 h",
+                    "7am_8am": "7 h - 8 h",
+                    "8am_9am": "8 h - 9 h",
+                    "9am_10am": "9 h - 10 h",
+                    "10am_11am": "10 h - 11 h",
+                    "11am_12pm": "11 h - 12 h",
+                    "12pm_1pm": "12 h - 13 h",
+                    "1pm_2pm": "13 h - 14 h",
+                    "2pm_3pm": "14 h - 15 h",
+                    "3pm_4pm": "15 h - 16 h",
+                    "4pm_5pm": "16 h - 17 h",
+                    "5pm_6pm": "17 h - 18 h",
+                    "6pm_7pm": "18 h - 19 h",
+                    "7pm_8pm": "19 h - 20 h",
+                    "8pm_9pm": "20 h - 21 h",
+                    "9pm_10pm": "21 h - 22 h",
+                    "10pm_11pm": "22 h - 23 h",
+                    "11pm_12am": "23 h - 0 h",
+                    "ambient": "Lumière ambiante",
+                    "disabled": "Désactivée",
+                    "schedule": "Planning"
+                }
+            },
+            "preferred_update_hour": {
+                "name": "Heure de mise à jour préférée",
                 "state": {
                     "12am_1am": "0 h - 1 h",
                     "1am_2am": "1 h - 2 h",
@@ -273,7 +345,1228 @@
             }
         },
         "sensor": {
-            "all": {
+            "ad_block_status": {
+                "name": "Blocage des publicités",
+                "state": {
+                    "blue": "Bleu",
+                    "connected": "Connecté",
+                    "disabled": "Désactivé",
+                    "disconnected": "Déconnecté",
+                    "failure": "Échec",
+                    "green": "Vert",
+                    "network": "Réseau",
+                    "profiles": "Profils",
+                    "red": "Rouge",
+                    "success": "Réussite",
+                    "white": "Blanc",
+                    "yellow": "Jaune"
+                },
+                "state_attributes": {
+                    "computers_personal": {
+                        "name": "Ordinateurs et appareils personnels"
+                    },
+                    "failure_reason": {
+                        "state": {
+                            "network_not_found": "Réseau introuvable"
+                        }
+                    },
+                    "mac_address": {
+                        "name": "Adresse MAC"
+                    },
+                    "name": {
+                        "name": "Nom"
+                    },
+                    "subnet_mask": {
+                        "name": "Masque de sous-réseau"
+                    }
+                }
+            },
+            "adblock_day": {
+                "name": "Publicités bloquées (jour)",
+                "state": {
+                    "blue": "Bleu",
+                    "connected": "Connecté",
+                    "disabled": "Désactivé",
+                    "disconnected": "Déconnecté",
+                    "failure": "Échec",
+                    "green": "Vert",
+                    "network": "Réseau",
+                    "profiles": "Profils",
+                    "red": "Rouge",
+                    "success": "Réussite",
+                    "white": "Blanc",
+                    "yellow": "Jaune"
+                },
+                "state_attributes": {
+                    "computers_personal": {
+                        "name": "Ordinateurs et appareils personnels"
+                    },
+                    "failure_reason": {
+                        "state": {
+                            "network_not_found": "Réseau introuvable"
+                        }
+                    },
+                    "mac_address": {
+                        "name": "Adresse MAC"
+                    },
+                    "name": {
+                        "name": "Nom"
+                    },
+                    "subnet_mask": {
+                        "name": "Masque de sous-réseau"
+                    }
+                }
+            },
+            "adblock_month": {
+                "name": "Publicités bloquées (mois)",
+                "state": {
+                    "blue": "Bleu",
+                    "connected": "Connecté",
+                    "disabled": "Désactivé",
+                    "disconnected": "Déconnecté",
+                    "failure": "Échec",
+                    "green": "Vert",
+                    "network": "Réseau",
+                    "profiles": "Profils",
+                    "red": "Rouge",
+                    "success": "Réussite",
+                    "white": "Blanc",
+                    "yellow": "Jaune"
+                },
+                "state_attributes": {
+                    "computers_personal": {
+                        "name": "Ordinateurs et appareils personnels"
+                    },
+                    "failure_reason": {
+                        "state": {
+                            "network_not_found": "Réseau introuvable"
+                        }
+                    },
+                    "mac_address": {
+                        "name": "Adresse MAC"
+                    },
+                    "name": {
+                        "name": "Nom"
+                    },
+                    "subnet_mask": {
+                        "name": "Masque de sous-réseau"
+                    }
+                }
+            },
+            "adblock_week": {
+                "name": "Publicités bloquées (semaine)",
+                "state": {
+                    "blue": "Bleu",
+                    "connected": "Connecté",
+                    "disabled": "Désactivé",
+                    "disconnected": "Déconnecté",
+                    "failure": "Échec",
+                    "green": "Vert",
+                    "network": "Réseau",
+                    "profiles": "Profils",
+                    "red": "Rouge",
+                    "success": "Réussite",
+                    "white": "Blanc",
+                    "yellow": "Jaune"
+                },
+                "state_attributes": {
+                    "computers_personal": {
+                        "name": "Ordinateurs et appareils personnels"
+                    },
+                    "failure_reason": {
+                        "state": {
+                            "network_not_found": "Réseau introuvable"
+                        }
+                    },
+                    "mac_address": {
+                        "name": "Adresse MAC"
+                    },
+                    "name": {
+                        "name": "Nom"
+                    },
+                    "subnet_mask": {
+                        "name": "Masque de sous-réseau"
+                    }
+                }
+            },
+            "blocked_day": {
+                "name": "Menaces bloquées (jour)",
+                "state": {
+                    "blue": "Bleu",
+                    "connected": "Connecté",
+                    "disabled": "Désactivé",
+                    "disconnected": "Déconnecté",
+                    "failure": "Échec",
+                    "green": "Vert",
+                    "network": "Réseau",
+                    "profiles": "Profils",
+                    "red": "Rouge",
+                    "success": "Réussite",
+                    "white": "Blanc",
+                    "yellow": "Jaune"
+                },
+                "state_attributes": {
+                    "computers_personal": {
+                        "name": "Ordinateurs et appareils personnels"
+                    },
+                    "failure_reason": {
+                        "state": {
+                            "network_not_found": "Réseau introuvable"
+                        }
+                    },
+                    "mac_address": {
+                        "name": "Adresse MAC"
+                    },
+                    "name": {
+                        "name": "Nom"
+                    },
+                    "subnet_mask": {
+                        "name": "Masque de sous-réseau"
+                    }
+                }
+            },
+            "blocked_month": {
+                "name": "Menaces bloquées (mois)",
+                "state": {
+                    "blue": "Bleu",
+                    "connected": "Connecté",
+                    "disabled": "Désactivé",
+                    "disconnected": "Déconnecté",
+                    "failure": "Échec",
+                    "green": "Vert",
+                    "network": "Réseau",
+                    "profiles": "Profils",
+                    "red": "Rouge",
+                    "success": "Réussite",
+                    "white": "Blanc",
+                    "yellow": "Jaune"
+                },
+                "state_attributes": {
+                    "computers_personal": {
+                        "name": "Ordinateurs et appareils personnels"
+                    },
+                    "failure_reason": {
+                        "state": {
+                            "network_not_found": "Réseau introuvable"
+                        }
+                    },
+                    "mac_address": {
+                        "name": "Adresse MAC"
+                    },
+                    "name": {
+                        "name": "Nom"
+                    },
+                    "subnet_mask": {
+                        "name": "Masque de sous-réseau"
+                    }
+                }
+            },
+            "blocked_week": {
+                "name": "Menaces bloquées (semaine)",
+                "state": {
+                    "blue": "Bleu",
+                    "connected": "Connecté",
+                    "disabled": "Désactivé",
+                    "disconnected": "Déconnecté",
+                    "failure": "Échec",
+                    "green": "Vert",
+                    "network": "Réseau",
+                    "profiles": "Profils",
+                    "red": "Rouge",
+                    "success": "Réussite",
+                    "white": "Blanc",
+                    "yellow": "Jaune"
+                },
+                "state_attributes": {
+                    "computers_personal": {
+                        "name": "Ordinateurs et appareils personnels"
+                    },
+                    "failure_reason": {
+                        "state": {
+                            "network_not_found": "Réseau introuvable"
+                        }
+                    },
+                    "mac_address": {
+                        "name": "Adresse MAC"
+                    },
+                    "name": {
+                        "name": "Nom"
+                    },
+                    "subnet_mask": {
+                        "name": "Masque de sous-réseau"
+                    }
+                }
+            },
+            "connected_clients_count": {
+                "name": "Appareils connectés",
+                "state": {
+                    "blue": "Bleu",
+                    "connected": "Connecté",
+                    "disabled": "Désactivé",
+                    "disconnected": "Déconnecté",
+                    "failure": "Échec",
+                    "green": "Vert",
+                    "network": "Réseau",
+                    "profiles": "Profils",
+                    "red": "Rouge",
+                    "success": "Réussite",
+                    "white": "Blanc",
+                    "yellow": "Jaune"
+                },
+                "state_attributes": {
+                    "computers_personal": {
+                        "name": "Ordinateurs et appareils personnels"
+                    },
+                    "failure_reason": {
+                        "state": {
+                            "network_not_found": "Réseau introuvable"
+                        }
+                    },
+                    "mac_address": {
+                        "name": "Adresse MAC"
+                    },
+                    "name": {
+                        "name": "Nom"
+                    },
+                    "subnet_mask": {
+                        "name": "Masque de sous-réseau"
+                    }
+                }
+            },
+            "connected_guest_clients_count": {
+                "name": "Appareils invités connectés",
+                "state": {
+                    "blue": "Bleu",
+                    "connected": "Connecté",
+                    "disabled": "Désactivé",
+                    "disconnected": "Déconnecté",
+                    "failure": "Échec",
+                    "green": "Vert",
+                    "network": "Réseau",
+                    "profiles": "Profils",
+                    "red": "Rouge",
+                    "success": "Réussite",
+                    "white": "Blanc",
+                    "yellow": "Jaune"
+                },
+                "state_attributes": {
+                    "computers_personal": {
+                        "name": "Ordinateurs et appareils personnels"
+                    },
+                    "failure_reason": {
+                        "state": {
+                            "network_not_found": "Réseau introuvable"
+                        }
+                    },
+                    "mac_address": {
+                        "name": "Adresse MAC"
+                    },
+                    "name": {
+                        "name": "Nom"
+                    },
+                    "subnet_mask": {
+                        "name": "Masque de sous-réseau"
+                    }
+                }
+            },
+            "connected_wired_clients_count": {
+                "name": "Appareils filaires connectés",
+                "state": {
+                    "blue": "Bleu",
+                    "connected": "Connecté",
+                    "disabled": "Désactivé",
+                    "disconnected": "Déconnecté",
+                    "failure": "Échec",
+                    "green": "Vert",
+                    "network": "Réseau",
+                    "profiles": "Profils",
+                    "red": "Rouge",
+                    "success": "Réussite",
+                    "white": "Blanc",
+                    "yellow": "Jaune"
+                },
+                "state_attributes": {
+                    "computers_personal": {
+                        "name": "Ordinateurs et appareils personnels"
+                    },
+                    "failure_reason": {
+                        "state": {
+                            "network_not_found": "Réseau introuvable"
+                        }
+                    },
+                    "mac_address": {
+                        "name": "Adresse MAC"
+                    },
+                    "name": {
+                        "name": "Nom"
+                    },
+                    "subnet_mask": {
+                        "name": "Masque de sous-réseau"
+                    }
+                }
+            },
+            "connected_wireless_clients_count": {
+                "name": "Appareils Wi-Fi connectés",
+                "state": {
+                    "blue": "Bleu",
+                    "connected": "Connecté",
+                    "disabled": "Désactivé",
+                    "disconnected": "Déconnecté",
+                    "failure": "Échec",
+                    "green": "Vert",
+                    "network": "Réseau",
+                    "profiles": "Profils",
+                    "red": "Rouge",
+                    "success": "Réussite",
+                    "white": "Blanc",
+                    "yellow": "Jaune"
+                },
+                "state_attributes": {
+                    "computers_personal": {
+                        "name": "Ordinateurs et appareils personnels"
+                    },
+                    "failure_reason": {
+                        "state": {
+                            "network_not_found": "Réseau introuvable"
+                        }
+                    },
+                    "mac_address": {
+                        "name": "Adresse MAC"
+                    },
+                    "name": {
+                        "name": "Nom"
+                    },
+                    "subnet_mask": {
+                        "name": "Masque de sous-réseau"
+                    }
+                }
+            },
+            "data_usage_day": {
+                "name": "Données consommées (jour)",
+                "state": {
+                    "blue": "Bleu",
+                    "connected": "Connecté",
+                    "disabled": "Désactivé",
+                    "disconnected": "Déconnecté",
+                    "failure": "Échec",
+                    "green": "Vert",
+                    "network": "Réseau",
+                    "profiles": "Profils",
+                    "red": "Rouge",
+                    "success": "Réussite",
+                    "white": "Blanc",
+                    "yellow": "Jaune"
+                },
+                "state_attributes": {
+                    "computers_personal": {
+                        "name": "Ordinateurs et appareils personnels"
+                    },
+                    "failure_reason": {
+                        "state": {
+                            "network_not_found": "Réseau introuvable"
+                        }
+                    },
+                    "mac_address": {
+                        "name": "Adresse MAC"
+                    },
+                    "name": {
+                        "name": "Nom"
+                    },
+                    "subnet_mask": {
+                        "name": "Masque de sous-réseau"
+                    }
+                }
+            },
+            "data_usage_month": {
+                "name": "Données consommées (mois)",
+                "state": {
+                    "blue": "Bleu",
+                    "connected": "Connecté",
+                    "disabled": "Désactivé",
+                    "disconnected": "Déconnecté",
+                    "failure": "Échec",
+                    "green": "Vert",
+                    "network": "Réseau",
+                    "profiles": "Profils",
+                    "red": "Rouge",
+                    "success": "Réussite",
+                    "white": "Blanc",
+                    "yellow": "Jaune"
+                },
+                "state_attributes": {
+                    "computers_personal": {
+                        "name": "Ordinateurs et appareils personnels"
+                    },
+                    "failure_reason": {
+                        "state": {
+                            "network_not_found": "Réseau introuvable"
+                        }
+                    },
+                    "mac_address": {
+                        "name": "Adresse MAC"
+                    },
+                    "name": {
+                        "name": "Nom"
+                    },
+                    "subnet_mask": {
+                        "name": "Masque de sous-réseau"
+                    }
+                }
+            },
+            "data_usage_week": {
+                "name": "Données consommées (semaine)",
+                "state": {
+                    "blue": "Bleu",
+                    "connected": "Connecté",
+                    "disabled": "Désactivé",
+                    "disconnected": "Déconnecté",
+                    "failure": "Échec",
+                    "green": "Vert",
+                    "network": "Réseau",
+                    "profiles": "Profils",
+                    "red": "Rouge",
+                    "success": "Réussite",
+                    "white": "Blanc",
+                    "yellow": "Jaune"
+                },
+                "state_attributes": {
+                    "computers_personal": {
+                        "name": "Ordinateurs et appareils personnels"
+                    },
+                    "failure_reason": {
+                        "state": {
+                            "network_not_found": "Réseau introuvable"
+                        }
+                    },
+                    "mac_address": {
+                        "name": "Adresse MAC"
+                    },
+                    "name": {
+                        "name": "Nom"
+                    },
+                    "subnet_mask": {
+                        "name": "Masque de sous-réseau"
+                    }
+                }
+            },
+            "ethernet_port": {
+                "name": "Port {port}",
+                "state": {
+                    "blue": "Bleu",
+                    "connected": "Connecté",
+                    "disabled": "Désactivé",
+                    "disconnected": "Déconnecté",
+                    "failure": "Échec",
+                    "green": "Vert",
+                    "network": "Réseau",
+                    "profiles": "Profils",
+                    "red": "Rouge",
+                    "success": "Réussite",
+                    "white": "Blanc",
+                    "yellow": "Jaune"
+                },
+                "state_attributes": {
+                    "computers_personal": {
+                        "name": "Ordinateurs et appareils personnels"
+                    },
+                    "failure_reason": {
+                        "state": {
+                            "network_not_found": "Réseau introuvable"
+                        }
+                    },
+                    "mac_address": {
+                        "name": "Adresse MAC"
+                    },
+                    "name": {
+                        "name": "Nom"
+                    },
+                    "subnet_mask": {
+                        "name": "Masque de sous-réseau"
+                    },
+                    "link": {
+                        "name": "Lien"
+                    },
+                    "original_speed": {
+                        "name": "Vitesse d'origine"
+                    },
+                    "derated_reason": {
+                        "name": "Vitesse réduite par",
+                        "state": {
+                            "none": "Aucun",
+                            "speed_test": "Test de débit",
+                            "user": "Utilisateur",
+                            "thermal": "Température"
+                        }
+                    },
+                    "wan": {
+                        "name": "Port WAN"
+                    },
+                    "neighbor": {
+                        "name": "Relié à"
+                    }
+                }
+            },
+            "gateway_ip": {
+                "name": "IP de la passerelle",
+                "state": {
+                    "blue": "Bleu",
+                    "connected": "Connecté",
+                    "disabled": "Désactivé",
+                    "disconnected": "Déconnecté",
+                    "failure": "Échec",
+                    "green": "Vert",
+                    "network": "Réseau",
+                    "profiles": "Profils",
+                    "red": "Rouge",
+                    "success": "Réussite",
+                    "white": "Blanc",
+                    "yellow": "Jaune"
+                },
+                "state_attributes": {
+                    "computers_personal": {
+                        "name": "Ordinateurs et appareils personnels"
+                    },
+                    "failure_reason": {
+                        "state": {
+                            "network_not_found": "Réseau introuvable"
+                        }
+                    },
+                    "mac_address": {
+                        "name": "Adresse MAC"
+                    },
+                    "name": {
+                        "name": "Nom"
+                    },
+                    "subnet_mask": {
+                        "name": "Masque de sous-réseau"
+                    }
+                }
+            },
+            "inspected_day": {
+                "name": "Analyses (jour)",
+                "state": {
+                    "blue": "Bleu",
+                    "connected": "Connecté",
+                    "disabled": "Désactivé",
+                    "disconnected": "Déconnecté",
+                    "failure": "Échec",
+                    "green": "Vert",
+                    "network": "Réseau",
+                    "profiles": "Profils",
+                    "red": "Rouge",
+                    "success": "Réussite",
+                    "white": "Blanc",
+                    "yellow": "Jaune"
+                },
+                "state_attributes": {
+                    "computers_personal": {
+                        "name": "Ordinateurs et appareils personnels"
+                    },
+                    "failure_reason": {
+                        "state": {
+                            "network_not_found": "Réseau introuvable"
+                        }
+                    },
+                    "mac_address": {
+                        "name": "Adresse MAC"
+                    },
+                    "name": {
+                        "name": "Nom"
+                    },
+                    "subnet_mask": {
+                        "name": "Masque de sous-réseau"
+                    }
+                }
+            },
+            "inspected_month": {
+                "name": "Analyses (mois)",
+                "state": {
+                    "blue": "Bleu",
+                    "connected": "Connecté",
+                    "disabled": "Désactivé",
+                    "disconnected": "Déconnecté",
+                    "failure": "Échec",
+                    "green": "Vert",
+                    "network": "Réseau",
+                    "profiles": "Profils",
+                    "red": "Rouge",
+                    "success": "Réussite",
+                    "white": "Blanc",
+                    "yellow": "Jaune"
+                },
+                "state_attributes": {
+                    "computers_personal": {
+                        "name": "Ordinateurs et appareils personnels"
+                    },
+                    "failure_reason": {
+                        "state": {
+                            "network_not_found": "Réseau introuvable"
+                        }
+                    },
+                    "mac_address": {
+                        "name": "Adresse MAC"
+                    },
+                    "name": {
+                        "name": "Nom"
+                    },
+                    "subnet_mask": {
+                        "name": "Masque de sous-réseau"
+                    }
+                }
+            },
+            "inspected_week": {
+                "name": "Analyses (semaine)",
+                "state": {
+                    "blue": "Bleu",
+                    "connected": "Connecté",
+                    "disabled": "Désactivé",
+                    "disconnected": "Déconnecté",
+                    "failure": "Échec",
+                    "green": "Vert",
+                    "network": "Réseau",
+                    "profiles": "Profils",
+                    "red": "Rouge",
+                    "success": "Réussite",
+                    "white": "Blanc",
+                    "yellow": "Jaune"
+                },
+                "state_attributes": {
+                    "computers_personal": {
+                        "name": "Ordinateurs et appareils personnels"
+                    },
+                    "failure_reason": {
+                        "state": {
+                            "network_not_found": "Réseau introuvable"
+                        }
+                    },
+                    "mac_address": {
+                        "name": "Adresse MAC"
+                    },
+                    "name": {
+                        "name": "Nom"
+                    },
+                    "subnet_mask": {
+                        "name": "Masque de sous-réseau"
+                    }
+                }
+            },
+            "ip": {
+                "name": "Adresse IP",
+                "state": {
+                    "blue": "Bleu",
+                    "connected": "Connecté",
+                    "disabled": "Désactivé",
+                    "disconnected": "Déconnecté",
+                    "failure": "Échec",
+                    "green": "Vert",
+                    "network": "Réseau",
+                    "profiles": "Profils",
+                    "red": "Rouge",
+                    "success": "Réussite",
+                    "white": "Blanc",
+                    "yellow": "Jaune"
+                },
+                "state_attributes": {
+                    "computers_personal": {
+                        "name": "Ordinateurs et appareils personnels"
+                    },
+                    "failure_reason": {
+                        "state": {
+                            "network_not_found": "Réseau introuvable"
+                        }
+                    },
+                    "mac_address": {
+                        "name": "Adresse MAC"
+                    },
+                    "name": {
+                        "name": "Nom"
+                    },
+                    "subnet_mask": {
+                        "name": "Masque de sous-réseau"
+                    }
+                }
+            },
+            "last_active": {
+                "name": "Dernière activité",
+                "state": {
+                    "blue": "Bleu",
+                    "connected": "Connecté",
+                    "disabled": "Désactivé",
+                    "disconnected": "Déconnecté",
+                    "failure": "Échec",
+                    "green": "Vert",
+                    "network": "Réseau",
+                    "profiles": "Profils",
+                    "red": "Rouge",
+                    "success": "Réussite",
+                    "white": "Blanc",
+                    "yellow": "Jaune"
+                },
+                "state_attributes": {
+                    "computers_personal": {
+                        "name": "Ordinateurs et appareils personnels"
+                    },
+                    "failure_reason": {
+                        "state": {
+                            "network_not_found": "Réseau introuvable"
+                        }
+                    },
+                    "mac_address": {
+                        "name": "Adresse MAC"
+                    },
+                    "name": {
+                        "name": "Nom"
+                    },
+                    "subnet_mask": {
+                        "name": "Masque de sous-réseau"
+                    }
+                }
+            },
+            "last_reboot": {
+                "name": "Dernier redémarrage",
+                "state": {
+                    "blue": "Bleu",
+                    "connected": "Connecté",
+                    "disabled": "Désactivé",
+                    "disconnected": "Déconnecté",
+                    "failure": "Échec",
+                    "green": "Vert",
+                    "network": "Réseau",
+                    "profiles": "Profils",
+                    "red": "Rouge",
+                    "success": "Réussite",
+                    "white": "Blanc",
+                    "yellow": "Jaune"
+                },
+                "state_attributes": {
+                    "computers_personal": {
+                        "name": "Ordinateurs et appareils personnels"
+                    },
+                    "failure_reason": {
+                        "state": {
+                            "network_not_found": "Réseau introuvable"
+                        }
+                    },
+                    "mac_address": {
+                        "name": "Adresse MAC"
+                    },
+                    "name": {
+                        "name": "Nom"
+                    },
+                    "subnet_mask": {
+                        "name": "Masque de sous-réseau"
+                    }
+                }
+            },
+            "mesh_quality_bars": {
+                "name": "Qualité du maillage",
+                "state": {
+                    "blue": "Bleu",
+                    "connected": "Connecté",
+                    "disabled": "Désactivé",
+                    "disconnected": "Déconnecté",
+                    "failure": "Échec",
+                    "green": "Vert",
+                    "network": "Réseau",
+                    "profiles": "Profils",
+                    "red": "Rouge",
+                    "success": "Réussite",
+                    "white": "Blanc",
+                    "yellow": "Jaune"
+                },
+                "state_attributes": {
+                    "computers_personal": {
+                        "name": "Ordinateurs et appareils personnels"
+                    },
+                    "failure_reason": {
+                        "state": {
+                            "network_not_found": "Réseau introuvable"
+                        }
+                    },
+                    "mac_address": {
+                        "name": "Adresse MAC"
+                    },
+                    "name": {
+                        "name": "Nom"
+                    },
+                    "subnet_mask": {
+                        "name": "Masque de sous-réseau"
+                    }
+                }
+            },
+            "public_ip": {
+                "name": "IP publique",
+                "state": {
+                    "blue": "Bleu",
+                    "connected": "Connecté",
+                    "disabled": "Désactivé",
+                    "disconnected": "Déconnecté",
+                    "failure": "Échec",
+                    "green": "Vert",
+                    "network": "Réseau",
+                    "profiles": "Profils",
+                    "red": "Rouge",
+                    "success": "Réussite",
+                    "white": "Blanc",
+                    "yellow": "Jaune"
+                },
+                "state_attributes": {
+                    "computers_personal": {
+                        "name": "Ordinateurs et appareils personnels"
+                    },
+                    "failure_reason": {
+                        "state": {
+                            "network_not_found": "Réseau introuvable"
+                        }
+                    },
+                    "mac_address": {
+                        "name": "Adresse MAC"
+                    },
+                    "name": {
+                        "name": "Nom"
+                    },
+                    "subnet_mask": {
+                        "name": "Masque de sous-réseau"
+                    }
+                }
+            },
+            "reboots_last_week": {
+                "name": "Redémarrages (7 jours)",
+                "state": {
+                    "blue": "Bleu",
+                    "connected": "Connecté",
+                    "disabled": "Désactivé",
+                    "disconnected": "Déconnecté",
+                    "failure": "Échec",
+                    "green": "Vert",
+                    "network": "Réseau",
+                    "profiles": "Profils",
+                    "red": "Rouge",
+                    "success": "Réussite",
+                    "white": "Blanc",
+                    "yellow": "Jaune"
+                },
+                "state_attributes": {
+                    "computers_personal": {
+                        "name": "Ordinateurs et appareils personnels"
+                    },
+                    "failure_reason": {
+                        "state": {
+                            "network_not_found": "Réseau introuvable"
+                        }
+                    },
+                    "mac_address": {
+                        "name": "Adresse MAC"
+                    },
+                    "name": {
+                        "name": "Nom"
+                    },
+                    "subnet_mask": {
+                        "name": "Masque de sous-réseau"
+                    },
+                    "last_day": {
+                        "name": "Dernières 24 heures"
+                    }
+                }
+            },
+            "signal": {
+                "name": "Puissance du signal",
+                "state": {
+                    "blue": "Bleu",
+                    "connected": "Connecté",
+                    "disabled": "Désactivé",
+                    "disconnected": "Déconnecté",
+                    "failure": "Échec",
+                    "green": "Vert",
+                    "network": "Réseau",
+                    "profiles": "Profils",
+                    "red": "Rouge",
+                    "success": "Réussite",
+                    "white": "Blanc",
+                    "yellow": "Jaune"
+                },
+                "state_attributes": {
+                    "computers_personal": {
+                        "name": "Ordinateurs et appareils personnels"
+                    },
+                    "failure_reason": {
+                        "state": {
+                            "network_not_found": "Réseau introuvable"
+                        }
+                    },
+                    "mac_address": {
+                        "name": "Adresse MAC"
+                    },
+                    "name": {
+                        "name": "Nom"
+                    },
+                    "subnet_mask": {
+                        "name": "Masque de sous-réseau"
+                    }
+                }
+            },
+            "speed_down": {
+                "name": "Débit descendant",
+                "state": {
+                    "blue": "Bleu",
+                    "connected": "Connecté",
+                    "disabled": "Désactivé",
+                    "disconnected": "Déconnecté",
+                    "failure": "Échec",
+                    "green": "Vert",
+                    "network": "Réseau",
+                    "profiles": "Profils",
+                    "red": "Rouge",
+                    "success": "Réussite",
+                    "white": "Blanc",
+                    "yellow": "Jaune"
+                },
+                "state_attributes": {
+                    "computers_personal": {
+                        "name": "Ordinateurs et appareils personnels"
+                    },
+                    "failure_reason": {
+                        "state": {
+                            "network_not_found": "Réseau introuvable"
+                        }
+                    },
+                    "mac_address": {
+                        "name": "Adresse MAC"
+                    },
+                    "name": {
+                        "name": "Nom"
+                    },
+                    "subnet_mask": {
+                        "name": "Masque de sous-réseau"
+                    }
+                }
+            },
+            "speed_up": {
+                "name": "Débit montant",
+                "state": {
+                    "blue": "Bleu",
+                    "connected": "Connecté",
+                    "disabled": "Désactivé",
+                    "disconnected": "Déconnecté",
+                    "failure": "Échec",
+                    "green": "Vert",
+                    "network": "Réseau",
+                    "profiles": "Profils",
+                    "red": "Rouge",
+                    "success": "Réussite",
+                    "white": "Blanc",
+                    "yellow": "Jaune"
+                },
+                "state_attributes": {
+                    "computers_personal": {
+                        "name": "Ordinateurs et appareils personnels"
+                    },
+                    "failure_reason": {
+                        "state": {
+                            "network_not_found": "Réseau introuvable"
+                        }
+                    },
+                    "mac_address": {
+                        "name": "Adresse MAC"
+                    },
+                    "name": {
+                        "name": "Nom"
+                    },
+                    "subnet_mask": {
+                        "name": "Masque de sous-réseau"
+                    }
+                }
+            },
+            "status": {
+                "name": "État",
+                "state": {
+                    "blue": "Bleu",
+                    "connected": "Connecté",
+                    "disabled": "Désactivé",
+                    "disconnected": "Déconnecté",
+                    "failure": "Échec",
+                    "green": "Vert",
+                    "network": "Réseau",
+                    "profiles": "Profils",
+                    "red": "Rouge",
+                    "success": "Réussite",
+                    "white": "Blanc",
+                    "yellow": "Jaune"
+                },
+                "state_attributes": {
+                    "computers_personal": {
+                        "name": "Ordinateurs et appareils personnels"
+                    },
+                    "failure_reason": {
+                        "state": {
+                            "network_not_found": "Réseau introuvable"
+                        }
+                    },
+                    "mac_address": {
+                        "name": "Adresse MAC"
+                    },
+                    "name": {
+                        "name": "Nom"
+                    },
+                    "subnet_mask": {
+                        "name": "Masque de sous-réseau"
+                    }
+                }
+            },
+            "uplink_type": {
+                "name": "Liaison au maillage",
+                "state": {
+                    "blue": "Bleu",
+                    "connected": "Connecté",
+                    "disabled": "Désactivé",
+                    "disconnected": "Déconnecté",
+                    "failure": "Échec",
+                    "green": "Vert",
+                    "network": "Réseau",
+                    "profiles": "Profils",
+                    "red": "Rouge",
+                    "success": "Réussite",
+                    "white": "Blanc",
+                    "yellow": "Jaune",
+                    "wired": "Filaire",
+                    "wired_poe": "Filaire (PoE)",
+                    "wireless": "Wi-Fi",
+                    "cellular": "Cellulaire",
+                    "unknown": "Inconnue"
+                },
+                "state_attributes": {
+                    "computers_personal": {
+                        "name": "Ordinateurs et appareils personnels"
+                    },
+                    "failure_reason": {
+                        "state": {
+                            "network_not_found": "Réseau introuvable"
+                        }
+                    },
+                    "mac_address": {
+                        "name": "Adresse MAC"
+                    },
+                    "name": {
+                        "name": "Nom"
+                    },
+                    "subnet_mask": {
+                        "name": "Masque de sous-réseau"
+                    }
+                }
+            },
+            "upstream_eero": {
+                "name": "eero parent",
+                "state": {
+                    "blue": "Bleu",
+                    "connected": "Connecté",
+                    "disabled": "Désactivé",
+                    "disconnected": "Déconnecté",
+                    "failure": "Échec",
+                    "green": "Vert",
+                    "network": "Réseau",
+                    "profiles": "Profils",
+                    "red": "Rouge",
+                    "success": "Réussite",
+                    "white": "Blanc",
+                    "yellow": "Jaune"
+                },
+                "state_attributes": {
+                    "computers_personal": {
+                        "name": "Ordinateurs et appareils personnels"
+                    },
+                    "failure_reason": {
+                        "state": {
+                            "network_not_found": "Réseau introuvable"
+                        }
+                    },
+                    "mac_address": {
+                        "name": "Adresse MAC"
+                    },
+                    "name": {
+                        "name": "Nom"
+                    },
+                    "subnet_mask": {
+                        "name": "Masque de sous-réseau"
+                    },
+                    "radio": {
+                        "name": "Radio"
+                    }
+                }
+            },
+            "usage_down": {
+                "name": "Trafic descendant",
+                "state": {
+                    "blue": "Bleu",
+                    "connected": "Connecté",
+                    "disabled": "Désactivé",
+                    "disconnected": "Déconnecté",
+                    "failure": "Échec",
+                    "green": "Vert",
+                    "network": "Réseau",
+                    "profiles": "Profils",
+                    "red": "Rouge",
+                    "success": "Réussite",
+                    "white": "Blanc",
+                    "yellow": "Jaune"
+                },
+                "state_attributes": {
+                    "computers_personal": {
+                        "name": "Ordinateurs et appareils personnels"
+                    },
+                    "failure_reason": {
+                        "state": {
+                            "network_not_found": "Réseau introuvable"
+                        }
+                    },
+                    "mac_address": {
+                        "name": "Adresse MAC"
+                    },
+                    "name": {
+                        "name": "Nom"
+                    },
+                    "subnet_mask": {
+                        "name": "Masque de sous-réseau"
+                    }
+                }
+            },
+            "usage_up": {
+                "name": "Trafic montant",
+                "state": {
+                    "blue": "Bleu",
+                    "connected": "Connecté",
+                    "disabled": "Désactivé",
+                    "disconnected": "Déconnecté",
+                    "failure": "Échec",
+                    "green": "Vert",
+                    "network": "Réseau",
+                    "profiles": "Profils",
+                    "red": "Rouge",
+                    "success": "Réussite",
+                    "white": "Blanc",
+                    "yellow": "Jaune"
+                },
+                "state_attributes": {
+                    "computers_personal": {
+                        "name": "Ordinateurs et appareils personnels"
+                    },
+                    "failure_reason": {
+                        "state": {
+                            "network_not_found": "Réseau introuvable"
+                        }
+                    },
+                    "mac_address": {
+                        "name": "Adresse MAC"
+                    },
+                    "name": {
+                        "name": "Nom"
+                    },
+                    "subnet_mask": {
+                        "name": "Masque de sous-réseau"
+                    }
+                }
+            },
+            "wan_router_ip": {
+                "name": "IP du routeur WAN",
                 "state": {
                     "blue": "Bleu",
                     "connected": "Connecté",
@@ -310,7 +1603,8 @@
             }
         },
         "switch": {
-            "all": {
+            "ad_block": {
+                "name": "Blocage des publicités",
                 "state_attributes": {
                     "thread_network_key": {
                         "name": "Clé du réseau Thread"
@@ -334,6 +1628,669 @@
                         "name": "Jeu de données opérationnel actif"
                     }
                 }
+            },
+            "auto_join_enabled": {
+                "name": "Connexion automatique",
+                "state_attributes": {
+                    "thread_network_key": {
+                        "name": "Clé du réseau Thread"
+                    },
+                    "thread_network_name": {
+                        "name": "Nom du réseau Thread"
+                    },
+                    "channel": {
+                        "name": "Canal"
+                    },
+                    "pan_id": {
+                        "name": "PAN ID"
+                    },
+                    "extended_pan_id": {
+                        "name": "PAN ID étendu"
+                    },
+                    "commissioning_credential": {
+                        "name": "Identifiant de mise en service"
+                    },
+                    "active_operational_dataset": {
+                        "name": "Jeu de données opérationnel actif"
+                    }
+                }
+            },
+            "backup_internet_enabled": {
+                "name": "Internet de secours",
+                "state_attributes": {
+                    "thread_network_key": {
+                        "name": "Clé du réseau Thread"
+                    },
+                    "thread_network_name": {
+                        "name": "Nom du réseau Thread"
+                    },
+                    "channel": {
+                        "name": "Canal"
+                    },
+                    "pan_id": {
+                        "name": "PAN ID"
+                    },
+                    "extended_pan_id": {
+                        "name": "PAN ID étendu"
+                    },
+                    "commissioning_credential": {
+                        "name": "Identifiant de mise en service"
+                    },
+                    "active_operational_dataset": {
+                        "name": "Jeu de données opérationnel actif"
+                    }
+                }
+            },
+            "band_steering": {
+                "name": "Orientation de bande",
+                "state_attributes": {
+                    "thread_network_key": {
+                        "name": "Clé du réseau Thread"
+                    },
+                    "thread_network_name": {
+                        "name": "Nom du réseau Thread"
+                    },
+                    "channel": {
+                        "name": "Canal"
+                    },
+                    "pan_id": {
+                        "name": "PAN ID"
+                    },
+                    "extended_pan_id": {
+                        "name": "PAN ID étendu"
+                    },
+                    "commissioning_credential": {
+                        "name": "Identifiant de mise en service"
+                    },
+                    "active_operational_dataset": {
+                        "name": "Jeu de données opérationnel actif"
+                    }
+                }
+            },
+            "block_gaming_content": {
+                "name": "Filtre jeux vidéo",
+                "state_attributes": {
+                    "thread_network_key": {
+                        "name": "Clé du réseau Thread"
+                    },
+                    "thread_network_name": {
+                        "name": "Nom du réseau Thread"
+                    },
+                    "channel": {
+                        "name": "Canal"
+                    },
+                    "pan_id": {
+                        "name": "PAN ID"
+                    },
+                    "extended_pan_id": {
+                        "name": "PAN ID étendu"
+                    },
+                    "commissioning_credential": {
+                        "name": "Identifiant de mise en service"
+                    },
+                    "active_operational_dataset": {
+                        "name": "Jeu de données opérationnel actif"
+                    }
+                }
+            },
+            "block_illegal_content": {
+                "name": "Filtre contenus illégaux",
+                "state_attributes": {
+                    "thread_network_key": {
+                        "name": "Clé du réseau Thread"
+                    },
+                    "thread_network_name": {
+                        "name": "Nom du réseau Thread"
+                    },
+                    "channel": {
+                        "name": "Canal"
+                    },
+                    "pan_id": {
+                        "name": "PAN ID"
+                    },
+                    "extended_pan_id": {
+                        "name": "PAN ID étendu"
+                    },
+                    "commissioning_credential": {
+                        "name": "Identifiant de mise en service"
+                    },
+                    "active_operational_dataset": {
+                        "name": "Jeu de données opérationnel actif"
+                    }
+                }
+            },
+            "block_malware": {
+                "name": "Sécurité avancée",
+                "state_attributes": {
+                    "thread_network_key": {
+                        "name": "Clé du réseau Thread"
+                    },
+                    "thread_network_name": {
+                        "name": "Nom du réseau Thread"
+                    },
+                    "channel": {
+                        "name": "Canal"
+                    },
+                    "pan_id": {
+                        "name": "PAN ID"
+                    },
+                    "extended_pan_id": {
+                        "name": "PAN ID étendu"
+                    },
+                    "commissioning_credential": {
+                        "name": "Identifiant de mise en service"
+                    },
+                    "active_operational_dataset": {
+                        "name": "Jeu de données opérationnel actif"
+                    }
+                }
+            },
+            "block_messaging_content": {
+                "name": "Filtre messageries",
+                "state_attributes": {
+                    "thread_network_key": {
+                        "name": "Clé du réseau Thread"
+                    },
+                    "thread_network_name": {
+                        "name": "Nom du réseau Thread"
+                    },
+                    "channel": {
+                        "name": "Canal"
+                    },
+                    "pan_id": {
+                        "name": "PAN ID"
+                    },
+                    "extended_pan_id": {
+                        "name": "PAN ID étendu"
+                    },
+                    "commissioning_credential": {
+                        "name": "Identifiant de mise en service"
+                    },
+                    "active_operational_dataset": {
+                        "name": "Jeu de données opérationnel actif"
+                    }
+                }
+            },
+            "block_pornographic_content": {
+                "name": "Filtre contenus pour adultes",
+                "state_attributes": {
+                    "thread_network_key": {
+                        "name": "Clé du réseau Thread"
+                    },
+                    "thread_network_name": {
+                        "name": "Nom du réseau Thread"
+                    },
+                    "channel": {
+                        "name": "Canal"
+                    },
+                    "pan_id": {
+                        "name": "PAN ID"
+                    },
+                    "extended_pan_id": {
+                        "name": "PAN ID étendu"
+                    },
+                    "commissioning_credential": {
+                        "name": "Identifiant de mise en service"
+                    },
+                    "active_operational_dataset": {
+                        "name": "Jeu de données opérationnel actif"
+                    }
+                }
+            },
+            "block_shopping_content": {
+                "name": "Filtre achats en ligne",
+                "state_attributes": {
+                    "thread_network_key": {
+                        "name": "Clé du réseau Thread"
+                    },
+                    "thread_network_name": {
+                        "name": "Nom du réseau Thread"
+                    },
+                    "channel": {
+                        "name": "Canal"
+                    },
+                    "pan_id": {
+                        "name": "PAN ID"
+                    },
+                    "extended_pan_id": {
+                        "name": "PAN ID étendu"
+                    },
+                    "commissioning_credential": {
+                        "name": "Identifiant de mise en service"
+                    },
+                    "active_operational_dataset": {
+                        "name": "Jeu de données opérationnel actif"
+                    }
+                }
+            },
+            "block_social_content": {
+                "name": "Filtre réseaux sociaux",
+                "state_attributes": {
+                    "thread_network_key": {
+                        "name": "Clé du réseau Thread"
+                    },
+                    "thread_network_name": {
+                        "name": "Nom du réseau Thread"
+                    },
+                    "channel": {
+                        "name": "Canal"
+                    },
+                    "pan_id": {
+                        "name": "PAN ID"
+                    },
+                    "extended_pan_id": {
+                        "name": "PAN ID étendu"
+                    },
+                    "commissioning_credential": {
+                        "name": "Identifiant de mise en service"
+                    },
+                    "active_operational_dataset": {
+                        "name": "Jeu de données opérationnel actif"
+                    }
+                }
+            },
+            "block_streaming_content": {
+                "name": "Filtre streaming",
+                "state_attributes": {
+                    "thread_network_key": {
+                        "name": "Clé du réseau Thread"
+                    },
+                    "thread_network_name": {
+                        "name": "Nom du réseau Thread"
+                    },
+                    "channel": {
+                        "name": "Canal"
+                    },
+                    "pan_id": {
+                        "name": "PAN ID"
+                    },
+                    "extended_pan_id": {
+                        "name": "PAN ID étendu"
+                    },
+                    "commissioning_credential": {
+                        "name": "Identifiant de mise en service"
+                    },
+                    "active_operational_dataset": {
+                        "name": "Jeu de données opérationnel actif"
+                    }
+                }
+            },
+            "block_violent_content": {
+                "name": "Filtre contenus violents",
+                "state_attributes": {
+                    "thread_network_key": {
+                        "name": "Clé du réseau Thread"
+                    },
+                    "thread_network_name": {
+                        "name": "Nom du réseau Thread"
+                    },
+                    "channel": {
+                        "name": "Canal"
+                    },
+                    "pan_id": {
+                        "name": "PAN ID"
+                    },
+                    "extended_pan_id": {
+                        "name": "PAN ID étendu"
+                    },
+                    "commissioning_credential": {
+                        "name": "Identifiant de mise en service"
+                    },
+                    "active_operational_dataset": {
+                        "name": "Jeu de données opérationnel actif"
+                    }
+                }
+            },
+            "ddns_enabled": {
+                "name": "DNS dynamique",
+                "state_attributes": {
+                    "thread_network_key": {
+                        "name": "Clé du réseau Thread"
+                    },
+                    "thread_network_name": {
+                        "name": "Nom du réseau Thread"
+                    },
+                    "channel": {
+                        "name": "Canal"
+                    },
+                    "pan_id": {
+                        "name": "PAN ID"
+                    },
+                    "extended_pan_id": {
+                        "name": "PAN ID étendu"
+                    },
+                    "commissioning_credential": {
+                        "name": "Identifiant de mise en service"
+                    },
+                    "active_operational_dataset": {
+                        "name": "Jeu de données opérationnel actif"
+                    }
+                }
+            },
+            "dns_caching": {
+                "name": "Cache DNS local",
+                "state_attributes": {
+                    "thread_network_key": {
+                        "name": "Clé du réseau Thread"
+                    },
+                    "thread_network_name": {
+                        "name": "Nom du réseau Thread"
+                    },
+                    "channel": {
+                        "name": "Canal"
+                    },
+                    "pan_id": {
+                        "name": "PAN ID"
+                    },
+                    "extended_pan_id": {
+                        "name": "PAN ID étendu"
+                    },
+                    "commissioning_credential": {
+                        "name": "Identifiant de mise en service"
+                    },
+                    "active_operational_dataset": {
+                        "name": "Jeu de données opérationnel actif"
+                    }
+                }
+            },
+            "guest_network_enabled": {
+                "name": "Réseau invité",
+                "state_attributes": {
+                    "thread_network_key": {
+                        "name": "Clé du réseau Thread"
+                    },
+                    "thread_network_name": {
+                        "name": "Nom du réseau Thread"
+                    },
+                    "channel": {
+                        "name": "Canal"
+                    },
+                    "pan_id": {
+                        "name": "PAN ID"
+                    },
+                    "extended_pan_id": {
+                        "name": "PAN ID étendu"
+                    },
+                    "commissioning_credential": {
+                        "name": "Identifiant de mise en service"
+                    },
+                    "active_operational_dataset": {
+                        "name": "Jeu de données opérationnel actif"
+                    }
+                }
+            },
+            "ipv6_upstream": {
+                "name": "IPv6",
+                "state_attributes": {
+                    "thread_network_key": {
+                        "name": "Clé du réseau Thread"
+                    },
+                    "thread_network_name": {
+                        "name": "Nom du réseau Thread"
+                    },
+                    "channel": {
+                        "name": "Canal"
+                    },
+                    "pan_id": {
+                        "name": "PAN ID"
+                    },
+                    "extended_pan_id": {
+                        "name": "PAN ID étendu"
+                    },
+                    "commissioning_credential": {
+                        "name": "Identifiant de mise en service"
+                    },
+                    "active_operational_dataset": {
+                        "name": "Jeu de données opérationnel actif"
+                    }
+                }
+            },
+            "pause_5g_enabled": {
+                "name": "Bande 5 GHz en pause",
+                "state_attributes": {
+                    "thread_network_key": {
+                        "name": "Clé du réseau Thread"
+                    },
+                    "thread_network_name": {
+                        "name": "Nom du réseau Thread"
+                    },
+                    "channel": {
+                        "name": "Canal"
+                    },
+                    "pan_id": {
+                        "name": "PAN ID"
+                    },
+                    "extended_pan_id": {
+                        "name": "PAN ID étendu"
+                    },
+                    "commissioning_credential": {
+                        "name": "Identifiant de mise en service"
+                    },
+                    "active_operational_dataset": {
+                        "name": "Jeu de données opérationnel actif"
+                    }
+                }
+            },
+            "paused": {
+                "name": "En pause",
+                "state_attributes": {
+                    "thread_network_key": {
+                        "name": "Clé du réseau Thread"
+                    },
+                    "thread_network_name": {
+                        "name": "Nom du réseau Thread"
+                    },
+                    "channel": {
+                        "name": "Canal"
+                    },
+                    "pan_id": {
+                        "name": "PAN ID"
+                    },
+                    "extended_pan_id": {
+                        "name": "PAN ID étendu"
+                    },
+                    "commissioning_credential": {
+                        "name": "Identifiant de mise en service"
+                    },
+                    "active_operational_dataset": {
+                        "name": "Jeu de données opérationnel actif"
+                    }
+                }
+            },
+            "safe_search_enabled": {
+                "name": "Filtre SafeSearch",
+                "state_attributes": {
+                    "thread_network_key": {
+                        "name": "Clé du réseau Thread"
+                    },
+                    "thread_network_name": {
+                        "name": "Nom du réseau Thread"
+                    },
+                    "channel": {
+                        "name": "Canal"
+                    },
+                    "pan_id": {
+                        "name": "PAN ID"
+                    },
+                    "extended_pan_id": {
+                        "name": "PAN ID étendu"
+                    },
+                    "commissioning_credential": {
+                        "name": "Identifiant de mise en service"
+                    },
+                    "active_operational_dataset": {
+                        "name": "Jeu de données opérationnel actif"
+                    }
+                }
+            },
+            "secondary_wan_allow_access": {
+                "name": "Autoriser l'Internet de secours",
+                "state_attributes": {
+                    "thread_network_key": {
+                        "name": "Clé du réseau Thread"
+                    },
+                    "thread_network_name": {
+                        "name": "Nom du réseau Thread"
+                    },
+                    "channel": {
+                        "name": "Canal"
+                    },
+                    "pan_id": {
+                        "name": "PAN ID"
+                    },
+                    "extended_pan_id": {
+                        "name": "PAN ID étendu"
+                    },
+                    "commissioning_credential": {
+                        "name": "Identifiant de mise en service"
+                    },
+                    "active_operational_dataset": {
+                        "name": "Jeu de données opérationnel actif"
+                    }
+                }
+            },
+            "sqm": {
+                "name": "Smart Queue Management",
+                "state_attributes": {
+                    "thread_network_key": {
+                        "name": "Clé du réseau Thread"
+                    },
+                    "thread_network_name": {
+                        "name": "Nom du réseau Thread"
+                    },
+                    "channel": {
+                        "name": "Canal"
+                    },
+                    "pan_id": {
+                        "name": "PAN ID"
+                    },
+                    "extended_pan_id": {
+                        "name": "PAN ID étendu"
+                    },
+                    "commissioning_credential": {
+                        "name": "Identifiant de mise en service"
+                    },
+                    "active_operational_dataset": {
+                        "name": "Jeu de données opérationnel actif"
+                    }
+                }
+            },
+            "thread_enabled": {
+                "name": "Thread",
+                "state_attributes": {
+                    "thread_network_key": {
+                        "name": "Clé du réseau Thread"
+                    },
+                    "thread_network_name": {
+                        "name": "Nom du réseau Thread"
+                    },
+                    "channel": {
+                        "name": "Canal"
+                    },
+                    "pan_id": {
+                        "name": "PAN ID"
+                    },
+                    "extended_pan_id": {
+                        "name": "PAN ID étendu"
+                    },
+                    "commissioning_credential": {
+                        "name": "Identifiant de mise en service"
+                    },
+                    "active_operational_dataset": {
+                        "name": "Jeu de données opérationnel actif"
+                    }
+                }
+            },
+            "upnp": {
+                "name": "UPnP",
+                "state_attributes": {
+                    "thread_network_key": {
+                        "name": "Clé du réseau Thread"
+                    },
+                    "thread_network_name": {
+                        "name": "Nom du réseau Thread"
+                    },
+                    "channel": {
+                        "name": "Canal"
+                    },
+                    "pan_id": {
+                        "name": "PAN ID"
+                    },
+                    "extended_pan_id": {
+                        "name": "PAN ID étendu"
+                    },
+                    "commissioning_credential": {
+                        "name": "Identifiant de mise en service"
+                    },
+                    "active_operational_dataset": {
+                        "name": "Jeu de données opérationnel actif"
+                    }
+                }
+            },
+            "wpa3": {
+                "name": "WPA3",
+                "state_attributes": {
+                    "thread_network_key": {
+                        "name": "Clé du réseau Thread"
+                    },
+                    "thread_network_name": {
+                        "name": "Nom du réseau Thread"
+                    },
+                    "channel": {
+                        "name": "Canal"
+                    },
+                    "pan_id": {
+                        "name": "PAN ID"
+                    },
+                    "extended_pan_id": {
+                        "name": "PAN ID étendu"
+                    },
+                    "commissioning_credential": {
+                        "name": "Identifiant de mise en service"
+                    },
+                    "active_operational_dataset": {
+                        "name": "Jeu de données opérationnel actif"
+                    }
+                }
+            },
+            "youtube_restricted": {
+                "name": "Filtre YouTube (mode restreint)",
+                "state_attributes": {
+                    "thread_network_key": {
+                        "name": "Clé du réseau Thread"
+                    },
+                    "thread_network_name": {
+                        "name": "Nom du réseau Thread"
+                    },
+                    "channel": {
+                        "name": "Canal"
+                    },
+                    "pan_id": {
+                        "name": "PAN ID"
+                    },
+                    "extended_pan_id": {
+                        "name": "PAN ID étendu"
+                    },
+                    "commissioning_credential": {
+                        "name": "Identifiant de mise en service"
+                    },
+                    "active_operational_dataset": {
+                        "name": "Jeu de données opérationnel actif"
+                    }
+                }
+            }
+        },
+        "time": {
+            "nightlight_schedule_off": {
+                "name": "Extinction de la veilleuse"
+            },
+            "nightlight_schedule_on": {
+                "name": "Allumage de la veilleuse"
+            }
+        },
+        "update": {
+            "firmware": {
+                "name": "Firmware"
             }
         }
     }
