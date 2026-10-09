@@ -245,9 +245,10 @@ class StaleDevicePurger:
             if device is None:
                 continue
             removed_ids |= {ident for dom, ident in device.identifiers if dom == DOMAIN}
-            device_registry.async_update_device(
-                stale.device_id, remove_config_entry_id=self.config_entry.entry_id
-            )
+            # A device belongs to a single config entry since HA 2026.10;
+            # removing one through async_update_device(remove_config_entry_id=)
+            # is deprecated and stops working in 2027.8.
+            device_registry.async_remove_device(stale.device_id)
         forget(self._seen, removed_ids, self._stamped)
         self._store.async_delay_save(self._serialize, SAVE_DELAY)
         _LOGGER.info(
