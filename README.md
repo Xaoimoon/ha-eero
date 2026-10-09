@@ -61,7 +61,7 @@ Home Assistant Core 2026.8 ou plus récent est requis.
 
 ## Bon à savoir
 
-- **Langue** : tout est traduit en français : configuration, options, actions, noms des entités, états et attributs. Les identifiants des nouvelles entités restent tirés des noms anglais (`sensor.salon_mesh_quality`), comme le veut Home Assistant ; ceux des entités existantes ne changent pas.
+- **Langue** : tout est traduit en français : configuration, options, actions, noms des entités, états et attributs. Les identifiants des entités existantes ne changent pas. Ceux des nouvelles entités sont fabriqués par Home Assistant (depuis la 2026.9) à partir du nom affiché et de la pièce de l'appareil, par exemple `sensor.salon_salon_qualite_du_maillage`.
 - **Capteurs de diagnostic** : la santé du maillage et les ports Ethernet sont rangés en diagnostic. Les ports sont créés au chargement de l'intégration, d'après ceux que signale chaque eero.
 - **Compte Amazon** : la connexion par un compte Amazon n'est pas prise en charge. Créer un compte eero classique et l'ajouter comme administrateur du réseau ([marche à suivre](https://github.com/schmittx/home-assistant-eero/issues/77#issuecomment-1960875926)).
 - **Session expirée** : si eero invalide la session, Home Assistant propose de se réauthentifier avec un nouveau code de vérification, sans supprimer l'intégration.
