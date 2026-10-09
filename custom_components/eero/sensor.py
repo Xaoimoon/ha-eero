@@ -35,6 +35,7 @@ from .api.const import (
     STATE_NETWORK,
     STATE_PROFILE,
 )
+from .api.eero import UPLINK_TYPES, EeroDevice
 from .api.util import sum_data_usage
 from .const import (
     CONF_ACTIVITY,
@@ -147,6 +148,18 @@ SENSOR_DESCRIPTIONS: list[EeroSensorEntityDescription] = [
         native_unit_of_measurement="clients",
     ),
     EeroSensorEntityDescription(
+        key="connected_wired_clients_count",
+        name="Connected Wired Clients",
+        state_class=SensorStateClass.MEASUREMENT,
+        native_unit_of_measurement="clients",
+    ),
+    EeroSensorEntityDescription(
+        key="connected_wireless_clients_count",
+        name="Connected Wireless Clients",
+        state_class=SensorStateClass.MEASUREMENT,
+        native_unit_of_measurement="clients",
+    ),
+    EeroSensorEntityDescription(
         key="connected_guest_clients_count",
         name="Connected Guest Clients",
         state_class=SensorStateClass.MEASUREMENT,
@@ -218,8 +231,28 @@ SENSOR_DESCRIPTIONS: list[EeroSensorEntityDescription] = [
         device_class=SensorDeviceClass.TIMESTAMP,
     ),
     EeroSensorEntityDescription(
+        key="last_reboot",
+        name="Last Reboot",
+        device_class=SensorDeviceClass.TIMESTAMP,
+    ),
+    EeroSensorEntityDescription(
+        key="mesh_quality_bars",
+        name="Mesh Quality",
+        state_class=SensorStateClass.MEASUREMENT,
+        native_unit_of_measurement="bars",
+    ),
+    EeroSensorEntityDescription(
         key="public_ip",
         name="Public IP",
+    ),
+    EeroSensorEntityDescription(
+        key="reboots_last_week",
+        name="Reboots Last Week",
+        state_class=SensorStateClass.MEASUREMENT,
+        native_unit_of_measurement="reboots",
+        extra_attrs={
+            "last_day": lambda resource: resource.reboots_last_day,
+        },
     ),
     EeroSensorEntityDescription(
         key="signal",
@@ -263,6 +296,19 @@ SENSOR_DESCRIPTIONS: list[EeroSensorEntityDescription] = [
         name="Status",
     ),
     EeroSensorEntityDescription(
+        key="uplink_type",
+        name="Mesh Connection",
+        device_class=SensorDeviceClass.ENUM,
+        options=list(UPLINK_TYPES),
+    ),
+    EeroSensorEntityDescription(
+        key="upstream_eero",
+        name="Upstream eero",
+        extra_attrs={
+            "radio": lambda resource: resource.upstream_radio,
+        },
+    ),
+    EeroSensorEntityDescription(
         key="usage_down",
         name="Download Rate",
         device_class=SensorDeviceClass.DATA_RATE,
@@ -284,6 +330,38 @@ SENSOR_DESCRIPTIONS: list[EeroSensorEntityDescription] = [
         },
     ),
 ]
+
+
+def ethernet_port_description(number: int, name: str) -> EeroSensorEntityDescription:
+    """Describe the link speed sensor of one Ethernet port of an eero.
+
+    Ports differ by model, so one description is built per port reported at
+    setup. The key carries the port number, which keeps the unique ID stable.
+    """
+
+    def port(resource: EeroDevice):
+        return resource.ethernet_port(number)
+
+    def attr(field: str) -> Callable:
+        return lambda resource: getattr(port(resource), field, None)
+
+    return EeroSensorEntityDescription(
+        key=f"ethernet_port_{number}",
+        name=f"Port {name}",
+        translation_key="ethernet_port",
+        translation_placeholders={"port": name},
+        device_class=SensorDeviceClass.DATA_RATE,
+        state_class=SensorStateClass.MEASUREMENT,
+        native_unit_of_measurement=UnitOfDataRate.MEGABITS_PER_SECOND,
+        native_value=lambda resource, key: getattr(port(resource), "speed_mbps", None),
+        extra_attrs={
+            "link": attr("link"),
+            "original_speed": attr("original_speed_mbps"),
+            "derated_reason": attr("derated_reason"),
+            "wan": attr("wan"),
+            "neighbor": attr("neighbor"),
+        },
+    )
 
 
 async def async_setup_entry(
@@ -362,6 +440,16 @@ async def async_setup_entry(
                                     entry[CONF_MISCELLANEOUS][network.id],
                                 )
                             )
+                    for port in eero.ethernet_ports:
+                        entities.append(
+                            EeroSensorEntity(
+                                coordinator,
+                                network.id,
+                                eero.id,
+                                ethernet_port_description(port.number, port.name),
+                                entry[CONF_MISCELLANEOUS][network.id],
+                            )
+                        )
 
             for profile in network.profiles:
                 if profile.id in entry[CONF_RESOURCES][network.id][CONF_PROFILES]:

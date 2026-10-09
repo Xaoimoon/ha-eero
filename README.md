@@ -18,6 +18,8 @@ C'est la suite maintenue de [schmittx/home-assistant-eero](https://github.com/sc
 - Pause de l'accès à Internet par profil ou par appareil, filtres de contenu des profils, applications bloquées (eero Plus).
 - Présence des appareils et des profils, avec la bande, le canal et la largeur de canal des appareils Wi-Fi.
 - Capteurs de signal, de débit, de consommation de données et d'activité (eero Plus).
+- Santé du maillage, pour chaque eero : qualité du maillage (0 à 5 barres), liaison (filaire, PoE, Wi-Fi) et eero parent, dernier redémarrage et redémarrages sur 7 jours, appareils filaires et Wi-Fi connectés.
+- Ports Ethernet des eero : vitesse négociée de chaque port, avec en attributs le lien, la vitesse d'origine et la raison d'un bridage, le port WAN et l'équipement relié.
 - Boutons pour les actions qui redémarrent le réseau, mises à jour du firmware des eero.
 - Veilleuse des eero Beacon (mode, horaires, luminosité).
 - Réseaux de secours (eero Plus).
@@ -59,7 +61,8 @@ Home Assistant Core 2026.8 ou plus récent est requis.
 
 ## Bon à savoir
 
-- **Langue** : la configuration, les options, l'action et les états sont traduits en français. Les noms des entités restent pour l'instant en anglais.
+- **Langue** : tout est traduit en français : configuration, options, actions, noms des entités, états et attributs. Les identifiants des nouvelles entités restent tirés des noms anglais (`sensor.salon_mesh_quality`), comme le veut Home Assistant ; ceux des entités existantes ne changent pas.
+- **Capteurs de diagnostic** : la santé du maillage et les ports Ethernet sont rangés en diagnostic. Les ports sont créés au chargement de l'intégration, d'après ceux que signale chaque eero.
 - **Compte Amazon** : la connexion par un compte Amazon n'est pas prise en charge. Créer un compte eero classique et l'ajouter comme administrateur du réseau ([marche à suivre](https://github.com/schmittx/home-assistant-eero/issues/77#issuecomment-1960875926)).
 - **Session expirée** : si eero invalide la session, Home Assistant propose de se réauthentifier avec un nouveau code de vérification, sans supprimer l'intégration.
 - **Appareils disparus** : un appareil qu'eero ne signale plus passe en « indisponible ». Il peut être supprimé depuis sa fiche dans Home Assistant et il est recréé s'il revient. Le réseau, les eero et les profils ne peuvent pas être supprimés de cette façon.

@@ -210,7 +210,25 @@
     },
     "entity": {
         "binary_sensor": {
-            "all": {
+            "block_apps_enabled": {
+                "name": "Block Apps",
+                "state_attributes": {
+                    "bandwidth_receive": {
+                        "name": "Bandwidth receive"
+                    },
+                    "bandwidth_transmit": {
+                        "name": "Bandwidth transmit"
+                    },
+                    "channel": {
+                        "name": "Channel"
+                    },
+                    "operating_band": {
+                        "name": "Operating band"
+                    }
+                }
+            },
+            "connected": {
+                "name": "Connected",
                 "state_attributes": {
                     "bandwidth_receive": {
                         "name": "Bandwidth receive"
@@ -227,8 +245,19 @@
                 }
             }
         },
+        "button": {
+            "reboot": {
+                "name": "Reboot"
+            },
+            "run_internet_backup_test": {
+                "name": "Run Internet Backup Test"
+            },
+            "run_speed_test": {
+                "name": "Run Speed Test"
+            }
+        },
         "device_tracker": {
-            "all": {
+            "device_tracker": {
                 "state_attributes": {
                     "connection_type": {
                         "state": {
@@ -239,8 +268,51 @@
                 }
             }
         },
+        "light": {
+            "status_light_enabled": {
+                "name": "Status Light"
+            }
+        },
+        "number": {
+            "nightlight_brightness_percentage": {
+                "name": "Nightlight Brightness"
+            }
+        },
         "select": {
-            "all": {
+            "nightlight_mode": {
+                "name": "Nightlight Mode",
+                "state": {
+                    "12am_1am": "12 AM - 1 AM",
+                    "1am_2am": "1 AM - 2 AM",
+                    "2am_3am": "2 AM - 3 AM",
+                    "3am_4am": "3 AM - 4 AM",
+                    "4am_5am": "4 AM - 5 AM",
+                    "5am_6am": "5 AM - 6 AM",
+                    "6am_7am": "6 AM - 7 AM",
+                    "7am_8am": "7 AM - 8 AM",
+                    "8am_9am": "8 AM - 9 AM",
+                    "9am_10am": "9 AM - 10 AM",
+                    "10am_11am": "10 AM - 11 AM",
+                    "11am_12pm": "11 AM - 12 PM",
+                    "12pm_1pm": "12 PM - 1 PM",
+                    "1pm_2pm": "1 PM - 2 PM",
+                    "2pm_3pm": "2 PM - 3 PM",
+                    "3pm_4pm": "3 PM - 4 PM",
+                    "4pm_5pm": "4 PM - 5 PM",
+                    "5pm_6pm": "5 PM - 6 PM",
+                    "6pm_7pm": "6 PM - 7 PM",
+                    "7pm_8pm": "7 PM - 8 PM",
+                    "8pm_9pm": "8 PM - 9 PM",
+                    "9pm_10pm": "9 PM - 10 PM",
+                    "10pm_11pm": "10 PM - 11 PM",
+                    "11pm_12am": "11 PM - 12 AM",
+                    "ambient": "Ambient",
+                    "disabled": "Disabled",
+                    "schedule": "Schedule"
+                }
+            },
+            "preferred_update_hour": {
+                "name": "Preferred Update Time",
                 "state": {
                     "12am_1am": "12 AM - 1 AM",
                     "1am_2am": "1 AM - 2 AM",
@@ -273,7 +345,1228 @@
             }
         },
         "sensor": {
-            "all": {
+            "ad_block_status": {
+                "name": "Ad Blocking Status",
+                "state": {
+                    "blue": "Blue",
+                    "connected": "Connected",
+                    "disabled": "Disabled",
+                    "disconnected": "Disconnected",
+                    "failure": "Failure",
+                    "green": "Green",
+                    "network": "Network",
+                    "profiles": "Profiles",
+                    "red": "Red",
+                    "success": "Success",
+                    "white": "White",
+                    "yellow": "Yellow"
+                },
+                "state_attributes": {
+                    "computers_personal": {
+                        "name": "Computers and personal"
+                    },
+                    "failure_reason": {
+                        "state": {
+                            "network_not_found": "Network not found"
+                        }
+                    },
+                    "mac_address": {
+                        "name": "MAC address"
+                    },
+                    "name": {
+                        "name": "Name"
+                    },
+                    "subnet_mask": {
+                        "name": "Subnet mask"
+                    }
+                }
+            },
+            "adblock_day": {
+                "name": "Ad Blocks Day",
+                "state": {
+                    "blue": "Blue",
+                    "connected": "Connected",
+                    "disabled": "Disabled",
+                    "disconnected": "Disconnected",
+                    "failure": "Failure",
+                    "green": "Green",
+                    "network": "Network",
+                    "profiles": "Profiles",
+                    "red": "Red",
+                    "success": "Success",
+                    "white": "White",
+                    "yellow": "Yellow"
+                },
+                "state_attributes": {
+                    "computers_personal": {
+                        "name": "Computers and personal"
+                    },
+                    "failure_reason": {
+                        "state": {
+                            "network_not_found": "Network not found"
+                        }
+                    },
+                    "mac_address": {
+                        "name": "MAC address"
+                    },
+                    "name": {
+                        "name": "Name"
+                    },
+                    "subnet_mask": {
+                        "name": "Subnet mask"
+                    }
+                }
+            },
+            "adblock_month": {
+                "name": "Ad Blocks Month",
+                "state": {
+                    "blue": "Blue",
+                    "connected": "Connected",
+                    "disabled": "Disabled",
+                    "disconnected": "Disconnected",
+                    "failure": "Failure",
+                    "green": "Green",
+                    "network": "Network",
+                    "profiles": "Profiles",
+                    "red": "Red",
+                    "success": "Success",
+                    "white": "White",
+                    "yellow": "Yellow"
+                },
+                "state_attributes": {
+                    "computers_personal": {
+                        "name": "Computers and personal"
+                    },
+                    "failure_reason": {
+                        "state": {
+                            "network_not_found": "Network not found"
+                        }
+                    },
+                    "mac_address": {
+                        "name": "MAC address"
+                    },
+                    "name": {
+                        "name": "Name"
+                    },
+                    "subnet_mask": {
+                        "name": "Subnet mask"
+                    }
+                }
+            },
+            "adblock_week": {
+                "name": "Ad Blocks Week",
+                "state": {
+                    "blue": "Blue",
+                    "connected": "Connected",
+                    "disabled": "Disabled",
+                    "disconnected": "Disconnected",
+                    "failure": "Failure",
+                    "green": "Green",
+                    "network": "Network",
+                    "profiles": "Profiles",
+                    "red": "Red",
+                    "success": "Success",
+                    "white": "White",
+                    "yellow": "Yellow"
+                },
+                "state_attributes": {
+                    "computers_personal": {
+                        "name": "Computers and personal"
+                    },
+                    "failure_reason": {
+                        "state": {
+                            "network_not_found": "Network not found"
+                        }
+                    },
+                    "mac_address": {
+                        "name": "MAC address"
+                    },
+                    "name": {
+                        "name": "Name"
+                    },
+                    "subnet_mask": {
+                        "name": "Subnet mask"
+                    }
+                }
+            },
+            "blocked_day": {
+                "name": "Threat Blocks Day",
+                "state": {
+                    "blue": "Blue",
+                    "connected": "Connected",
+                    "disabled": "Disabled",
+                    "disconnected": "Disconnected",
+                    "failure": "Failure",
+                    "green": "Green",
+                    "network": "Network",
+                    "profiles": "Profiles",
+                    "red": "Red",
+                    "success": "Success",
+                    "white": "White",
+                    "yellow": "Yellow"
+                },
+                "state_attributes": {
+                    "computers_personal": {
+                        "name": "Computers and personal"
+                    },
+                    "failure_reason": {
+                        "state": {
+                            "network_not_found": "Network not found"
+                        }
+                    },
+                    "mac_address": {
+                        "name": "MAC address"
+                    },
+                    "name": {
+                        "name": "Name"
+                    },
+                    "subnet_mask": {
+                        "name": "Subnet mask"
+                    }
+                }
+            },
+            "blocked_month": {
+                "name": "Threat Blocks Month",
+                "state": {
+                    "blue": "Blue",
+                    "connected": "Connected",
+                    "disabled": "Disabled",
+                    "disconnected": "Disconnected",
+                    "failure": "Failure",
+                    "green": "Green",
+                    "network": "Network",
+                    "profiles": "Profiles",
+                    "red": "Red",
+                    "success": "Success",
+                    "white": "White",
+                    "yellow": "Yellow"
+                },
+                "state_attributes": {
+                    "computers_personal": {
+                        "name": "Computers and personal"
+                    },
+                    "failure_reason": {
+                        "state": {
+                            "network_not_found": "Network not found"
+                        }
+                    },
+                    "mac_address": {
+                        "name": "MAC address"
+                    },
+                    "name": {
+                        "name": "Name"
+                    },
+                    "subnet_mask": {
+                        "name": "Subnet mask"
+                    }
+                }
+            },
+            "blocked_week": {
+                "name": "Threat Blocks Week",
+                "state": {
+                    "blue": "Blue",
+                    "connected": "Connected",
+                    "disabled": "Disabled",
+                    "disconnected": "Disconnected",
+                    "failure": "Failure",
+                    "green": "Green",
+                    "network": "Network",
+                    "profiles": "Profiles",
+                    "red": "Red",
+                    "success": "Success",
+                    "white": "White",
+                    "yellow": "Yellow"
+                },
+                "state_attributes": {
+                    "computers_personal": {
+                        "name": "Computers and personal"
+                    },
+                    "failure_reason": {
+                        "state": {
+                            "network_not_found": "Network not found"
+                        }
+                    },
+                    "mac_address": {
+                        "name": "MAC address"
+                    },
+                    "name": {
+                        "name": "Name"
+                    },
+                    "subnet_mask": {
+                        "name": "Subnet mask"
+                    }
+                }
+            },
+            "connected_clients_count": {
+                "name": "Connected Clients",
+                "state": {
+                    "blue": "Blue",
+                    "connected": "Connected",
+                    "disabled": "Disabled",
+                    "disconnected": "Disconnected",
+                    "failure": "Failure",
+                    "green": "Green",
+                    "network": "Network",
+                    "profiles": "Profiles",
+                    "red": "Red",
+                    "success": "Success",
+                    "white": "White",
+                    "yellow": "Yellow"
+                },
+                "state_attributes": {
+                    "computers_personal": {
+                        "name": "Computers and personal"
+                    },
+                    "failure_reason": {
+                        "state": {
+                            "network_not_found": "Network not found"
+                        }
+                    },
+                    "mac_address": {
+                        "name": "MAC address"
+                    },
+                    "name": {
+                        "name": "Name"
+                    },
+                    "subnet_mask": {
+                        "name": "Subnet mask"
+                    }
+                }
+            },
+            "connected_guest_clients_count": {
+                "name": "Connected Guest Clients",
+                "state": {
+                    "blue": "Blue",
+                    "connected": "Connected",
+                    "disabled": "Disabled",
+                    "disconnected": "Disconnected",
+                    "failure": "Failure",
+                    "green": "Green",
+                    "network": "Network",
+                    "profiles": "Profiles",
+                    "red": "Red",
+                    "success": "Success",
+                    "white": "White",
+                    "yellow": "Yellow"
+                },
+                "state_attributes": {
+                    "computers_personal": {
+                        "name": "Computers and personal"
+                    },
+                    "failure_reason": {
+                        "state": {
+                            "network_not_found": "Network not found"
+                        }
+                    },
+                    "mac_address": {
+                        "name": "MAC address"
+                    },
+                    "name": {
+                        "name": "Name"
+                    },
+                    "subnet_mask": {
+                        "name": "Subnet mask"
+                    }
+                }
+            },
+            "connected_wired_clients_count": {
+                "name": "Connected Wired Clients",
+                "state": {
+                    "blue": "Blue",
+                    "connected": "Connected",
+                    "disabled": "Disabled",
+                    "disconnected": "Disconnected",
+                    "failure": "Failure",
+                    "green": "Green",
+                    "network": "Network",
+                    "profiles": "Profiles",
+                    "red": "Red",
+                    "success": "Success",
+                    "white": "White",
+                    "yellow": "Yellow"
+                },
+                "state_attributes": {
+                    "computers_personal": {
+                        "name": "Computers and personal"
+                    },
+                    "failure_reason": {
+                        "state": {
+                            "network_not_found": "Network not found"
+                        }
+                    },
+                    "mac_address": {
+                        "name": "MAC address"
+                    },
+                    "name": {
+                        "name": "Name"
+                    },
+                    "subnet_mask": {
+                        "name": "Subnet mask"
+                    }
+                }
+            },
+            "connected_wireless_clients_count": {
+                "name": "Connected Wireless Clients",
+                "state": {
+                    "blue": "Blue",
+                    "connected": "Connected",
+                    "disabled": "Disabled",
+                    "disconnected": "Disconnected",
+                    "failure": "Failure",
+                    "green": "Green",
+                    "network": "Network",
+                    "profiles": "Profiles",
+                    "red": "Red",
+                    "success": "Success",
+                    "white": "White",
+                    "yellow": "Yellow"
+                },
+                "state_attributes": {
+                    "computers_personal": {
+                        "name": "Computers and personal"
+                    },
+                    "failure_reason": {
+                        "state": {
+                            "network_not_found": "Network not found"
+                        }
+                    },
+                    "mac_address": {
+                        "name": "MAC address"
+                    },
+                    "name": {
+                        "name": "Name"
+                    },
+                    "subnet_mask": {
+                        "name": "Subnet mask"
+                    }
+                }
+            },
+            "data_usage_day": {
+                "name": "Data Usage Day",
+                "state": {
+                    "blue": "Blue",
+                    "connected": "Connected",
+                    "disabled": "Disabled",
+                    "disconnected": "Disconnected",
+                    "failure": "Failure",
+                    "green": "Green",
+                    "network": "Network",
+                    "profiles": "Profiles",
+                    "red": "Red",
+                    "success": "Success",
+                    "white": "White",
+                    "yellow": "Yellow"
+                },
+                "state_attributes": {
+                    "computers_personal": {
+                        "name": "Computers and personal"
+                    },
+                    "failure_reason": {
+                        "state": {
+                            "network_not_found": "Network not found"
+                        }
+                    },
+                    "mac_address": {
+                        "name": "MAC address"
+                    },
+                    "name": {
+                        "name": "Name"
+                    },
+                    "subnet_mask": {
+                        "name": "Subnet mask"
+                    }
+                }
+            },
+            "data_usage_month": {
+                "name": "Data Usage Month",
+                "state": {
+                    "blue": "Blue",
+                    "connected": "Connected",
+                    "disabled": "Disabled",
+                    "disconnected": "Disconnected",
+                    "failure": "Failure",
+                    "green": "Green",
+                    "network": "Network",
+                    "profiles": "Profiles",
+                    "red": "Red",
+                    "success": "Success",
+                    "white": "White",
+                    "yellow": "Yellow"
+                },
+                "state_attributes": {
+                    "computers_personal": {
+                        "name": "Computers and personal"
+                    },
+                    "failure_reason": {
+                        "state": {
+                            "network_not_found": "Network not found"
+                        }
+                    },
+                    "mac_address": {
+                        "name": "MAC address"
+                    },
+                    "name": {
+                        "name": "Name"
+                    },
+                    "subnet_mask": {
+                        "name": "Subnet mask"
+                    }
+                }
+            },
+            "data_usage_week": {
+                "name": "Data Usage Week",
+                "state": {
+                    "blue": "Blue",
+                    "connected": "Connected",
+                    "disabled": "Disabled",
+                    "disconnected": "Disconnected",
+                    "failure": "Failure",
+                    "green": "Green",
+                    "network": "Network",
+                    "profiles": "Profiles",
+                    "red": "Red",
+                    "success": "Success",
+                    "white": "White",
+                    "yellow": "Yellow"
+                },
+                "state_attributes": {
+                    "computers_personal": {
+                        "name": "Computers and personal"
+                    },
+                    "failure_reason": {
+                        "state": {
+                            "network_not_found": "Network not found"
+                        }
+                    },
+                    "mac_address": {
+                        "name": "MAC address"
+                    },
+                    "name": {
+                        "name": "Name"
+                    },
+                    "subnet_mask": {
+                        "name": "Subnet mask"
+                    }
+                }
+            },
+            "ethernet_port": {
+                "name": "Port {port}",
+                "state": {
+                    "blue": "Blue",
+                    "connected": "Connected",
+                    "disabled": "Disabled",
+                    "disconnected": "Disconnected",
+                    "failure": "Failure",
+                    "green": "Green",
+                    "network": "Network",
+                    "profiles": "Profiles",
+                    "red": "Red",
+                    "success": "Success",
+                    "white": "White",
+                    "yellow": "Yellow"
+                },
+                "state_attributes": {
+                    "computers_personal": {
+                        "name": "Computers and personal"
+                    },
+                    "failure_reason": {
+                        "state": {
+                            "network_not_found": "Network not found"
+                        }
+                    },
+                    "mac_address": {
+                        "name": "MAC address"
+                    },
+                    "name": {
+                        "name": "Name"
+                    },
+                    "subnet_mask": {
+                        "name": "Subnet mask"
+                    },
+                    "link": {
+                        "name": "Link"
+                    },
+                    "original_speed": {
+                        "name": "Original speed"
+                    },
+                    "derated_reason": {
+                        "name": "Speed reduced by",
+                        "state": {
+                            "none": "None",
+                            "speed_test": "Speed test",
+                            "user": "User",
+                            "thermal": "Temperature"
+                        }
+                    },
+                    "wan": {
+                        "name": "WAN port"
+                    },
+                    "neighbor": {
+                        "name": "Connected to"
+                    }
+                }
+            },
+            "gateway_ip": {
+                "name": "Gateway IP",
+                "state": {
+                    "blue": "Blue",
+                    "connected": "Connected",
+                    "disabled": "Disabled",
+                    "disconnected": "Disconnected",
+                    "failure": "Failure",
+                    "green": "Green",
+                    "network": "Network",
+                    "profiles": "Profiles",
+                    "red": "Red",
+                    "success": "Success",
+                    "white": "White",
+                    "yellow": "Yellow"
+                },
+                "state_attributes": {
+                    "computers_personal": {
+                        "name": "Computers and personal"
+                    },
+                    "failure_reason": {
+                        "state": {
+                            "network_not_found": "Network not found"
+                        }
+                    },
+                    "mac_address": {
+                        "name": "MAC address"
+                    },
+                    "name": {
+                        "name": "Name"
+                    },
+                    "subnet_mask": {
+                        "name": "Subnet mask"
+                    }
+                }
+            },
+            "inspected_day": {
+                "name": "Scans Day",
+                "state": {
+                    "blue": "Blue",
+                    "connected": "Connected",
+                    "disabled": "Disabled",
+                    "disconnected": "Disconnected",
+                    "failure": "Failure",
+                    "green": "Green",
+                    "network": "Network",
+                    "profiles": "Profiles",
+                    "red": "Red",
+                    "success": "Success",
+                    "white": "White",
+                    "yellow": "Yellow"
+                },
+                "state_attributes": {
+                    "computers_personal": {
+                        "name": "Computers and personal"
+                    },
+                    "failure_reason": {
+                        "state": {
+                            "network_not_found": "Network not found"
+                        }
+                    },
+                    "mac_address": {
+                        "name": "MAC address"
+                    },
+                    "name": {
+                        "name": "Name"
+                    },
+                    "subnet_mask": {
+                        "name": "Subnet mask"
+                    }
+                }
+            },
+            "inspected_month": {
+                "name": "Scans Month",
+                "state": {
+                    "blue": "Blue",
+                    "connected": "Connected",
+                    "disabled": "Disabled",
+                    "disconnected": "Disconnected",
+                    "failure": "Failure",
+                    "green": "Green",
+                    "network": "Network",
+                    "profiles": "Profiles",
+                    "red": "Red",
+                    "success": "Success",
+                    "white": "White",
+                    "yellow": "Yellow"
+                },
+                "state_attributes": {
+                    "computers_personal": {
+                        "name": "Computers and personal"
+                    },
+                    "failure_reason": {
+                        "state": {
+                            "network_not_found": "Network not found"
+                        }
+                    },
+                    "mac_address": {
+                        "name": "MAC address"
+                    },
+                    "name": {
+                        "name": "Name"
+                    },
+                    "subnet_mask": {
+                        "name": "Subnet mask"
+                    }
+                }
+            },
+            "inspected_week": {
+                "name": "Scans Week",
+                "state": {
+                    "blue": "Blue",
+                    "connected": "Connected",
+                    "disabled": "Disabled",
+                    "disconnected": "Disconnected",
+                    "failure": "Failure",
+                    "green": "Green",
+                    "network": "Network",
+                    "profiles": "Profiles",
+                    "red": "Red",
+                    "success": "Success",
+                    "white": "White",
+                    "yellow": "Yellow"
+                },
+                "state_attributes": {
+                    "computers_personal": {
+                        "name": "Computers and personal"
+                    },
+                    "failure_reason": {
+                        "state": {
+                            "network_not_found": "Network not found"
+                        }
+                    },
+                    "mac_address": {
+                        "name": "MAC address"
+                    },
+                    "name": {
+                        "name": "Name"
+                    },
+                    "subnet_mask": {
+                        "name": "Subnet mask"
+                    }
+                }
+            },
+            "ip": {
+                "name": "IP Address",
+                "state": {
+                    "blue": "Blue",
+                    "connected": "Connected",
+                    "disabled": "Disabled",
+                    "disconnected": "Disconnected",
+                    "failure": "Failure",
+                    "green": "Green",
+                    "network": "Network",
+                    "profiles": "Profiles",
+                    "red": "Red",
+                    "success": "Success",
+                    "white": "White",
+                    "yellow": "Yellow"
+                },
+                "state_attributes": {
+                    "computers_personal": {
+                        "name": "Computers and personal"
+                    },
+                    "failure_reason": {
+                        "state": {
+                            "network_not_found": "Network not found"
+                        }
+                    },
+                    "mac_address": {
+                        "name": "MAC address"
+                    },
+                    "name": {
+                        "name": "Name"
+                    },
+                    "subnet_mask": {
+                        "name": "Subnet mask"
+                    }
+                }
+            },
+            "last_active": {
+                "name": "Last Active",
+                "state": {
+                    "blue": "Blue",
+                    "connected": "Connected",
+                    "disabled": "Disabled",
+                    "disconnected": "Disconnected",
+                    "failure": "Failure",
+                    "green": "Green",
+                    "network": "Network",
+                    "profiles": "Profiles",
+                    "red": "Red",
+                    "success": "Success",
+                    "white": "White",
+                    "yellow": "Yellow"
+                },
+                "state_attributes": {
+                    "computers_personal": {
+                        "name": "Computers and personal"
+                    },
+                    "failure_reason": {
+                        "state": {
+                            "network_not_found": "Network not found"
+                        }
+                    },
+                    "mac_address": {
+                        "name": "MAC address"
+                    },
+                    "name": {
+                        "name": "Name"
+                    },
+                    "subnet_mask": {
+                        "name": "Subnet mask"
+                    }
+                }
+            },
+            "last_reboot": {
+                "name": "Last Reboot",
+                "state": {
+                    "blue": "Blue",
+                    "connected": "Connected",
+                    "disabled": "Disabled",
+                    "disconnected": "Disconnected",
+                    "failure": "Failure",
+                    "green": "Green",
+                    "network": "Network",
+                    "profiles": "Profiles",
+                    "red": "Red",
+                    "success": "Success",
+                    "white": "White",
+                    "yellow": "Yellow"
+                },
+                "state_attributes": {
+                    "computers_personal": {
+                        "name": "Computers and personal"
+                    },
+                    "failure_reason": {
+                        "state": {
+                            "network_not_found": "Network not found"
+                        }
+                    },
+                    "mac_address": {
+                        "name": "MAC address"
+                    },
+                    "name": {
+                        "name": "Name"
+                    },
+                    "subnet_mask": {
+                        "name": "Subnet mask"
+                    }
+                }
+            },
+            "mesh_quality_bars": {
+                "name": "Mesh Quality",
+                "state": {
+                    "blue": "Blue",
+                    "connected": "Connected",
+                    "disabled": "Disabled",
+                    "disconnected": "Disconnected",
+                    "failure": "Failure",
+                    "green": "Green",
+                    "network": "Network",
+                    "profiles": "Profiles",
+                    "red": "Red",
+                    "success": "Success",
+                    "white": "White",
+                    "yellow": "Yellow"
+                },
+                "state_attributes": {
+                    "computers_personal": {
+                        "name": "Computers and personal"
+                    },
+                    "failure_reason": {
+                        "state": {
+                            "network_not_found": "Network not found"
+                        }
+                    },
+                    "mac_address": {
+                        "name": "MAC address"
+                    },
+                    "name": {
+                        "name": "Name"
+                    },
+                    "subnet_mask": {
+                        "name": "Subnet mask"
+                    }
+                }
+            },
+            "public_ip": {
+                "name": "Public IP",
+                "state": {
+                    "blue": "Blue",
+                    "connected": "Connected",
+                    "disabled": "Disabled",
+                    "disconnected": "Disconnected",
+                    "failure": "Failure",
+                    "green": "Green",
+                    "network": "Network",
+                    "profiles": "Profiles",
+                    "red": "Red",
+                    "success": "Success",
+                    "white": "White",
+                    "yellow": "Yellow"
+                },
+                "state_attributes": {
+                    "computers_personal": {
+                        "name": "Computers and personal"
+                    },
+                    "failure_reason": {
+                        "state": {
+                            "network_not_found": "Network not found"
+                        }
+                    },
+                    "mac_address": {
+                        "name": "MAC address"
+                    },
+                    "name": {
+                        "name": "Name"
+                    },
+                    "subnet_mask": {
+                        "name": "Subnet mask"
+                    }
+                }
+            },
+            "reboots_last_week": {
+                "name": "Reboots Last Week",
+                "state": {
+                    "blue": "Blue",
+                    "connected": "Connected",
+                    "disabled": "Disabled",
+                    "disconnected": "Disconnected",
+                    "failure": "Failure",
+                    "green": "Green",
+                    "network": "Network",
+                    "profiles": "Profiles",
+                    "red": "Red",
+                    "success": "Success",
+                    "white": "White",
+                    "yellow": "Yellow"
+                },
+                "state_attributes": {
+                    "computers_personal": {
+                        "name": "Computers and personal"
+                    },
+                    "failure_reason": {
+                        "state": {
+                            "network_not_found": "Network not found"
+                        }
+                    },
+                    "mac_address": {
+                        "name": "MAC address"
+                    },
+                    "name": {
+                        "name": "Name"
+                    },
+                    "subnet_mask": {
+                        "name": "Subnet mask"
+                    },
+                    "last_day": {
+                        "name": "Last 24 hours"
+                    }
+                }
+            },
+            "signal": {
+                "name": "Signal Strength",
+                "state": {
+                    "blue": "Blue",
+                    "connected": "Connected",
+                    "disabled": "Disabled",
+                    "disconnected": "Disconnected",
+                    "failure": "Failure",
+                    "green": "Green",
+                    "network": "Network",
+                    "profiles": "Profiles",
+                    "red": "Red",
+                    "success": "Success",
+                    "white": "White",
+                    "yellow": "Yellow"
+                },
+                "state_attributes": {
+                    "computers_personal": {
+                        "name": "Computers and personal"
+                    },
+                    "failure_reason": {
+                        "state": {
+                            "network_not_found": "Network not found"
+                        }
+                    },
+                    "mac_address": {
+                        "name": "MAC address"
+                    },
+                    "name": {
+                        "name": "Name"
+                    },
+                    "subnet_mask": {
+                        "name": "Subnet mask"
+                    }
+                }
+            },
+            "speed_down": {
+                "name": "Download Speed",
+                "state": {
+                    "blue": "Blue",
+                    "connected": "Connected",
+                    "disabled": "Disabled",
+                    "disconnected": "Disconnected",
+                    "failure": "Failure",
+                    "green": "Green",
+                    "network": "Network",
+                    "profiles": "Profiles",
+                    "red": "Red",
+                    "success": "Success",
+                    "white": "White",
+                    "yellow": "Yellow"
+                },
+                "state_attributes": {
+                    "computers_personal": {
+                        "name": "Computers and personal"
+                    },
+                    "failure_reason": {
+                        "state": {
+                            "network_not_found": "Network not found"
+                        }
+                    },
+                    "mac_address": {
+                        "name": "MAC address"
+                    },
+                    "name": {
+                        "name": "Name"
+                    },
+                    "subnet_mask": {
+                        "name": "Subnet mask"
+                    }
+                }
+            },
+            "speed_up": {
+                "name": "Upload Speed",
+                "state": {
+                    "blue": "Blue",
+                    "connected": "Connected",
+                    "disabled": "Disabled",
+                    "disconnected": "Disconnected",
+                    "failure": "Failure",
+                    "green": "Green",
+                    "network": "Network",
+                    "profiles": "Profiles",
+                    "red": "Red",
+                    "success": "Success",
+                    "white": "White",
+                    "yellow": "Yellow"
+                },
+                "state_attributes": {
+                    "computers_personal": {
+                        "name": "Computers and personal"
+                    },
+                    "failure_reason": {
+                        "state": {
+                            "network_not_found": "Network not found"
+                        }
+                    },
+                    "mac_address": {
+                        "name": "MAC address"
+                    },
+                    "name": {
+                        "name": "Name"
+                    },
+                    "subnet_mask": {
+                        "name": "Subnet mask"
+                    }
+                }
+            },
+            "status": {
+                "name": "Status",
+                "state": {
+                    "blue": "Blue",
+                    "connected": "Connected",
+                    "disabled": "Disabled",
+                    "disconnected": "Disconnected",
+                    "failure": "Failure",
+                    "green": "Green",
+                    "network": "Network",
+                    "profiles": "Profiles",
+                    "red": "Red",
+                    "success": "Success",
+                    "white": "White",
+                    "yellow": "Yellow"
+                },
+                "state_attributes": {
+                    "computers_personal": {
+                        "name": "Computers and personal"
+                    },
+                    "failure_reason": {
+                        "state": {
+                            "network_not_found": "Network not found"
+                        }
+                    },
+                    "mac_address": {
+                        "name": "MAC address"
+                    },
+                    "name": {
+                        "name": "Name"
+                    },
+                    "subnet_mask": {
+                        "name": "Subnet mask"
+                    }
+                }
+            },
+            "uplink_type": {
+                "name": "Mesh Connection",
+                "state": {
+                    "blue": "Blue",
+                    "connected": "Connected",
+                    "disabled": "Disabled",
+                    "disconnected": "Disconnected",
+                    "failure": "Failure",
+                    "green": "Green",
+                    "network": "Network",
+                    "profiles": "Profiles",
+                    "red": "Red",
+                    "success": "Success",
+                    "white": "White",
+                    "yellow": "Yellow",
+                    "wired": "Wired",
+                    "wired_poe": "Wired (PoE)",
+                    "wireless": "Wireless",
+                    "cellular": "Cellular",
+                    "unknown": "Unknown"
+                },
+                "state_attributes": {
+                    "computers_personal": {
+                        "name": "Computers and personal"
+                    },
+                    "failure_reason": {
+                        "state": {
+                            "network_not_found": "Network not found"
+                        }
+                    },
+                    "mac_address": {
+                        "name": "MAC address"
+                    },
+                    "name": {
+                        "name": "Name"
+                    },
+                    "subnet_mask": {
+                        "name": "Subnet mask"
+                    }
+                }
+            },
+            "upstream_eero": {
+                "name": "Upstream eero",
+                "state": {
+                    "blue": "Blue",
+                    "connected": "Connected",
+                    "disabled": "Disabled",
+                    "disconnected": "Disconnected",
+                    "failure": "Failure",
+                    "green": "Green",
+                    "network": "Network",
+                    "profiles": "Profiles",
+                    "red": "Red",
+                    "success": "Success",
+                    "white": "White",
+                    "yellow": "Yellow"
+                },
+                "state_attributes": {
+                    "computers_personal": {
+                        "name": "Computers and personal"
+                    },
+                    "failure_reason": {
+                        "state": {
+                            "network_not_found": "Network not found"
+                        }
+                    },
+                    "mac_address": {
+                        "name": "MAC address"
+                    },
+                    "name": {
+                        "name": "Name"
+                    },
+                    "subnet_mask": {
+                        "name": "Subnet mask"
+                    },
+                    "radio": {
+                        "name": "Radio"
+                    }
+                }
+            },
+            "usage_down": {
+                "name": "Download Rate",
+                "state": {
+                    "blue": "Blue",
+                    "connected": "Connected",
+                    "disabled": "Disabled",
+                    "disconnected": "Disconnected",
+                    "failure": "Failure",
+                    "green": "Green",
+                    "network": "Network",
+                    "profiles": "Profiles",
+                    "red": "Red",
+                    "success": "Success",
+                    "white": "White",
+                    "yellow": "Yellow"
+                },
+                "state_attributes": {
+                    "computers_personal": {
+                        "name": "Computers and personal"
+                    },
+                    "failure_reason": {
+                        "state": {
+                            "network_not_found": "Network not found"
+                        }
+                    },
+                    "mac_address": {
+                        "name": "MAC address"
+                    },
+                    "name": {
+                        "name": "Name"
+                    },
+                    "subnet_mask": {
+                        "name": "Subnet mask"
+                    }
+                }
+            },
+            "usage_up": {
+                "name": "Upload Rate",
+                "state": {
+                    "blue": "Blue",
+                    "connected": "Connected",
+                    "disabled": "Disabled",
+                    "disconnected": "Disconnected",
+                    "failure": "Failure",
+                    "green": "Green",
+                    "network": "Network",
+                    "profiles": "Profiles",
+                    "red": "Red",
+                    "success": "Success",
+                    "white": "White",
+                    "yellow": "Yellow"
+                },
+                "state_attributes": {
+                    "computers_personal": {
+                        "name": "Computers and personal"
+                    },
+                    "failure_reason": {
+                        "state": {
+                            "network_not_found": "Network not found"
+                        }
+                    },
+                    "mac_address": {
+                        "name": "MAC address"
+                    },
+                    "name": {
+                        "name": "Name"
+                    },
+                    "subnet_mask": {
+                        "name": "Subnet mask"
+                    }
+                }
+            },
+            "wan_router_ip": {
+                "name": "WAN Router IP",
                 "state": {
                     "blue": "Blue",
                     "connected": "Connected",
@@ -310,7 +1603,8 @@
             }
         },
         "switch": {
-            "all": {
+            "ad_block": {
+                "name": "Ad Blocking",
                 "state_attributes": {
                     "thread_network_key": {
                         "name": "Thread network key"
@@ -334,6 +1628,669 @@
                         "name": "Active operational dataset"
                     }
                 }
+            },
+            "auto_join_enabled": {
+                "name": "Auto-Join Enabled",
+                "state_attributes": {
+                    "thread_network_key": {
+                        "name": "Thread network key"
+                    },
+                    "thread_network_name": {
+                        "name": "Thread network name"
+                    },
+                    "channel": {
+                        "name": "Channel"
+                    },
+                    "pan_id": {
+                        "name": "PAN ID"
+                    },
+                    "extended_pan_id": {
+                        "name": "Extended PAN ID"
+                    },
+                    "commissioning_credential": {
+                        "name": "Commissioning credential"
+                    },
+                    "active_operational_dataset": {
+                        "name": "Active operational dataset"
+                    }
+                }
+            },
+            "backup_internet_enabled": {
+                "name": "Backup Internet Enabled",
+                "state_attributes": {
+                    "thread_network_key": {
+                        "name": "Thread network key"
+                    },
+                    "thread_network_name": {
+                        "name": "Thread network name"
+                    },
+                    "channel": {
+                        "name": "Channel"
+                    },
+                    "pan_id": {
+                        "name": "PAN ID"
+                    },
+                    "extended_pan_id": {
+                        "name": "Extended PAN ID"
+                    },
+                    "commissioning_credential": {
+                        "name": "Commissioning credential"
+                    },
+                    "active_operational_dataset": {
+                        "name": "Active operational dataset"
+                    }
+                }
+            },
+            "band_steering": {
+                "name": "Band Steering",
+                "state_attributes": {
+                    "thread_network_key": {
+                        "name": "Thread network key"
+                    },
+                    "thread_network_name": {
+                        "name": "Thread network name"
+                    },
+                    "channel": {
+                        "name": "Channel"
+                    },
+                    "pan_id": {
+                        "name": "PAN ID"
+                    },
+                    "extended_pan_id": {
+                        "name": "Extended PAN ID"
+                    },
+                    "commissioning_credential": {
+                        "name": "Commissioning credential"
+                    },
+                    "active_operational_dataset": {
+                        "name": "Active operational dataset"
+                    }
+                }
+            },
+            "block_gaming_content": {
+                "name": "Gaming Content Filter",
+                "state_attributes": {
+                    "thread_network_key": {
+                        "name": "Thread network key"
+                    },
+                    "thread_network_name": {
+                        "name": "Thread network name"
+                    },
+                    "channel": {
+                        "name": "Channel"
+                    },
+                    "pan_id": {
+                        "name": "PAN ID"
+                    },
+                    "extended_pan_id": {
+                        "name": "Extended PAN ID"
+                    },
+                    "commissioning_credential": {
+                        "name": "Commissioning credential"
+                    },
+                    "active_operational_dataset": {
+                        "name": "Active operational dataset"
+                    }
+                }
+            },
+            "block_illegal_content": {
+                "name": "Illegal or Criminal Content Filter",
+                "state_attributes": {
+                    "thread_network_key": {
+                        "name": "Thread network key"
+                    },
+                    "thread_network_name": {
+                        "name": "Thread network name"
+                    },
+                    "channel": {
+                        "name": "Channel"
+                    },
+                    "pan_id": {
+                        "name": "PAN ID"
+                    },
+                    "extended_pan_id": {
+                        "name": "Extended PAN ID"
+                    },
+                    "commissioning_credential": {
+                        "name": "Commissioning credential"
+                    },
+                    "active_operational_dataset": {
+                        "name": "Active operational dataset"
+                    }
+                }
+            },
+            "block_malware": {
+                "name": "Advanced Security",
+                "state_attributes": {
+                    "thread_network_key": {
+                        "name": "Thread network key"
+                    },
+                    "thread_network_name": {
+                        "name": "Thread network name"
+                    },
+                    "channel": {
+                        "name": "Channel"
+                    },
+                    "pan_id": {
+                        "name": "PAN ID"
+                    },
+                    "extended_pan_id": {
+                        "name": "Extended PAN ID"
+                    },
+                    "commissioning_credential": {
+                        "name": "Commissioning credential"
+                    },
+                    "active_operational_dataset": {
+                        "name": "Active operational dataset"
+                    }
+                }
+            },
+            "block_messaging_content": {
+                "name": "Chat and Messaging Content Filter",
+                "state_attributes": {
+                    "thread_network_key": {
+                        "name": "Thread network key"
+                    },
+                    "thread_network_name": {
+                        "name": "Thread network name"
+                    },
+                    "channel": {
+                        "name": "Channel"
+                    },
+                    "pan_id": {
+                        "name": "PAN ID"
+                    },
+                    "extended_pan_id": {
+                        "name": "Extended PAN ID"
+                    },
+                    "commissioning_credential": {
+                        "name": "Commissioning credential"
+                    },
+                    "active_operational_dataset": {
+                        "name": "Active operational dataset"
+                    }
+                }
+            },
+            "block_pornographic_content": {
+                "name": "Adult Content Filter",
+                "state_attributes": {
+                    "thread_network_key": {
+                        "name": "Thread network key"
+                    },
+                    "thread_network_name": {
+                        "name": "Thread network name"
+                    },
+                    "channel": {
+                        "name": "Channel"
+                    },
+                    "pan_id": {
+                        "name": "PAN ID"
+                    },
+                    "extended_pan_id": {
+                        "name": "Extended PAN ID"
+                    },
+                    "commissioning_credential": {
+                        "name": "Commissioning credential"
+                    },
+                    "active_operational_dataset": {
+                        "name": "Active operational dataset"
+                    }
+                }
+            },
+            "block_shopping_content": {
+                "name": "Shopping Content Filter",
+                "state_attributes": {
+                    "thread_network_key": {
+                        "name": "Thread network key"
+                    },
+                    "thread_network_name": {
+                        "name": "Thread network name"
+                    },
+                    "channel": {
+                        "name": "Channel"
+                    },
+                    "pan_id": {
+                        "name": "PAN ID"
+                    },
+                    "extended_pan_id": {
+                        "name": "Extended PAN ID"
+                    },
+                    "commissioning_credential": {
+                        "name": "Commissioning credential"
+                    },
+                    "active_operational_dataset": {
+                        "name": "Active operational dataset"
+                    }
+                }
+            },
+            "block_social_content": {
+                "name": "Social Media Content Filter",
+                "state_attributes": {
+                    "thread_network_key": {
+                        "name": "Thread network key"
+                    },
+                    "thread_network_name": {
+                        "name": "Thread network name"
+                    },
+                    "channel": {
+                        "name": "Channel"
+                    },
+                    "pan_id": {
+                        "name": "PAN ID"
+                    },
+                    "extended_pan_id": {
+                        "name": "Extended PAN ID"
+                    },
+                    "commissioning_credential": {
+                        "name": "Commissioning credential"
+                    },
+                    "active_operational_dataset": {
+                        "name": "Active operational dataset"
+                    }
+                }
+            },
+            "block_streaming_content": {
+                "name": "Streaming Content Filter",
+                "state_attributes": {
+                    "thread_network_key": {
+                        "name": "Thread network key"
+                    },
+                    "thread_network_name": {
+                        "name": "Thread network name"
+                    },
+                    "channel": {
+                        "name": "Channel"
+                    },
+                    "pan_id": {
+                        "name": "PAN ID"
+                    },
+                    "extended_pan_id": {
+                        "name": "Extended PAN ID"
+                    },
+                    "commissioning_credential": {
+                        "name": "Commissioning credential"
+                    },
+                    "active_operational_dataset": {
+                        "name": "Active operational dataset"
+                    }
+                }
+            },
+            "block_violent_content": {
+                "name": "Violent Content Filter",
+                "state_attributes": {
+                    "thread_network_key": {
+                        "name": "Thread network key"
+                    },
+                    "thread_network_name": {
+                        "name": "Thread network name"
+                    },
+                    "channel": {
+                        "name": "Channel"
+                    },
+                    "pan_id": {
+                        "name": "PAN ID"
+                    },
+                    "extended_pan_id": {
+                        "name": "Extended PAN ID"
+                    },
+                    "commissioning_credential": {
+                        "name": "Commissioning credential"
+                    },
+                    "active_operational_dataset": {
+                        "name": "Active operational dataset"
+                    }
+                }
+            },
+            "ddns_enabled": {
+                "name": "Dynamic DNS",
+                "state_attributes": {
+                    "thread_network_key": {
+                        "name": "Thread network key"
+                    },
+                    "thread_network_name": {
+                        "name": "Thread network name"
+                    },
+                    "channel": {
+                        "name": "Channel"
+                    },
+                    "pan_id": {
+                        "name": "PAN ID"
+                    },
+                    "extended_pan_id": {
+                        "name": "Extended PAN ID"
+                    },
+                    "commissioning_credential": {
+                        "name": "Commissioning credential"
+                    },
+                    "active_operational_dataset": {
+                        "name": "Active operational dataset"
+                    }
+                }
+            },
+            "dns_caching": {
+                "name": "Local DNS Caching",
+                "state_attributes": {
+                    "thread_network_key": {
+                        "name": "Thread network key"
+                    },
+                    "thread_network_name": {
+                        "name": "Thread network name"
+                    },
+                    "channel": {
+                        "name": "Channel"
+                    },
+                    "pan_id": {
+                        "name": "PAN ID"
+                    },
+                    "extended_pan_id": {
+                        "name": "Extended PAN ID"
+                    },
+                    "commissioning_credential": {
+                        "name": "Commissioning credential"
+                    },
+                    "active_operational_dataset": {
+                        "name": "Active operational dataset"
+                    }
+                }
+            },
+            "guest_network_enabled": {
+                "name": "Guest Network",
+                "state_attributes": {
+                    "thread_network_key": {
+                        "name": "Thread network key"
+                    },
+                    "thread_network_name": {
+                        "name": "Thread network name"
+                    },
+                    "channel": {
+                        "name": "Channel"
+                    },
+                    "pan_id": {
+                        "name": "PAN ID"
+                    },
+                    "extended_pan_id": {
+                        "name": "Extended PAN ID"
+                    },
+                    "commissioning_credential": {
+                        "name": "Commissioning credential"
+                    },
+                    "active_operational_dataset": {
+                        "name": "Active operational dataset"
+                    }
+                }
+            },
+            "ipv6_upstream": {
+                "name": "IPv6 Enabled",
+                "state_attributes": {
+                    "thread_network_key": {
+                        "name": "Thread network key"
+                    },
+                    "thread_network_name": {
+                        "name": "Thread network name"
+                    },
+                    "channel": {
+                        "name": "Channel"
+                    },
+                    "pan_id": {
+                        "name": "PAN ID"
+                    },
+                    "extended_pan_id": {
+                        "name": "Extended PAN ID"
+                    },
+                    "commissioning_credential": {
+                        "name": "Commissioning credential"
+                    },
+                    "active_operational_dataset": {
+                        "name": "Active operational dataset"
+                    }
+                }
+            },
+            "pause_5g_enabled": {
+                "name": "5 GHz Band Paused",
+                "state_attributes": {
+                    "thread_network_key": {
+                        "name": "Thread network key"
+                    },
+                    "thread_network_name": {
+                        "name": "Thread network name"
+                    },
+                    "channel": {
+                        "name": "Channel"
+                    },
+                    "pan_id": {
+                        "name": "PAN ID"
+                    },
+                    "extended_pan_id": {
+                        "name": "Extended PAN ID"
+                    },
+                    "commissioning_credential": {
+                        "name": "Commissioning credential"
+                    },
+                    "active_operational_dataset": {
+                        "name": "Active operational dataset"
+                    }
+                }
+            },
+            "paused": {
+                "name": "Paused",
+                "state_attributes": {
+                    "thread_network_key": {
+                        "name": "Thread network key"
+                    },
+                    "thread_network_name": {
+                        "name": "Thread network name"
+                    },
+                    "channel": {
+                        "name": "Channel"
+                    },
+                    "pan_id": {
+                        "name": "PAN ID"
+                    },
+                    "extended_pan_id": {
+                        "name": "Extended PAN ID"
+                    },
+                    "commissioning_credential": {
+                        "name": "Commissioning credential"
+                    },
+                    "active_operational_dataset": {
+                        "name": "Active operational dataset"
+                    }
+                }
+            },
+            "safe_search_enabled": {
+                "name": "SafeSearch Content Filter",
+                "state_attributes": {
+                    "thread_network_key": {
+                        "name": "Thread network key"
+                    },
+                    "thread_network_name": {
+                        "name": "Thread network name"
+                    },
+                    "channel": {
+                        "name": "Channel"
+                    },
+                    "pan_id": {
+                        "name": "PAN ID"
+                    },
+                    "extended_pan_id": {
+                        "name": "Extended PAN ID"
+                    },
+                    "commissioning_credential": {
+                        "name": "Commissioning credential"
+                    },
+                    "active_operational_dataset": {
+                        "name": "Active operational dataset"
+                    }
+                }
+            },
+            "secondary_wan_allow_access": {
+                "name": "Allow Internet Backup",
+                "state_attributes": {
+                    "thread_network_key": {
+                        "name": "Thread network key"
+                    },
+                    "thread_network_name": {
+                        "name": "Thread network name"
+                    },
+                    "channel": {
+                        "name": "Channel"
+                    },
+                    "pan_id": {
+                        "name": "PAN ID"
+                    },
+                    "extended_pan_id": {
+                        "name": "Extended PAN ID"
+                    },
+                    "commissioning_credential": {
+                        "name": "Commissioning credential"
+                    },
+                    "active_operational_dataset": {
+                        "name": "Active operational dataset"
+                    }
+                }
+            },
+            "sqm": {
+                "name": "Smart Queue Management",
+                "state_attributes": {
+                    "thread_network_key": {
+                        "name": "Thread network key"
+                    },
+                    "thread_network_name": {
+                        "name": "Thread network name"
+                    },
+                    "channel": {
+                        "name": "Channel"
+                    },
+                    "pan_id": {
+                        "name": "PAN ID"
+                    },
+                    "extended_pan_id": {
+                        "name": "Extended PAN ID"
+                    },
+                    "commissioning_credential": {
+                        "name": "Commissioning credential"
+                    },
+                    "active_operational_dataset": {
+                        "name": "Active operational dataset"
+                    }
+                }
+            },
+            "thread_enabled": {
+                "name": "Thread Enabled",
+                "state_attributes": {
+                    "thread_network_key": {
+                        "name": "Thread network key"
+                    },
+                    "thread_network_name": {
+                        "name": "Thread network name"
+                    },
+                    "channel": {
+                        "name": "Channel"
+                    },
+                    "pan_id": {
+                        "name": "PAN ID"
+                    },
+                    "extended_pan_id": {
+                        "name": "Extended PAN ID"
+                    },
+                    "commissioning_credential": {
+                        "name": "Commissioning credential"
+                    },
+                    "active_operational_dataset": {
+                        "name": "Active operational dataset"
+                    }
+                }
+            },
+            "upnp": {
+                "name": "UPnP",
+                "state_attributes": {
+                    "thread_network_key": {
+                        "name": "Thread network key"
+                    },
+                    "thread_network_name": {
+                        "name": "Thread network name"
+                    },
+                    "channel": {
+                        "name": "Channel"
+                    },
+                    "pan_id": {
+                        "name": "PAN ID"
+                    },
+                    "extended_pan_id": {
+                        "name": "Extended PAN ID"
+                    },
+                    "commissioning_credential": {
+                        "name": "Commissioning credential"
+                    },
+                    "active_operational_dataset": {
+                        "name": "Active operational dataset"
+                    }
+                }
+            },
+            "wpa3": {
+                "name": "WPA3",
+                "state_attributes": {
+                    "thread_network_key": {
+                        "name": "Thread network key"
+                    },
+                    "thread_network_name": {
+                        "name": "Thread network name"
+                    },
+                    "channel": {
+                        "name": "Channel"
+                    },
+                    "pan_id": {
+                        "name": "PAN ID"
+                    },
+                    "extended_pan_id": {
+                        "name": "Extended PAN ID"
+                    },
+                    "commissioning_credential": {
+                        "name": "Commissioning credential"
+                    },
+                    "active_operational_dataset": {
+                        "name": "Active operational dataset"
+                    }
+                }
+            },
+            "youtube_restricted": {
+                "name": "YouTube Restricted Content Filter",
+                "state_attributes": {
+                    "thread_network_key": {
+                        "name": "Thread network key"
+                    },
+                    "thread_network_name": {
+                        "name": "Thread network name"
+                    },
+                    "channel": {
+                        "name": "Channel"
+                    },
+                    "pan_id": {
+                        "name": "PAN ID"
+                    },
+                    "extended_pan_id": {
+                        "name": "Extended PAN ID"
+                    },
+                    "commissioning_credential": {
+                        "name": "Commissioning credential"
+                    },
+                    "active_operational_dataset": {
+                        "name": "Active operational dataset"
+                    }
+                }
+            }
+        },
+        "time": {
+            "nightlight_schedule_off": {
+                "name": "Nightlight Off"
+            },
+            "nightlight_schedule_on": {
+                "name": "Nightlight On"
+            }
+        },
+        "update": {
+            "firmware": {
+                "name": "Firmware"
             }
         }
     }

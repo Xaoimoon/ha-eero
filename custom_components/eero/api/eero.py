@@ -2,7 +2,9 @@
 
 from __future__ import annotations
 
-from datetime import time
+from dataclasses import dataclass
+from datetime import datetime, time
+import re
 
 from .const import (
     METHOD_POST,
@@ -15,8 +17,135 @@ from .firmware import EeroFirmware
 from .resource import EeroResource
 
 
+# Field names and value formats below come from the eero Android app's data
+# models (Gson, no naming policy): `ethernet_status.statuses[]` per port, link
+# speeds as PhyRate names ("P10" ... "P25000", in Mbit/s), `derated_reason` as
+# 0 none, 1 speed test, 2 user, 3 thermal.
+DERATED_REASONS = {0: "none", 1: "speed_test", 2: "user", 3: "thermal"}
+UPLINK_TYPES = ("wired", "wired_poe", "wireless", "cellular", "unknown")
+_PHY_RATE = re.compile(r"^P(\d+)$")
+
+
+def phy_rate_mbps(value: str | None) -> int | None:
+    """Return the link speed in Mbit/s of a PhyRate name such as "P1000"."""
+    if isinstance(value, str) and (match := _PHY_RATE.match(value)):
+        return int(match.group(1))
+    return None
+
+
+def parse_date(value: str | None) -> datetime | None:
+    """Parse an ISO 8601 date from the API, or return None."""
+    if not isinstance(value, str) or not value:
+        return None
+    try:
+        return datetime.fromisoformat(value.replace("Z", "+00:00"))
+    except ValueError:
+        return None
+
+
+@dataclass(frozen=True)
+class EeroEthernetPort:
+    """One Ethernet port of an eero, from `ethernet_status.statuses`."""
+
+    number: int
+    name: str
+    link: bool | None
+    speed_mbps: int | None
+    original_speed_mbps: int | None
+    derated_reason: str | None
+    wan: bool | None
+    neighbor: str | None
+
+    @classmethod
+    def from_status(cls, status: dict) -> EeroEthernetPort | None:
+        """Build a port from one status entry; None without a port number."""
+        number = status.get("interfaceNumber")
+        if not isinstance(number, int):
+            return None
+        neighbor = status.get("neighbor") or {}
+        metadata = neighbor.get("metadata") or {}
+        return cls(
+            number=number,
+            name=str(status.get("port_name") or number),
+            link=status.get("hasCarrier"),
+            speed_mbps=phy_rate_mbps(status.get("speed")),
+            original_speed_mbps=phy_rate_mbps(status.get("original_speed")),
+            derated_reason=DERATED_REASONS.get(status.get("derated_reason")),
+            wan=status.get("isWanPort"),
+            neighbor=metadata.get("location") or metadata.get("name"),
+        )
+
+
 class EeroDevice(EeroResource):
     """EeroDevice."""
+
+    @property
+    def connected_wired_clients_count(self) -> int | None:
+        """Wired clients connected to this eero."""
+        return self.data.get("connected_wired_clients_count")
+
+    @property
+    def connected_wireless_clients_count(self) -> int | None:
+        """Wireless clients connected to this eero."""
+        return self.data.get("connected_wireless_clients_count")
+
+    @property
+    def ethernet_ports(self) -> list[EeroEthernetPort]:
+        """Ethernet ports, in port number order (none on a Beacon)."""
+        statuses = (self.data.get("ethernet_status") or {}).get("statuses") or []
+        ports = [
+            port
+            for status in statuses
+            if isinstance(status, dict)
+            and (port := EeroEthernetPort.from_status(status)) is not None
+        ]
+        return sorted(ports, key=lambda port: port.number)
+
+    def ethernet_port(self, number: int) -> EeroEthernetPort | None:
+        """Return the port with this number, or None if not reported."""
+        for port in self.ethernet_ports:
+            if port.number == number:
+                return port
+        return None
+
+    @property
+    def last_reboot(self) -> datetime | None:
+        """Last reboot."""
+        return parse_date(self.data.get("last_reboot"))
+
+    @property
+    def mesh_quality_bars(self) -> int | None:
+        """Mesh quality, 0 to 5 bars as in the app."""
+        return self.data.get("mesh_quality_bars")
+
+    @property
+    def reboots_last_day(self) -> int | None:
+        """Reboots in the last 24 hours."""
+        return (self.data.get("reboots") or {}).get("last_day")
+
+    @property
+    def reboots_last_week(self) -> int | None:
+        """Reboots in the last 7 days."""
+        return (self.data.get("reboots") or {}).get("last_week")
+
+    @property
+    def upstream_eero(self) -> str | None:
+        """Name of the eero this one reaches the mesh through wirelessly."""
+        return (self.data.get("wireless_upstream_node") or {}).get("name")
+
+    @property
+    def upstream_radio(self) -> str | None:
+        """Radio of the wireless link to the upstream eero."""
+        return (self.data.get("wireless_upstream_node") or {}).get("primary_mesh_radio")
+
+    @property
+    def uplink_type(self) -> str | None:
+        """How this eero reaches the mesh: wired, wired_poe, wireless, cellular."""
+        value = self.data.get("connection_type")
+        if not isinstance(value, str):
+            return None
+        value = value.lower()
+        return value if value in UPLINK_TYPES else "unknown"
 
     @property
     def connected_clients_count(self) -> int | None:

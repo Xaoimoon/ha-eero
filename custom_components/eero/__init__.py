@@ -26,7 +26,6 @@ from homeassistant.helpers import (
     entity_registry as er,
 )
 from homeassistant.helpers.entity import EntityDescription
-from homeassistant.helpers.typing import UNDEFINED
 from homeassistant.helpers.update_coordinator import (
     CoordinatorEntity,
     DataUpdateCoordinator,
@@ -735,6 +734,9 @@ class EeroEntity(CoordinatorEntity):
         self.network_id = network_id
         self.resource_id = resource_id
         self.entity_description = description
+        # One translation key per entity (its key unless the description sets
+        # one): names, states and attributes are then translated per entity.
+        self._attr_translation_key = description.translation_key or description.key
         self.prefix_network_name = miscellaneous[CONF_PREFIX_NETWORK_NAME]
         self.suffix_connection_type = miscellaneous[CONF_SUFFIX_CONNECTION_TYPE]
 
@@ -860,18 +862,10 @@ class EeroEntity(CoordinatorEntity):
                 device_info["via_device_id"] = network_device.id
         return device_info
 
-    @property
-    def name(self) -> str | None:
-        """Return the entity portion of the name.
-
-        has_entity_name is set, so Home Assistant prefixes the device name and
-        this returns the short suffix only. None means the entity carries the
-        device name alone.
-        """
-        name = self.entity_description.name
-        if name is UNDEFINED:
-            return None
-        return name
+    # No `name` override: Home Assistant resolves the translated name (falling
+    # back to the description's English name), treats a missing name as the
+    # device name, and derives new entity IDs from the English name only while
+    # the property is its own.
 
 
 @dataclass
@@ -881,4 +875,4 @@ class EeroEntityDescription(EntityDescription):
     extra_attrs: dict[str, Callable] | None = None
     premium_type: bool = False
     request_refresh: bool = True
-    translation_key: str | None = "all"
+    translation_key: str | None = None
