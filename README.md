@@ -2,6 +2,8 @@
 
 [![HACS](https://img.shields.io/badge/HACS-Custom-orange.svg?style=for-the-badge)](https://hacs.xyz/docs/faq/custom_repositories)
 [![Release](https://img.shields.io/github/v/release/Xaoimoon/ha-eero?style=for-the-badge)](https://github.com/Xaoimoon/ha-eero/releases)
+[![Stars](https://img.shields.io/github/stars/Xaoimoon/ha-eero?style=for-the-badge)](https://github.com/Xaoimoon/ha-eero/stargazers)
+[![Installations](https://img.shields.io/badge/dynamic/json?style=for-the-badge&color=41BDF5&logo=home-assistant&label=installations&query=%24.eero.total&url=https%3A%2F%2Fanalytics.home-assistant.io%2Fcustom_integrations.json)](https://analytics.home-assistant.io/custom_integrations/)
 [![Licence](https://img.shields.io/badge/license-MIT-green.svg?style=for-the-badge)](https://github.com/Xaoimoon/ha-eero/blob/main/LICENSE)
 
 [![Maintenu](https://img.shields.io/badge/maintained-yes-green.svg?style=for-the-badge)](https://github.com/Xaoimoon/ha-eero/commits/main)
