@@ -903,6 +903,9 @@
                     },
                     "neighbor": {
                         "name": "Relié à"
+                    },
+                    "neighbor_port": {
+                        "name": "Port en face"
                     }
                 }
             },

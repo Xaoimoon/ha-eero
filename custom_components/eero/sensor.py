@@ -360,6 +360,7 @@ def ethernet_port_description(number: int, name: str) -> EeroSensorEntityDescrip
             "derated_reason": attr("derated_reason"),
             "wan": attr("wan"),
             "neighbor": attr("neighbor"),
+            "neighbor_port": attr("neighbor_port"),
         },
     )
 

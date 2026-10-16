@@ -20,8 +20,8 @@ C'est la suite maintenue de [schmittx/home-assistant-eero](https://github.com/sc
 - Pause de l'accès à Internet par profil ou par appareil, filtres de contenu des profils, applications bloquées (eero Plus).
 - Présence des appareils et des profils, avec la bande, le canal et la largeur de canal des appareils Wi-Fi.
 - Capteurs de signal, de débit, de consommation de données et d'activité (eero Plus).
-- Santé du maillage, pour chaque eero : qualité du maillage (0 à 5 barres), liaison (filaire, PoE, Wi-Fi) et eero parent, dernier redémarrage et redémarrages sur 7 jours, appareils filaires et Wi-Fi connectés.
-- Ports Ethernet des eero : vitesse négociée de chaque port, avec en attributs le lien, la vitesse d'origine et la raison d'un bridage, le port WAN et l'équipement relié.
+- Santé du maillage, pour chaque eero : qualité du maillage (0 à 5 barres), liaison (filaire, PoE, Wi-Fi) et eero parent, dernier redémarrage et redémarrages sur 7 jours (relevés une fois par heure : un appel de plus par eero), appareils filaires et Wi-Fi connectés.
+- Ports Ethernet des eero : vitesse négociée de chaque port (inconnue quand le câble est débranché), avec en attributs le lien, la vitesse d'origine et la raison d'un bridage, le port WAN, l'équipement relié et son port (annoncés en LLDP : un autre eero est nommé par son emplacement).
 - Boutons pour les actions qui redémarrent le réseau, mises à jour du firmware des eero.
 - Veilleuse des eero Beacon (mode, horaires, luminosité).
 - Réseaux de secours (eero Plus).

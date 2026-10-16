@@ -55,25 +55,62 @@ class EeroEthernetPort:
     derated_reason: str | None
     wan: bool | None
     neighbor: str | None
+    neighbor_port: str | None = None
 
     @classmethod
-    def from_status(cls, status: dict) -> EeroEthernetPort | None:
-        """Build a port from one status entry; None without a port number."""
+    def from_status(
+        cls, status: dict, eero_names: dict[str, str] | None = None
+    ) -> EeroEthernetPort | None:
+        """Build a port from one status entry; None without a port number.
+
+        `eero_names` maps the lowercase MAC addresses of the network's eeros
+        to their names, to name an eero seen at the other end of the cable.
+        """
         number = status.get("interfaceNumber")
         if not isinstance(number, int):
             return None
-        neighbor = status.get("neighbor") or {}
-        metadata = neighbor.get("metadata") or {}
+        neighbor, neighbor_port = _port_neighbor(status, eero_names or {})
+        link = status.get("hasCarrier")
         return cls(
             number=number,
             name=str(status.get("port_name") or number),
-            link=status.get("hasCarrier"),
-            speed_mbps=phy_rate_mbps(status.get("speed")),
+            link=link,
+            # Without a carrier the API still reports a speed (P10 seen live on
+            # an unplugged port): there is no link, so no speed.
+            speed_mbps=None if link is False else phy_rate_mbps(status.get("speed")),
             original_speed_mbps=phy_rate_mbps(status.get("original_speed")),
             derated_reason=DERATED_REASONS.get(status.get("derated_reason")),
             wan=status.get("isWanPort"),
-            neighbor=metadata.get("location") or metadata.get("name"),
+            neighbor=neighbor,
+            neighbor_port=neighbor_port,
         )
+
+
+def _port_neighbor(status: dict, eero_names: dict[str, str]) -> tuple[str | None, str | None]:
+    """Name and port of the device at the other end of an Ethernet port.
+
+    The API leaves `neighbor` null and reports the neighbor in `lldpInfo`
+    (seen live 2026-10-16): another eero is named by matching its chassis or
+    port MAC address with the network's eeros, anything else by its LLDP
+    system name. `neighbor.metadata` (app model) is still read first.
+    """
+    metadata = (status.get("neighbor") or {}).get("metadata") or {}
+    if name := metadata.get("location") or metadata.get("name"):
+        port = metadata.get("port")
+        return name, None if port is None else str(port)
+    for lldp in status.get("lldpInfo") or []:
+        if not isinstance(lldp, dict):
+            continue
+        macs = (lldp.get("chassisId"), lldp.get("macAddress"))
+        name = next(
+            (eero_names[mac.lower()] for mac in macs
+             if isinstance(mac, str) and mac.lower() in eero_names),
+            None,
+        ) or lldp.get("systemName") or lldp.get("chassisId")
+        if name:
+            port = lldp.get("portId")
+            return name, None if port is None else str(port)
+    return None, None
 
 
 class EeroDevice(EeroResource):
@@ -93,13 +130,26 @@ class EeroDevice(EeroResource):
     def ethernet_ports(self) -> list[EeroEthernetPort]:
         """Ethernet ports, in port number order (none on a Beacon)."""
         statuses = (self.data.get("ethernet_status") or {}).get("statuses") or []
+        eero_names = self._network_eero_names()
         ports = [
             port
             for status in statuses
             if isinstance(status, dict)
-            and (port := EeroEthernetPort.from_status(status)) is not None
+            and (port := EeroEthernetPort.from_status(status, eero_names)) is not None
         ]
         return sorted(ports, key=lambda port: port.number)
+
+    def _network_eero_names(self) -> dict[str, str]:
+        """Lowercase MAC address -> name, for every eero of the network."""
+        network_data = getattr(self.network, "data", None) or {}
+        names = {}
+        for eero in (network_data.get("eeros") or {}).get("data") or []:
+            if not isinstance(eero, dict) or not eero.get("location"):
+                continue
+            for mac in [eero.get("mac_address"), *(eero.get("ethernet_addresses") or [])]:
+                if isinstance(mac, str):
+                    names[mac.lower()] = eero["location"]
+        return names
 
     def ethernet_port(self, number: int) -> EeroEthernetPort | None:
         """Return the port with this number, or None if not reported."""
