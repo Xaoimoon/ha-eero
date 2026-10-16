@@ -7,7 +7,6 @@ import datetime
 import json
 import logging
 from pathlib import Path
-import time
 from typing import Any
 from urllib.parse import urlparse
 from zoneinfo import ZoneInfo
@@ -35,9 +34,6 @@ from .const import (
 from .util import backup_access_point_ok, premium_ok
 
 _LOGGER = logging.getLogger(__name__)
-
-# Seconds between two fetches of an eero's own resource for its reboot counts.
-REBOOTS_REFRESH_INTERVAL = 3600
 
 
 class EeroException(Exception):
@@ -90,8 +86,6 @@ class EeroAPI:
         """Initialize."""
         self.data = EeroAccount(self, {})
         self.release_notes_cache: dict[str, dict[str, Any] | None] = {}
-        # eero url -> (time of the last detail fetch, its `reboots` block)
-        self.reboots_cache: dict[str, tuple[float, dict[str, Any] | None]] = {}
         self.save_location = save_location
         self.session = requests.Session()
         self.user_token = user_token
@@ -416,7 +410,6 @@ class EeroAPI:
                 ]
             ):
                 network_data = self.call(method=METHOD_GET, url=network_url) or {}
-                self.add_eero_reboots(network_data)
                 resources = network_data.get("resources", {})
                 if thread_url := resources.get("thread"):
                     network_data["thread"] = self.call(
@@ -529,36 +522,6 @@ class EeroAPI:
         self.save_response(response=account, name="update_data")
         self.data = EeroAccount(self, account)
         return self.data
-
-    def add_eero_reboots(self, network_data: dict, now: float | None = None) -> None:
-        """Add each eero's `reboots` block to the network data.
-
-        The eeros embedded in the network response have no `reboots`: only
-        the eero's own resource (GET eero url, `getEero` in the app) has it.
-        That is one more call per eero, so it is made at most once an hour;
-        a reboot count over 7 days does not need more.
-        """
-        now = time.monotonic() if now is None else now
-        for eero in (network_data.get("eeros") or {}).get("data") or []:
-            url = eero.get("url") if isinstance(eero, dict) else None
-            if not url or "reboots" in eero:
-                continue
-            fetched_at, reboots = self.reboots_cache.get(url, (None, None))
-            if fetched_at is None or now - fetched_at >= REBOOTS_REFRESH_INTERVAL:
-                try:
-                    detail = self.call(method=METHOD_GET, url=url) or {}
-                except (EeroSessionExpired, EeroRateLimited):
-                    raise
-                except EeroException as error:
-                    # Only a sensor depends on it: keep the last value rather
-                    # than fail the whole poll, and wait the interval before
-                    # retrying so a lasting error does not cost a call a poll.
-                    _LOGGER.debug("Could not fetch eero %s: %s", url, error)
-                else:
-                    reboots = detail.get("reboots")
-                self.reboots_cache[url] = (now, reboots)
-            if isinstance(reboots, dict):
-                eero["reboots"] = reboots
 
     def get_resource_data(
         self,
