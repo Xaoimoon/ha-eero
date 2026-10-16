@@ -2,9 +2,9 @@
 
 The eero below follows the shape of a real network response (2026-10-16,
 three eero Pro 6, anonymized MAC addresses and names): `neighbor` is null and
-the device at the other end of a port is in `lldpInfo`; `reboots` is absent
-from the eeros embedded in the network and comes from the eero's own
-resource (see test_eero_reboots_are_fetched_hourly).
+the device at the other end of a port is in `lldpInfo`. The app's data model
+also has a `reboots` block (last day, last week): the API sends it neither in
+the network response nor in the eero's own resource, so there is no sensor.
 """
 
 from __future__ import annotations
@@ -22,7 +22,6 @@ EERO = {
     "connection_type": "WIRELESS",
     "mesh_quality_bars": 4,
     "last_reboot": "2026-10-01T03:12:45.000Z",
-    "reboots": {"last_day": 0, "last_week": 2},
     "connected_wired_clients_count": 1,
     "connected_wireless_clients_count": 7,
     "wireless_upstream_node": {
@@ -92,8 +91,6 @@ def test_mesh_health():
     assert device.uplink_type == "wireless"
     assert device.upstream_eero == "Salon"
     assert device.upstream_radio == "5GHz"
-    assert device.reboots_last_week == 2
-    assert device.reboots_last_day == 0
     assert device.last_reboot == datetime(2026, 10, 1, 3, 12, 45, tzinfo=UTC)
     assert device.connected_wired_clients_count == 1
     assert device.connected_wireless_clients_count == 7
@@ -135,53 +132,6 @@ def test_neighbor_metadata_is_still_read_first():
     port = device.ethernet_port(1)
     assert (port.neighbor, port.neighbor_port) == ("Switch bureau", "3")
 
-
-def test_eero_reboots_are_fetched_hourly():
-    calls = []
-
-    class Api(eero_api.EeroAPI):
-        def call(self, method, url, allow_refresh=True, **kwargs):
-            calls.append(url)
-            if url == "/2.2/eeros/2":
-                raise eero_api.EeroException(code=500, message="boom")
-            return {"reboots": {"last_day": 0, "last_week": 3}}
-
-    def network():
-        return {"eeros": {"data": [{"url": "/2.2/eeros/1"}, {"url": "/2.2/eeros/2"}]}}
-
-    api = Api()
-    first = network()
-    api.add_eero_reboots(first, now=1000.0)
-    assert first["eeros"]["data"][0]["reboots"] == {"last_day": 0, "last_week": 3}
-    assert "reboots" not in first["eeros"]["data"][1]  # error: no value, poll goes on
-    assert calls == ["/2.2/eeros/1", "/2.2/eeros/2"]
-
-    # Next poll within the hour: cached value, and no call at all, not even
-    # for the eero that failed (a lasting error must not cost a call a poll).
-    second = network()
-    api.add_eero_reboots(second, now=1090.0)
-    assert second["eeros"]["data"][0]["reboots"]["last_week"] == 3
-    assert calls == ["/2.2/eeros/1", "/2.2/eeros/2"]
-
-    # An hour later both are fetched again.
-    api.add_eero_reboots(network(), now=1000.0 + eero_api.REBOOTS_REFRESH_INTERVAL)
-    assert calls.count("/2.2/eeros/1") == 2
-    assert calls.count("/2.2/eeros/2") == 2
-
-
-def test_expired_session_while_fetching_reboots_is_raised():
-    class Api(eero_api.EeroAPI):
-        def call(self, method, url, allow_refresh=True, **kwargs):
-            raise eero_api.EeroSessionExpired(message="expired")
-
-    try:
-        Api().add_eero_reboots({"eeros": {"data": [{"url": "/2.2/eeros/1"}]}}, now=0.0)
-    except eero_api.EeroSessionExpired:
-        pass
-    else:
-        raise AssertionError("EeroSessionExpired was swallowed")
-
-
 def test_unplugged_port_has_no_speed():
     # Seen live 2026-10-16: an unplugged port still reports "P10".
     device = eero({"ethernet_status": {"statuses": [
@@ -198,7 +148,6 @@ def test_missing_fields_give_none_not_errors():
     assert device.mesh_quality_bars is None
     assert device.uplink_type is None
     assert device.upstream_eero is None
-    assert device.reboots_last_week is None
     assert device.last_reboot is None
     assert device.ethernet_ports == []
 

@@ -169,16 +169,6 @@ class EeroDevice(EeroResource):
         return self.data.get("mesh_quality_bars")
 
     @property
-    def reboots_last_day(self) -> int | None:
-        """Reboots in the last 24 hours."""
-        return (self.data.get("reboots") or {}).get("last_day")
-
-    @property
-    def reboots_last_week(self) -> int | None:
-        """Reboots in the last 7 days."""
-        return (self.data.get("reboots") or {}).get("last_week")
-
-    @property
     def upstream_eero(self) -> str | None:
         """Name of the eero this one reaches the mesh through wirelessly."""
         return (self.data.get("wireless_upstream_node") or {}).get("name")

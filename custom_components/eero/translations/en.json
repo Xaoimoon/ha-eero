@@ -1233,45 +1233,6 @@
                     }
                 }
             },
-            "reboots_last_week": {
-                "name": "Reboots Last Week",
-                "state": {
-                    "blue": "Blue",
-                    "connected": "Connected",
-                    "disabled": "Disabled",
-                    "disconnected": "Disconnected",
-                    "failure": "Failure",
-                    "green": "Green",
-                    "network": "Network",
-                    "profiles": "Profiles",
-                    "red": "Red",
-                    "success": "Success",
-                    "white": "White",
-                    "yellow": "Yellow"
-                },
-                "state_attributes": {
-                    "computers_personal": {
-                        "name": "Computers and personal"
-                    },
-                    "failure_reason": {
-                        "state": {
-                            "network_not_found": "Network not found"
-                        }
-                    },
-                    "mac_address": {
-                        "name": "MAC address"
-                    },
-                    "name": {
-                        "name": "Name"
-                    },
-                    "subnet_mask": {
-                        "name": "Subnet mask"
-                    },
-                    "last_day": {
-                        "name": "Last 24 hours"
-                    }
-                }
-            },
             "signal": {
                 "name": "Signal Strength",
                 "state": {

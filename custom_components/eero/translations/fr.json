@@ -1233,45 +1233,6 @@
                     }
                 }
             },
-            "reboots_last_week": {
-                "name": "Redémarrages (7 jours)",
-                "state": {
-                    "blue": "Bleu",
-                    "connected": "Connecté",
-                    "disabled": "Désactivé",
-                    "disconnected": "Déconnecté",
-                    "failure": "Échec",
-                    "green": "Vert",
-                    "network": "Réseau",
-                    "profiles": "Profils",
-                    "red": "Rouge",
-                    "success": "Réussite",
-                    "white": "Blanc",
-                    "yellow": "Jaune"
-                },
-                "state_attributes": {
-                    "computers_personal": {
-                        "name": "Ordinateurs et appareils personnels"
-                    },
-                    "failure_reason": {
-                        "state": {
-                            "network_not_found": "Réseau introuvable"
-                        }
-                    },
-                    "mac_address": {
-                        "name": "Adresse MAC"
-                    },
-                    "name": {
-                        "name": "Nom"
-                    },
-                    "subnet_mask": {
-                        "name": "Masque de sous-réseau"
-                    },
-                    "last_day": {
-                        "name": "Dernières 24 heures"
-                    }
-                }
-            },
             "signal": {
                 "name": "Puissance du signal",
                 "state": {

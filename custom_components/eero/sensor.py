@@ -246,15 +246,6 @@ SENSOR_DESCRIPTIONS: list[EeroSensorEntityDescription] = [
         name="Public IP",
     ),
     EeroSensorEntityDescription(
-        key="reboots_last_week",
-        name="Reboots Last Week",
-        state_class=SensorStateClass.MEASUREMENT,
-        native_unit_of_measurement="reboots",
-        extra_attrs={
-            "last_day": lambda resource: resource.reboots_last_day,
-        },
-    ),
-    EeroSensorEntityDescription(
         key="signal",
         name="Signal Strength",
         device_class=SensorDeviceClass.SIGNAL_STRENGTH,
