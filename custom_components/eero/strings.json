@@ -903,6 +903,9 @@
                     },
                     "neighbor": {
                         "name": "Connected to"
+                    },
+                    "neighbor_port": {
+                        "name": "Port on the other side"
                     }
                 }
             },
