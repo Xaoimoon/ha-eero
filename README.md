@@ -2,12 +2,14 @@
 
 [![HACS](https://img.shields.io/badge/HACS-Custom-orange.svg?style=for-the-badge)](https://hacs.xyz/docs/faq/custom_repositories)
 [![Release](https://img.shields.io/github/v/release/Xaoimoon/ha-eero?style=for-the-badge)](https://github.com/Xaoimoon/ha-eero/releases)
-[![Stars](https://img.shields.io/github/stars/Xaoimoon/ha-eero?style=for-the-badge)](https://github.com/Xaoimoon/ha-eero/stargazers)
-[![Downloads](https://img.shields.io/github/downloads/Xaoimoon/ha-eero/total?style=for-the-badge&color=blue&label=installations)](https://github.com/Xaoimoon/ha-eero/releases)
+[![Installations actives](https://img.shields.io/badge/dynamic/json?style=for-the-badge&color=41BDF5&label=Active%20installations&cacheSeconds=15600&url=https://analytics.home-assistant.io/custom_integrations.json&query=$.eero.total)](https://analytics.home-assistant.io/)
 [![Licence](https://img.shields.io/badge/license-MIT-green.svg?style=for-the-badge)](https://github.com/Xaoimoon/ha-eero/blob/main/LICENSE)
 
 [![Maintenu](https://img.shields.io/badge/maintained-yes-green.svg?style=for-the-badge)](https://github.com/Xaoimoon/ha-eero/commits/main)
 [![Activité](https://img.shields.io/github/commit-activity/y/Xaoimoon/ha-eero?style=for-the-badge)](https://github.com/Xaoimoon/ha-eero/commits/main)
+[![Discussions](https://img.shields.io/github/discussions/Xaoimoon/ha-eero?style=for-the-badge&logo=github&color=7289DA)](https://github.com/Xaoimoon/ha-eero/discussions)
+[![Issues](https://img.shields.io/github/issues/Xaoimoon/ha-eero?style=for-the-badge&logo=github&color=E05D44)](https://github.com/Xaoimoon/ha-eero/issues)
+[![Stars](https://img.shields.io/github/stars/Xaoimoon/ha-eero?style=for-the-badge&logo=github&color=DFB317)](https://github.com/Xaoimoon/ha-eero/stargazers)
 
 Intégration Home Assistant (non officielle) pour les réseaux Wi-Fi maillés eero. Elle passe par le compte eero (API cloud, comme l'application mobile) pour afficher et piloter le réseau, les eero, les profils et les appareils connectés.
 
